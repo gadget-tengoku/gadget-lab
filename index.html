@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GadgetLab | 最新ガジェット・家電をお得に</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --accent: #FF4D00;
+    --accent-light: #fff1ec;
+    --black: #111111;
+    --gray-dark: #333;
+    --gray: #888;
+    --gray-light: #f4f4f2;
+    --white: #ffffff;
+    --border: #e8e8e4;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ===== HEADER ===== */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+
+  .logo {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--accent); }
+
+  nav { display: flex; gap: 28px; font-size: 13px; color: var(--gray); font-weight: 500; }
+  nav a:hover { color: var(--black); }
+
+  .header-cta {
+    background: var(--black);
+    color: var(--white);
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: background 0.2s;
+  }
+  .header-cta:hover { background: var(--accent); }
+
+  /* ===== HERO ===== */
+  .hero {
+    padding: 80px 5% 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    min-height: 480px;
+  }
+
+  .hero-text {}
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent);
+    background: var(--accent-light);
+    padding: 5px 12px; border-radius: 999px;
+    margin-bottom: 20px;
+  }
+  .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: inline-block; }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 18px;
+  }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+
+  .hero-sub {
+    font-size: 16px; color: var(--gray-dark); line-height: 1.7;
+    margin-bottom: 32px; max-width: 420px;
+  }
+
+  .hero-actions { display: flex; gap: 12px; align-items: center; }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: opacity 0.15s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  .btn-ghost {
+    font-size: 14px; font-weight: 500; color: var(--gray);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .btn-ghost:hover { color: var(--black); }
+
+  .hero-visual {
+    background: var(--gray-light);
+    border-radius: 24px;
+    height: 340px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-visual::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(255,77,0,0.12) 0%, transparent 60%);
+  }
+
+  /* ===== STATS ===== */
+  .stats {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 5%;
+    display: flex; gap: 0;
+  }
+  .stat {
+    flex: 1;
+    text-align: center;
+    padding: 0 20px;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -1px; }
+  .stat-label { font-size: 12px; color: var(--gray); margin-top: 2px; }
+
+  /* ===== SECTIONS ===== */
+  .section { padding: 60px 5%; }
+  .section-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 32px;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 26px; font-weight: 800; letter-spacing: -0.5px;
+  }
+  .section-link { font-size: 13px; color: var(--accent); font-weight: 500; }
+  .section-link:hover { text-decoration: underline; }
+
+  /* ===== CATEGORY TABS ===== */
+  .tabs {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .tab {
+    padding: 7px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: all 0.15s;
+    background: white; color: var(--gray);
+  }
+  .tab.active, .tab:hover {
+    background: var(--black); color: white; border-color: var(--black);
+  }
+
+  /* ===== PRODUCT GRID ===== */
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+
+  .product-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: white;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+  }
+
+  .product-thumb {
+    background: var(--gray-light);
+    height: 180px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 70px;
+    position: relative;
+  }
+  .product-badges { position: absolute; top: 10px; left: 10px; display: flex; gap: 4px; }
+  .badge {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.05em;
+    padding: 3px 8px; border-radius: 999px;
+  }
+  .badge-new { background: var(--black); color: white; }
+  .badge-sale { background: var(--accent); color: white; }
+  .badge-popular { background: #f0faf0; color: #1a7a1a; }
+
+  .product-body { padding: 14px 16px 16px; }
+  .product-brand { font-size: 11px; color: var(--gray); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px; }
+  .product-name { font-size: 14px; font-weight: 500; line-height: 1.4; margin-bottom: 8px; color: var(--black); }
+  .product-stars { font-size: 12px; color: var(--accent); margin-bottom: 10px; }
+  .product-stars span { color: var(--gray); margin-left: 4px; }
+  .product-price-row { display: flex; align-items: baseline; gap: 6px; margin-bottom: 12px; }
+  .product-price { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--accent); }
+  .product-price-old { font-size: 13px; color: var(--gray); text-decoration: line-through; }
+  .product-price-tax { font-size: 11px; color: var(--gray); }
+
+  .btn-rakuten {
+    display: block; width: 100%;
+    background: #BF0000;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: var(--radius-sm);
+    font-size: 13px; font-weight: 600;
+    transition: opacity 0.15s;
+    border: none; cursor: pointer;
+  }
+  .btn-rakuten:hover { opacity: 0.88; }
+  .btn-rakuten::before { content: '🛒 '; }
+
+  /* ===== FEATURED BANNER ===== */
+  .featured-banner {
+    background: var(--black);
+    color: white;
+    border-radius: 20px;
+    padding: 48px 5%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: center;
+    margin: 0 5% 60px;
+  }
+  .banner-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .banner-title { font-family: var(--font-display); font-size: 32px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 10px; }
+  .banner-desc { font-size: 14px; color: #aaa; line-height: 1.6; margin-bottom: 24px; }
+  .banner-price { font-size: 13px; color: #aaa; margin-bottom: 24px; }
+  .banner-price strong { font-family: var(--font-display); font-size: 36px; font-weight: 800; color: white; }
+  .btn-banner {
+    display: inline-block;
+    background: var(--accent); color: white;
+    padding: 13px 28px;
+    border-radius: 999px;
+    font-size: 14px; font-weight: 600;
+    transition: opacity 0.15s;
+  }
+  .btn-banner:hover { opacity: 0.88; }
+  .banner-img { font-size: 100px; }
+
+  /* ===== RANKING ===== */
+  .ranking-list { display: flex; flex-direction: column; gap: 12px; }
+  .ranking-item {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: white;
+    transition: border-color 0.15s;
+    cursor: pointer;
+  }
+  .ranking-item:hover { border-color: #ccc; }
+  .rank-num {
+    font-family: var(--font-display);
+    font-size: 28px; font-weight: 800;
+    min-width: 44px;
+    text-align: center;
+    color: var(--gray-light);
+  }
+  .rank-num.top { color: var(--accent); }
+  .rank-thumb { font-size: 36px; }
+  .rank-info { flex: 1; }
+  .rank-name { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .rank-price { font-size: 16px; font-weight: 700; color: var(--accent); font-family: var(--font-display); }
+  .rank-stars { font-size: 11px; color: var(--accent); }
+  .rank-btn {
+    background: var(--gray-light);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 12px; font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .rank-btn:hover { background: var(--border); }
+
+  /* ===== REVIEW SECTION ===== */
+  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .review-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .review-stars { font-size: 14px; color: var(--accent); margin-bottom: 10px; }
+  .review-text { font-size: 14px; line-height: 1.7; color: var(--gray-dark); margin-bottom: 14px; }
+  .review-author { display: flex; align-items: center; gap: 10px; }
+  .review-avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--gray-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .review-name { font-size: 13px; font-weight: 600; }
+  .review-date { font-size: 11px; color: var(--gray); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--black); color: #aaa;
+    padding: 48px 5% 32px;
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px; margin-bottom: 40px;
+  }
+  .footer-brand { }
+  .footer-logo { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: white; margin-bottom: 10px; }
+  .footer-logo span { color: var(--accent); }
+  .footer-desc { font-size: 13px; line-height: 1.7; }
+  .footer-col h4 { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: white; margin-bottom: 14px; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { font-size: 13px; margin-bottom: 8px; }
+  .footer-col a:hover { color: white; }
+  .footer-bottom {
+    border-top: 1px solid #222;
+    padding-top: 24px;
+    font-size: 12px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .affiliate-note {
+    font-size: 11px;
+    color: #666;
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-text { animation: fadeUp 0.6s ease both; }
+  .hero-visual { animation: fadeUp 0.6s 0.15s ease both; }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; gap: 32px; padding: 40px 5%; }
+    .hero-visual { height: 220px; font-size: 70px; }
+    nav { display: none; }
+    .stats { overflow-x: auto; }
+    .featured-banner { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">Gadget<span>Lab</span></div>
+  <nav>
+    <a href="#products">商品一覧</a>
+    <a href="#ranking">ランキング</a>
+    <a href="#reviews">レビュー</a>
+    <a href="#about">このサイトについて</a>
+  </nav>
+  <a href="https://affiliate.rakuten.co.jp/" class="header-cta" target="_blank">楽天で探す</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">毎日更新中</div>
+    <h1>本当に<em>使える</em><br>ガジェットだけ<br>厳選して紹介</h1>
+    <p class="hero-sub">家電・スマートデバイス・音響機器など、実際に使って良かった製品を楽天市場からセレクト。お得なセール情報も随時更新。</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">商品を見る</a>
+      <a href="#ranking" class="btn-ghost">ランキングを見る →</a>
+    </div>
+  </div>
+  <div class="hero-visual">🎧</div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">250<span style="font-size:18px">+</span></div>
+    <div class="stat-label">掲載商品数</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">4.6</div>
+    <div class="stat-label">平均評価</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">毎日</div>
+    <div class="stat-label">情報更新</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">無料</div>
+    <div class="stat-label">掲載・閲覧</div>
+  </div>
+</div>
+
+<!-- PRODUCTS SECTION -->
+<section class="section" id="products">
+  <div class="section-header">
+    <h2 class="section-title">注目商品</h2>
+    <a href="https://www.rakuten.co.jp/" class="section-link" target="_blank">楽天でもっと見る →</a>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="filterTab(this, 'all')">すべて</button>
+    <button class="tab" onclick="filterTab(this, 'audio')">オーディオ</button>
+    <button class="tab" onclick="filterTab(this, 'smart')">スマートホーム</button>
+    <button class="tab" onclick="filterTab(this, 'mobile')">モバイル</button>
+    <button class="tab" onclick="filterTab(this, 'pc')">PC・周辺機器</button>
+  </div>
+
+  <div class="product-grid" id="productGrid">
+
+    <!-- 商品カード 1 -->
+    <div class="product-card" data-cat="audio">
+      <div class="product-thumb">
+        🎧
+        <div class="product-badges"><span class="badge badge-popular">人気No.1</span></div>
+      </div>
+      <div class="product-body">
+        <div class="product-brand">Sony</div>
+        <div class="product-name">ワイヤレスノイキャンイヤホン WF-1000XM5</div>
+        <div class="product-stars">★★★★★ <span>(2,341件)</span></div>
+        <div class="product-price-row">
+          <span class="product-price">¥28,980</span>
+          <span class="product-price-old">¥39,800</span>
+          <span class="product-price-tax">税込</span>
+        </div>
+        <!-- ↓ここにアフィリエイトリンクを入れる -->
+        <a href="https://affiliate.rakuten.co.jp/" class="btn-rakuten" target="_blank">楽天で購入する</a>
+      </div>
+    </div>
+
+    <!-- 商品カード 2 -->
+    <div class="product-card" data-cat="smart">
+      <div class="product-thumb">
+        💡
+        <div class="product-badges"><span class="badge badge-new">NEW</span></div>
+      </div>
+      <div class="product-body">
+        <div class="product-brand">Philips Hue</div>
+        <div class="product-name">スマートLEDライト スターターキット</div>
+        <div class="product-stars">★★★★☆ <span>(876件)</span></div>
+        <div class="product-price-row">
+          <span class="product-price">¥12,800</span>
+          <span class="product-price-tax">税込</span>
+        </div>
+        <a href="https://affiliate.rakuten.co.jp/" class="btn-rakuten" target="_blank">楽天で購入する</a>
+      </div>
+    </div>
+
+    <!-- 商品カード 3 -->
+    <div class="product-card" data-cat="mobile">
+      <div class="product-thumb">
+        ⌚
+        <div class="product-badges"><span class="badge badge-sale">SALE</span></div>
+      </div>
+      <div class="product-body">
+        <div class="product-brand">Apple</div>
+        <div class="product-name">Apple Watch Series 9 GPS 41mm</div>
+        <div class="product-stars">★★★★★ <span>(5,102件)</span></div>
+        <div class="product-price-row">
+          <span class="product-price">¥48,800</span>
+          <span class="product-price-old">¥59,800</span>
+          <span class="product-price-tax">税込</span>
+        </div>
+        <a href="https://affiliate.rakuten.co.jp/" class="btn-rakuten" target="_blank">楽天で購入する</a>
+      </div>
+    </div>
+
+    <!-- 商品カード 4 -->
+    <div class="product-card" data-cat="pc">
+      <div class="product-thumb">🖱️</div>
+      <div class="product-body">
+        <div class="product-brand">Logicool</div>
+        <div class="product-name">MX Master 3S ワイヤレスマウス</div>
+        <div class="product-stars">★★★★★ <span>(3,280件)</span></div>
+        <div class="product-price-row">
+          <span class="product-price">¥14,850</span>
+          <span class="product-price-tax">税込</span>
+        </div>
+        <a href="https://affiliate.rakuten.co.jp/" class="btn-rakuten" target="_blank">楽天で購入する</a>
+      </div>
+    </div>
+
+    <!-- 商品カード 5 -->
+    <div class="product-card" data-cat="mobile">
+      <div class="product-thumb">🔋</div>
+      <div class="product-body">
+        <div class="product-brand">Anker</div>
+        <div class="product-name">モバイルバッテリー 24000mAh 140W</div>
+        <div class="product-stars">★★★★★ <span>(4,560件)</span></div>
+        <div class="product-price-row">
+          <span class="product-price">¥9,990</span>
+          <span class="product-price-tax">税込</span>
+        </div>
+        <a href="https://affiliate.rakuten.co.jp/" class="btn-rakuten" target="_blank">楽天で購入する</a>
+      </div>
+    </div>
+
+    <!-- 商品カード 6 -->
+    <div class="product-card" data-cat="audio">
+      <div class="product-thumb">
+        🔊
+        <div class="product-badges"><span class="badge badge-new">NEW</span></div>
+      </div>
+      <div class="product-body">
+        <div class="product-brand">Sonos</div>
+        <div class="product-name">Era 100 ワイヤレススピーカー</div>
+        <div class="product-stars">★★★★☆ <span>(721件)</span></div>
+        <div class="product-price-row">
+          <span class="product-price">¥36,800</span>
+          <span class="product-price-tax">税込</span>
+        </div>
+        <a href="https://affiliate.rakuten.co.jp/" class="btn-rakuten" target="_blank">楽天で購入する</a>
+      </div>
+    </div>
+
+    <!-- 商品カード 7 -->
+    <div class="product-card" data-cat="smart">
+      <div class="product-thumb">📷</div>
+      <div class="product-body">
+        <div class="product-brand">Arlo</div>
+        <div class="product-name">屋外対応 スマートカメラ Pro 5S</div>
+        <div class="product-stars">★★★★☆ <span>(1,023件)</span></div>
+        <div class="product-price-row">
+          <span class="product-price">¥21,480</span>
+          <span class="product-price-tax">税込</span>
+        </div>
+        <a href="https://affiliate.rakuten.co.jp/" class="btn-rakuten" target="_blank">楽天で購入する</a>
+      </div>
+    </div>
+
+    <!-- 商品カード 8 -->
+    <div class="product-card" data-cat="pc">
+      <div class="product-thumb">⌨️</div>
+      <div class="product-body">
+        <div class="product-brand">HHKB</div>
+        <div class="product-name">Happy Hacking Keyboard Professional HYBRID</div>
+        <div class="product-stars">★★★★★ <span>(2,198件)</span></div>
+        <div class="product-price-row">
+          <span class="product-price">¥35,200</span>
+          <span class="product-price-tax">税込</span>
+        </div>
+        <a href="https://affiliate.rakuten.co.jp/" class="btn-rakuten" target="_blank">楽天で購入する</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURED BANNER -->
+<div class="featured-banner">
+  <div>
+    <div class="banner-label">今週のイチオシ</div>
+    <div class="banner-title">AirPods Pro 2<br>が過去最安値</div>
+    <div class="banner-desc">ノイズキャンセリング性能が大幅アップ。<br>Apple純正最高峰のイヤホンが特価登場。</div>
+    <div class="banner-price">楽天最安 <strong>¥34,800</strong></div>
+    <!-- ↓アフィリエイトリンクに変更 -->
+    <a href="https://affiliate.rakuten.co.jp/" class="btn-banner" target="_blank">今すぐチェック</a>
+  </div>
+  <div class="banner-img">🎵</div>
+</div>
+
+<!-- RANKING -->
+<section class="section" id="ranking">
+  <div class="section-header">
+    <h2 class="section-title">売れ筋ランキング</h2>
+    <a href="https://www.rakuten.co.jp/" class="section-link" target="_blank">全ランキングを見る →</a>
+  </div>
+  <div class="ranking-list">
+    <div class="ranking-item">
+      <div class="rank-num top">1</div>
+      <div class="rank-thumb">🎧</div>
+      <div class="rank-info">
+        <div class="rank-name">Sony WF-1000XM5 ワイヤレスイヤホン</div>
+        <div class="rank-stars">★★★★★</div>
+      </div>
+      <div class="rank-price">¥28,980</div>
+      <a href="https://affiliate.rakuten.co.jp/" target="_blank"><button class="rank-btn">楽天で見る</button></a>
+    </div>
+    <div class="ranking-item">
+      <div class="rank-num top">2</div>
+      <div class="rank-thumb">🔋</div>
+      <div class="rank-info">
+        <div class="rank-name">Anker モバイルバッテリー 24000mAh</div>
+        <div class="rank-stars">★★★★★</div>
+      </div>
+      <div class="rank-price">¥9,990</div>
+      <a href="https://affiliate.rakuten.co.jp/" target="_blank"><button class="rank-btn">楽天で見る</button></a>
+    </div>
+    <div class="ranking-item">
+      <div class="rank-num top">3</div>
+      <div class="rank-thumb">⌚</div>
+      <div class="rank-info">
+        <div class="rank-name">Apple Watch Series 9 GPS 41mm</div>
+        <div class="rank-stars">★★★★★</div>
+      </div>
+      <div class="rank-price">¥48,800</div>
+      <a href="https://affiliate.rakuten.co.jp/" target="_blank"><button class="rank-btn">楽天で見る</button></a>
+    </div>
+    <div class="ranking-item">
+      <div class="rank-num">4</div>
+      <div class="rank-thumb">🖱️</div>
+      <div class="rank-info">
+        <div class="rank-name">Logicool MX Master 3S マウス</div>
+        <div class="rank-stars">★★★★★</div>
+      </div>
+      <div class="rank-price">¥14,850</div>
+      <a href="https://affiliate.rakuten.co.jp/" target="_blank"><button class="rank-btn">楽天で見る</button></a>
+    </div>
+    <div class="ranking-item">
+      <div class="rank-num">5</div>
+      <div class="rank-thumb">💡</div>
+      <div class="rank-info">
+        <div class="rank-name">Philips Hue スマートLEDライト スターターキット</div>
+        <div class="rank-stars">★★★★☆</div>
+      </div>
+      <div class="rank-price">¥12,800</div>
+      <a href="https://affiliate.rakuten.co.jp/" target="_blank"><button class="rank-btn">楽天で見る</button></a>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section" id="reviews" style="background: var(--gray-light); margin: 0; padding: 60px 5%;">
+  <div class="section-header">
+    <h2 class="section-title">購入者レビュー</h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card" style="background:white;">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">「ノイズキャンセリングの精度が前モデルから格段に向上。在宅ワーク中に使うと集中力が全然違います。音質も申し分なし！」</div>
+      <div class="review-author">
+        <div class="review-avatar">😊</div>
+        <div>
+          <div class="review-name">T.Yamamoto</div>
+          <div class="review-date">2025年10月 購入</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card" style="background:white;">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">「Ankerのバッテリーは容量が大きいのにコンパクトで驚き。旅行先でスマホ・タブレット・ノートPCを全部充電できました。」</div>
+      <div class="review-author">
+        <div class="review-avatar">🙂</div>
+        <div>
+          <div class="review-name">K.Sato</div>
+          <div class="review-date">2025年11月 購入</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card" style="background:white;">
+      <div class="review-stars">★★★★☆</div>
+      <div class="review-text">「MX Master 3Sはトラッキング精度が最高。長時間使っても疲れない形状で、仕事効率が上がった実感があります。」</div>
+      <div class="review-author">
+        <div class="review-avatar">😄</div>
+        <div>
+          <div class="review-name">H.Tanaka</div>
+          <div class="review-date">2025年9月 購入</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about" style="max-width: 700px; margin: 0 auto;">
+  <h2 class="section-title" style="margin-bottom: 16px;">このサイトについて</h2>
+  <p style="font-size: 15px; color: var(--gray-dark); line-height: 1.8; margin-bottom: 12px;">
+    GadgetLabは、実際に試した家電・ガジェットの中から「本当に買って良かった」と思えるものだけを厳選して紹介するアフィリエイトサイトです。
+  </p>
+  <p style="font-size: 15px; color: var(--gray-dark); line-height: 1.8;">
+    本サイトのリンクから楽天市場で商品を購入いただいた場合、サイト運営者に一定の報酬が発生します。これがサイト継続の支えになっています。
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">Gadget<span>Lab</span></div>
+      <p class="footer-desc">家電・ガジェット専門のアフィリエイトメディア。<br>本当に使えるものだけを厳選紹介。</p>
+    </div>
+    <div class="footer-col">
+      <h4>カテゴリ</h4>
+      <ul>
+        <li><a href="#">オーディオ</a></li>
+        <li><a href="#">スマートホーム</a></li>
+        <li><a href="#">モバイル</a></li>
+        <li><a href="#">PC周辺機器</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>コンテンツ</h4>
+      <ul>
+        <li><a href="#ranking">ランキング</a></li>
+        <li><a href="#reviews">レビュー</a></li>
+        <li><a href="#products">新着商品</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>サイト情報</h4>
+      <ul>
+        <li><a href="#about">このサイトについて</a></li>
+        <li><a href="#">プライバシーポリシー</a></li>
+        <li><a href="#">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="affiliate-note">※ 本サイトは楽天アフィリエイトプログラムに参加しています。商品リンクから購入された場合、運営者に報酬が発生することがあります。</p>
+    <p style="font-size:12px;">© 2025 GadgetLab</p>
+  </div>
+</footer>
+
+<script>
+function filterTab(el, cat) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.product-card').forEach(card => {
+    if (cat === 'all' || card.dataset.cat === cat) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+
+</body>
+</html>
