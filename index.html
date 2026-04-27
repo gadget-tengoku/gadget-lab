@@ -4,29 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ガジェット天国 | 最新家電・ガジェットをお得に</title>
-
-<!-- SEO メタタグ -->
 <meta name="description" content="家電・ガジェット専門サイト。最新のイヤホン・スマートウォッチ・スマートホーム機器など、楽天市場の人気商品を厳選してご紹介。最安値情報も随時更新。">
 <meta name="keywords" content="ガジェット,家電,イヤホン,スマートウォッチ,楽天,おすすめ,最安値,ワイヤレスイヤホン,スマートホーム">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://gadget-tengoku.github.io/gadget-lab/">
-
-<!-- OGP -->
 <meta property="og:title" content="ガジェット天国 | 最新家電・ガジェットをお得に">
 <meta property="og:description" content="家電・ガジェット専門サイト。楽天市場の人気商品をリアルタイムで紹介。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://gadget-tengoku.github.io/gadget-lab/">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
-
-<!-- 構造化データ -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"ガジェット天国","url":"https://gadget-tengoku.github.io/gadget-lab/","description":"家電・ガジェット専門アフィリエイトサイト"}
 </script>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--accent:#FF4D00;--accent-light:#fff1ec;--black:#111;--gray-dark:#333;--gray:#888;--gray-light:#f4f4f2;--white:#fff;--border:#e8e8e4;--font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;--radius:12px;--radius-sm:8px}
@@ -225,19 +217,18 @@ footer{background:var(--black);color:#aaa;padding:48px 5% 28px}
     </div>
   </div>
   <div class="footer-bottom">
-    <p class="affiliate-note">※ 本サイトは楽天アフィリエイトプログラムに参加しています。商品リンクから購入された場合、運営者に報酬が発生することがあります。商品価格・在庫は楽天市場の情報に基づきます。</p>
+    <p class="affiliate-note">※ 本サイトは楽天アフィリエイトプログラムに参加しています。商品リンクから購入された場合、運営者に報酬が発生することがあります。</p>
     <p>© 2025 ガジェット天国</p>
   </div>
 </footer>
 
 <script>
-const APP_ID = '1693b6a4-2e07-4e04-b417-61ae0078af36';
-const AFFILIATE_ID = '533b373d.082b6dc2.533b3742.245bd56b';
+// Cloudflare Workers経由で楽天APIを呼び出す
+const WORKER_URL = 'https://rakuten-proxy.sobamoripaya.workers.dev';
 
 async function fetchRakuten(keyword, hits = 8) {
-  const url = `https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706?applicationId=${APP_ID}&affiliateId=${AFFILIATE_ID}&keyword=${encodeURIComponent(keyword)}&hits=${hits}&sort=-reviewCount&imageFlag=1&format=json`;
   try {
-    const res = await fetch(url);
+    const res = await fetch(`${WORKER_URL}?keyword=${encodeURIComponent(keyword)}&hits=${hits}`);
     if (!res.ok) throw new Error();
     const data = await res.json();
     return data.Items || [];
@@ -246,7 +237,9 @@ async function fetchRakuten(keyword, hits = 8) {
 
 function stars(score) {
   const s = parseFloat(score) || 0;
-  return '★'.repeat(Math.floor(s)) + (s % 1 >= 0.5 ? '☆' : '') + '☆'.repeat(5 - Math.ceil(s));
+  const full = Math.floor(s);
+  const half = s - full >= 0.5 ? 1 : 0;
+  return '★'.repeat(full) + (half ? '☆' : '') + '☆'.repeat(5 - full - half);
 }
 
 function cardHTML(item) {
@@ -319,6 +312,5 @@ document.getElementById('searchInput').addEventListener('keydown', e => { if (e.
 loadProducts('ガジェット 人気', null);
 loadRanking();
 </script>
-
 </body>
 </html>
