@@ -132,53 +132,64 @@ def fetch_rakuten_products(keyword, hits=5):
         return []
 
 def build_article_html(theme, products):
-    """楽天の実データを使って記事HTMLを直接生成"""
+    """画像左・情報右のサイドバイサイドレイアウトで記事生成"""
     today = datetime.now().strftime('%Y年%m月%d日')
     year = datetime.now().year
     title = f"【{year}年最新】{theme['title']} おすすめランキングTOP5"
 
-    # 商品カードHTML生成
-    rank_colors = ['gold', 'silver', 'bronze', '', '']
+    rank_colors = ['gold', 'silver', 'bronze', 'normal', 'normal']
     rank_labels = ['🥇 編集部イチオシ', '🥈 コスパ優秀', '🥉 人気急上昇', '4位', '5位']
-    
+
     product_cards = ''
     for i, item in enumerate(products[:5]):
         p = item.get('Item', {})
         name = p.get('itemName', 'N/A')[:60]
         price = p.get('itemPrice', 0)
-        shop = p.get('shopName', '')
+        shop = p.get('shopName', '')[:20]
         review_avg = float(p.get('reviewAverage', 0))
         review_count = int(p.get('reviewCount', 0))
         affiliate_url = p.get('affiliateUrl', p.get('itemUrl', '#'))
         img_url = p.get('mediumImageUrls', [{}])[0].get('imageUrl', '') if p.get('mediumImageUrls') else ''
-        # 楽天レビューページへのリンク
+        # 大きい画像URLを取得（mediumImageUrls → 画像サイズを128→400に変換）
+        large_img_url = img_url.replace('?_ex=128x128', '?_ex=400x400') if img_url else ''
         item_code = p.get('itemCode', '')
         review_url = f"https://review.rakuten.co.jp/item/1/{item_code.replace(':', '/')}/1.1/" if item_code else affiliate_url
-        stars = '★' * int(review_avg) + '☆' * (5 - int(review_avg))
-        color_class = rank_colors[i]
+        stars_full = int(review_avg)
+        stars_html = '★' * stars_full + '☆' * (5 - stars_full)
+        color = rank_colors[i]
         label = rank_labels[i]
 
-        img_html = f'<img src="{img_url}" alt="{name}" style="width:100%;height:200px;object-fit:contain;background:#f5f5f5;border-radius:8px">' if img_url else f'<div style="width:100%;height:200px;background:#f5f5f5;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:60px">{theme["emoji"]}</div>'
+        # 商品画像HTML（大きい画像を優先）
+        display_img = large_img_url or img_url
+        if display_img:
+            img_html = f'<img src="{display_img}" alt="{name}" loading="lazy" onerror="this.src=\'{img_url}\'">'
+        else:
+            img_html = f'<div class="rank-img-placeholder">{theme["emoji"]}</div>'
 
         product_cards += f'''
 <div class="rank-card" id="rank{i+1}">
-  <div class="rank-header {color_class}">
+  <div class="rank-header {color}">
     <span class="rank-number">{i+1}</span>
     <span class="rank-label">{label}</span>
+    <span class="rank-shop-tag">{shop}</span>
   </div>
   <div class="rank-body">
-    {img_html}
-    <div class="rank-name" style="margin-top:12px">{name}</div>
-    <div class="rank-shop">販売店: {shop}</div>
-    <div class="rank-review">
-      <span style="color:#FFD700;font-size:1.1rem">{stars}</span>
-      <a href="{review_url}" target="_blank" rel="noopener" style="color:#FF4D00;font-size:0.85rem;margin-left:8px">
-        {review_avg:.1f} / 5.0（{review_count:,}件のレビューを見る →）
-      </a>
-    </div>
-    <div class="price-buy">
-      <div class="price">¥{price:,} <small>税込</small></div>
-      <a href="{affiliate_url}" class="btn-buy" target="_blank" rel="noopener sponsored">🛒 楽天で購入する</a>
+    <div class="rank-layout">
+      <div class="rank-img-col">
+        {img_html}
+      </div>
+      <div class="rank-info-col">
+        <div class="rank-name">{name}</div>
+        <div class="rank-review">
+          <span class="stars">{stars_html}</span>
+          <strong>{review_avg:.1f}</strong>
+          <a href="{review_url}" target="_blank" rel="noopener">（{review_count:,}件のレビューを見る →）</a>
+        </div>
+        <div class="price-buy">
+          <div class="price">¥{price:,} <small>税込</small></div>
+          <a href="{affiliate_url}" class="btn-buy" target="_blank" rel="noopener sponsored">楽天市場で購入する</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>'''
@@ -187,19 +198,19 @@ def build_article_html(theme, products):
     table_rows = ''
     for i, item in enumerate(products[:5]):
         p = item.get('Item', {})
-        name = p.get('itemName', '')[:25]
+        name = p.get('itemName', '')[:28]
         price = p.get('itemPrice', 0)
         review_avg = float(p.get('reviewAverage', 0))
         review_count = int(p.get('reviewCount', 0))
         stars = '★' * int(review_avg) + '☆' * (5 - int(review_avg))
         affiliate_url = p.get('affiliateUrl', p.get('itemUrl', '#'))
         table_rows += f'''<tr>
-          <td><span class="rank-no">{i+1}位</span>{name}</td>
-          <td>¥{price:,}</td>
-          <td>{stars} {review_avg:.1f}</td>
-          <td>{review_count:,}件</td>
-          <td><a href="{affiliate_url}" target="_blank" rel="noopener sponsored" style="color:#BF0000;font-weight:700">購入→</a></td>
-        </tr>'''
+<td><span class="rank-no">{i+1}位</span>{name}</td>
+<td>¥{price:,}</td>
+<td>{stars} {review_avg:.1f}</td>
+<td>{review_count:,}件</td>
+<td><a href="{affiliate_url}" target="_blank" rel="noopener sponsored" style="color:#BF0000;font-weight:700">購入→</a></td>
+</tr>'''
 
     html = f'''<!DOCTYPE html>
 <html lang="ja">
@@ -208,13 +219,14 @@ def build_article_html(theme, products):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title} | ガジェット天国</title>
 <meta name="description" content="{year}年最新の{theme["title"]}TOP5を楽天実売データで比較。実際のレビュー数・評価点つき。({today}更新)">
+<link rel="canonical" href="{SITE_URL}/">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3514849475707540" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="article-style.css">
 </head>
 <body>
 <header>
   <div class="header-inner">
-    <div class="logo">Gadget<span>天国</span></div>
+    <a href="{SITE_URL}/" class="logo">Gadget<span>天国</span></a>
     <nav>
       <a href="{SITE_URL}/">トップ</a>
       <a href="{SITE_URL}/archive.html">記事一覧</a>
@@ -223,7 +235,7 @@ def build_article_html(theme, products):
 </header>
 
 <div class="hero">
-  <span class="hero-badge">{today} 更新</span>
+  <div class="hero-badge">{today} 更新</div>
   <h1>{theme["emoji"]} {title}</h1>
   <p class="hero-sub">楽天市場の実売データ・レビュー数をもとに厳選</p>
 </div>
@@ -231,21 +243,21 @@ def build_article_html(theme, products):
 <div class="container">
 
   <div class="intro-box">
-    <p>この記事では楽天市場の実際の売れ筋・レビュー数をもとに<strong>{theme["title"]}TOP5</strong>を厳選しました。気になった商品は楽天の実際のレビューもご確認ください。</p>
+    <p>この記事では楽天市場の実際の売れ筋・レビュー数をもとに<strong>{theme["title"]} TOP5</strong>を厳選しました。気になった商品はリンク先の楽天レビューもご確認ください。</p>
   </div>
 
   <nav class="toc">
-    <div class="toc-title">📋 目次</div>
+    <div class="toc-title">この記事の目次</div>
     <ol>
       <li><a href="#ranking">おすすめランキングTOP5</a></li>
       <li><a href="#compare">スペック比較表</a></li>
-      <li><a href="#guide">選び方ガイド</a></li>
+      <li><a href="#guide">選び方のポイント</a></li>
     </ol>
   </nav>
 
   <section id="ranking">
     <h2 class="section-title">🏆 おすすめランキングTOP5</h2>
-    <p style="font-size:.85rem;color:#888;margin-bottom:16px">※楽天市場のレビュー数順。価格は{today}時点。</p>
+    <p style="font-size:.8rem;color:#999;margin-bottom:16px">※楽天市場のレビュー数順。価格は{today}時点のものです。</p>
     {product_cards}
   </section>
 
@@ -265,17 +277,17 @@ def build_article_html(theme, products):
       <div class="guide-item">
         <div class="guide-item-icon">💰</div>
         <div class="guide-item-title">予算を決める</div>
-        <div class="guide-item-desc">まず予算を明確にしましょう。5,000円以下・1万円・3万円以上でおすすめモデルが変わります。</div>
+        <div class="guide-item-desc">まず予算を明確に。5,000円・1万円・3万円以上でおすすめモデルが変わります。</div>
       </div>
       <div class="guide-item">
         <div class="guide-item-icon">⭐</div>
         <div class="guide-item-title">レビュー数を確認</div>
-        <div class="guide-item-desc">レビュー数が多いほど実績あり。1,000件以上あれば安心して購入できます。</div>
+        <div class="guide-item-desc">1,000件以上のレビューがあれば実績十分。安心して購入できます。</div>
       </div>
       <div class="guide-item">
         <div class="guide-item-icon">🔄</div>
         <div class="guide-item-title">用途に合わせる</div>
-        <div class="guide-item-desc">日常使い・スポーツ・ビジネスなど用途によって最適なモデルが変わります。</div>
+        <div class="guide-item-desc">日常使い・スポーツ・ビジネスなど用途で最適モデルが変わります。</div>
       </div>
       <div class="guide-item">
         <div class="guide-item-icon">🛡️</div>
@@ -291,7 +303,7 @@ def build_article_html(theme, products):
   <div class="footer-logo">Gadget<span>天国</span></div>
   <a class="back-link" href="{SITE_URL}/">← トップページに戻る</a>
   <p class="footer-note">※本サイトは楽天アフィリエイトプログラムに参加しています。商品リンクから購入された場合、運営者に報酬が発生することがあります。商品情報・価格は楽天市場の情報に基づきます。</p>
-  <p style="margin-top:10px;font-size:.75rem">© 2026 ガジェット天国</p>
+  <p style="margin-top:8px;font-size:.72rem">© {year} ガジェット天国</p>
 </footer>
 </body>
 </html>'''
@@ -323,13 +335,12 @@ def update_articles_json(theme, filename, img_url, today):
     upload_to_github('articles.json', json.dumps(articles, ensure_ascii=False, indent=2), "Auto: 記事一覧更新")
 
 def build_archive_page(articles):
-    """アーカイブページを生成"""
     cards = ''
     for a in articles:
         img = a.get('img_url', '')
-        img_html = f'<img src="{img}" alt="{a["title"]}" style="width:100%;height:160px;object-fit:contain;background:#f5f5f5">' if img else f'<div style="width:100%;height:160px;background:linear-gradient(135deg,#1a1a1a,#333);display:flex;align-items:center;justify-content:center;font-size:50px">{a.get("emoji","📱")}</div>'
+        img_html = f'<img src="{img}" alt="{a["title"]}" style="width:100%;height:160px;object-fit:contain;background:#f5f5f5;padding:8px">' if img else f'<div style="width:100%;height:160px;background:linear-gradient(135deg,#1a1a1a,#333);display:flex;align-items:center;justify-content:center;font-size:50px">{a.get("emoji","📱")}</div>'
         cards += f'''
-<a href="{a["filename"]}" style="display:block;background:white;border-radius:12px;overflow:hidden;border:1px solid #eee;transition:transform .2s;text-decoration:none;color:inherit">
+<a href="{a["filename"]}" style="display:block;background:white;border-radius:12px;overflow:hidden;border:1px solid #eee;transition:transform .2s,box-shadow .2s;text-decoration:none;color:inherit">
   {img_html}
   <div style="padding:14px">
     <div style="font-size:11px;color:#FF4D00;font-weight:700;margin-bottom:4px">{a.get("category","")}</div>
@@ -348,23 +359,26 @@ def build_archive_page(articles):
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3514849475707540" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="article-style.css">
 <style>
-.archive-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;padding:30px 5%}}
+.archive-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;margin-top:24px}}
+.archive-grid a:hover{{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.1)}}
 </style>
 </head>
 <body>
 <header>
   <div class="header-inner">
-    <div class="logo">Gadget<span>天国</span></div>
+    <a href="{SITE_URL}/" class="logo">Gadget<span>天国</span></a>
     <nav><a href="{SITE_URL}/">トップ</a></nav>
   </div>
 </header>
 <div class="hero">
-  <span class="hero-badge">全記事一覧</span>
+  <div class="hero-badge">全記事一覧</div>
   <h1>📚 記事アーカイブ</h1>
   <p class="hero-sub">毎日更新中 | 全{len(articles)}記事</p>
 </div>
-<div class="archive-grid">
-{cards}
+<div class="container">
+  <div class="archive-grid">
+    {cards}
+  </div>
 </div>
 <footer>
   <div class="footer-logo">Gadget<span>天国</span></div>
@@ -412,13 +426,14 @@ def main():
         products = fetch_rakuten_products('ガジェット 人気')
     print(f"✅ {len(products)}件取得")
 
-    # 1番目の商品画像をサムネに使用
+    # サムネイル用の画像URL（1番目商品の大きい画像）
     img_url = ''
     if products:
         p = products[0].get('Item', {})
         imgs = p.get('mediumImageUrls', [])
         if imgs:
-            img_url = imgs[0].get('imageUrl', '')
+            raw = imgs[0].get('imageUrl', '')
+            img_url = raw.replace('?_ex=128x128', '?_ex=400x400') if raw else raw
 
     print("📝 記事HTML生成中...")
     article_html = build_article_html(theme, products)
@@ -431,7 +446,6 @@ def main():
     upload_to_github(filename, article_html, f"Auto: {theme['title']} [{slot.upper()}]")
     update_articles_json(theme, filename, img_url, today)
 
-    # アーカイブページ更新
     print("📚 アーカイブページ更新中...")
     articles_json, _ = get_github_file('articles.json')
     if articles_json:
