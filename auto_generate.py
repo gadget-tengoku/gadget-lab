@@ -12,7 +12,7 @@ RAKUTEN_AFFILIATE_ID = '533b373d.082b6dc2.533b3742.245bd56b'
 CLAUDE_API_KEY = os.environ['CLAUDE_API_KEY']
 GITHUB_TOKEN = os.environ['GITHUB_TOKEN']
 GITHUB_REPO = 'gadget-tengoku/gadget-lab'
-SITE_URL = 'https://gadget-tengoku.github.io/gadget-lab'
+SITE_URL = 'https://gadget-tengoku.com'
 
 TWITTER_API_KEY = os.environ.get('API_KEY', '')
 TWITTER_API_SECRET = os.environ.get('API_SECRET', '')
