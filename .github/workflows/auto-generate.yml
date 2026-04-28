@@ -44,3 +44,8 @@ jobs:
           ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
           SLOT: ${{ steps.slot.outputs.slot }}
         run: python auto_generate.py
+        - name: 既存記事を新レイアウトに一括変換
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+        run: python migrate_articles.py
