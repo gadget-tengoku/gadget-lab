@@ -4,56 +4,257 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>記事アーカイブ | ガジェット天国</title>
-<meta name="description" content="ガジェット天国の全記事一覧。イヤホン・スマートウォッチ・ゲーミングなど家電・ガジェットの最新比較記事。">
+<meta name="description" content="ガジェット天国の全記事一覧。イヤホン・スマートウォッチ・モバイルバッテリーなど家電・ガジェットの最新比較記事をまとめて確認。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://gadget-tengoku.com/archive.html">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3514849475707540" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="article-style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <style>
-.archive-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;padding:30px 5%}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--accent:#FF4D00;--accent-light:#fff1ec;--black:#111;--gray-dark:#333;--gray:#888;--gray-light:#f4f4f2;--white:#fff;--border:#e8e8e4;--font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;--radius:12px}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--white);color:var(--black);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:var(--font-display);font-size:22px;font-weight:800}
+.logo span{color:var(--accent)}
+nav{display:flex;gap:24px;font-size:13px;color:var(--gray);font-weight:500}
+nav a:hover{color:var(--black)}
+.header-cta{background:var(--black);color:var(--white);padding:8px 18px;border-radius:999px;font-size:12px;font-weight:600;transition:background .2s}
+.header-cta:hover{background:var(--accent)}
+
+.page-hero{background:var(--gray-light);border-bottom:1px solid var(--border);padding:52px 5% 44px}
+.page-hero-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:var(--accent-light);padding:5px 12px;border-radius:999px;margin-bottom:16px}
+.page-hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block}
+.page-hero h1{font-family:var(--font-display);font-size:clamp(30px,4vw,48px);font-weight:800;letter-spacing:-1.5px;margin-bottom:10px}
+.page-hero-sub{font-size:15px;color:var(--gray-dark)}
+#articleCount{color:var(--accent);font-weight:700}
+
+.filter-bar{padding:20px 5%;border-bottom:1px solid var(--border);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.filter-label{font-size:12px;font-weight:600;color:var(--gray);margin-right:4px;letter-spacing:.05em;text-transform:uppercase}
+.filter-btn{padding:6px 16px;border-radius:999px;border:1px solid var(--border);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;background:white;color:var(--gray);font-family:var(--font-body)}
+.filter-btn.active,.filter-btn:hover{background:var(--black);color:white;border-color:var(--black)}
+
+.archive-wrap{padding:36px 5% 72px}
+.archive-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.article-card{background:white;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:transform .2s,box-shadow .2s;display:block}
+.article-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.1)}
+.article-thumb{height:150px;display:flex;align-items:center;justify-content:center;font-size:56px;position:relative}
+.article-tag{position:absolute;top:10px;left:10px;color:white;font-size:10px;font-weight:700;padding:3px 10px;border-radius:999px}
+.tag-new{background:var(--accent)}
+.tag-fixed{background:var(--black)}
+.article-body{padding:16px}
+.article-category{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.article-title{font-size:14px;font-weight:700;line-height:1.4;margin-bottom:8px;color:var(--black)}
+.article-desc{font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:12px}
+.article-meta{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--gray)}
+.article-read{color:var(--accent);font-weight:600;font-size:12px}
+
+.empty-state{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--gray)}
+.empty-state p{font-size:15px;margin-top:12px}
+
+.loading{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--gray)}
+.loading-spinner{width:34px;height:34px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+footer{background:var(--black);color:#aaa;padding:48px 5% 28px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:36px}
+.footer-logo{font-family:var(--font-display);font-size:20px;font-weight:800;color:white;margin-bottom:10px}
+.footer-logo span{color:var(--accent)}
+.footer-desc{font-size:13px;line-height:1.7}
+.footer-col h4{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:white;margin-bottom:12px}
+.footer-col ul{list-style:none}
+.footer-col li{font-size:13px;margin-bottom:7px}
+.footer-col a{color:#aaa}
+.footer-col a:hover{color:white}
+.footer-bottom{border-top:1px solid #222;padding-top:20px;font-size:11px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.affiliate-note{font-size:11px;color:#555;max-width:560px;line-height:1.6}
+
+@media(max-width:768px){
+  nav{display:none}
+  .archive-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr;gap:24px}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
 </style>
 </head>
 <body>
-<header>
-  <div class="header-inner">
-    <div class="logo">Gadget<span>天国</span></div>
-    <nav><a href="https://gadget-tengoku.com/">トップ</a></nav>
-  </div>
-</header>
-<div class="hero">
-  <span class="hero-badge">全記事一覧</span>
-  <h1>📚 記事アーカイブ</h1>
-  <p class="hero-sub">毎日更新中 | 全3記事</p>
-</div>
-<div class="archive-grid">
 
-<a href="article-キッズ向けスマートウォッチ-am-20260428.html" style="display:block;background:white;border-radius:12px;overflow:hidden;border:1px solid #eee;transition:transform .2s;text-decoration:none;color:inherit">
-  <div style="width:100%;height:160px;background:linear-gradient(135deg,#1a1a1a,#333);display:flex;align-items:center;justify-content:center;font-size:50px">👦</div>
-  <div style="padding:14px">
-    <div style="font-size:11px;color:#FF4D00;font-weight:700;margin-bottom:4px">スマートウォッチ</div>
-    <div style="font-size:14px;font-weight:700;line-height:1.4;margin-bottom:6px">【2026年最新】キッズ向けスマートウォッチ おすすめランキングTOP5</div>
-    <div style="font-size:11px;color:#888">📅 2026年04月28日</div>
-  </div>
-</a>
-<a href="article-android---------------am-20260428.html" style="display:block;background:white;border-radius:12px;overflow:hidden;border:1px solid #eee;transition:transform .2s;text-decoration:none;color:inherit">
-  <div style="width:100%;height:160px;background:linear-gradient(135deg,#1a1a1a,#333);display:flex;align-items:center;justify-content:center;font-size:50px">⏰</div>
-  <div style="padding:14px">
-    <div style="font-size:11px;color:#FF4D00;font-weight:700;margin-bottom:4px">イヤホン</div>
-    <div style="font-size:14px;font-weight:700;line-height:1.4;margin-bottom:6px">【2026年最新】Android向け長時間バッテリーイヤホン おすすめランキングTOP5</div>
-    <div style="font-size:11px;color:#888">📅 2026年04月28日</div>
-  </div>
-</a>
-<a href="smartwatch-ranking-20260428.html" style="display:block;background:white;border-radius:12px;overflow:hidden;border:1px solid #eee;transition:transform .2s;text-decoration:none;color:inherit">
-  <div style="width:100%;height:160px;background:linear-gradient(135deg,#1a1a1a,#333);display:flex;align-items:center;justify-content:center;font-size:50px">⌚</div>
-  <div style="padding:14px">
-    <div style="font-size:11px;color:#FF4D00;font-weight:700;margin-bottom:4px">スマートウォッチ</div>
-    <div style="font-size:14px;font-weight:700;line-height:1.4;margin-bottom:6px">【2026年最新】スマートウォッチ おすすめ人気ランキングTOP5</div>
-    <div style="font-size:11px;color:#888">📅 2026年04月28日</div>
-  </div>
-</a>
+<header>
+  <a href="https://gadget-tengoku.com/" style="font-family:var(--font-display);font-size:22px;font-weight:800;color:var(--black)">Gadget<span style="color:var(--accent)">天国</span></a>
+  <nav>
+    <a href="https://gadget-tengoku.com/#articles">記事一覧</a>
+    <a href="archive.html" style="color:var(--black);font-weight:600">アーカイブ</a>
+    <a href="https://gadget-tengoku.com/#products">商品一覧</a>
+    <a href="https://gadget-tengoku.com/#ranking">ランキング</a>
+    <a href="https://gadget-tengoku.com/#about">サイトについて</a>
+  </nav>
+  <a href="https://www.rakuten.co.jp/" class="header-cta" target="_blank" rel="noopener">楽天で探す</a>
+</header>
+
+<div class="page-hero">
+  <div class="page-hero-eyebrow">毎日自動更新</div>
+  <h1>📚 記事アーカイブ</h1>
+  <p class="page-hero-sub">全 <span id="articleCount">-</span> 記事 | 家電・ガジェット専門メディア</p>
 </div>
+
+<div class="filter-bar">
+  <span class="filter-label">カテゴリ：</span>
+  <button class="filter-btn active" data-category="all">すべて</button>
+  <button class="filter-btn" data-category="イヤホン">イヤホン</button>
+  <button class="filter-btn" data-category="スマートウォッチ">スマートウォッチ</button>
+  <button class="filter-btn" data-category="モバイルバッテリー">モバイルバッテリー</button>
+  <button class="filter-btn" data-category="スマートホーム">スマートホーム</button>
+  <button class="filter-btn" data-category="PC周辺機器">PC周辺機器</button>
+</div>
+
+<div class="archive-wrap">
+  <div class="archive-grid" id="archiveGrid">
+    <div class="loading"><div class="loading-spinner"></div><p>記事を読み込み中...</p></div>
+  </div>
+</div>
+
 <footer>
-  <div class="footer-logo">Gadget<span>天国</span></div>
-  <a class="back-link" href="https://gadget-tengoku.com/">← トップページに戻る</a>
-  <p class="footer-note">© 2026 ガジェット天国</p>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">Gadget<span>天国</span></div>
+      <p class="footer-desc">家電・ガジェット専門メディア。<br>楽天市場の人気商品をリアルタイムで紹介。</p>
+    </div>
+    <div class="footer-col">
+      <h4>記事</h4>
+      <ul>
+        <li><a href="earphone.html">イヤホンランキング</a></li>
+        <li><a href="smartwatch.html">スマートウォッチ比較</a></li>
+        <li><a href="battery.html">バッテリー比較</a></li>
+        <li><a href="archive.html">記事アーカイブ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>サイト情報</h4>
+      <ul>
+        <li><a href="https://gadget-tengoku.com/#about">このサイトについて</a></li>
+        <li><a href="https://gadget-tengoku.com/#ranking">ランキング</a></li>
+        <li><a href="privacy.html">プライバシーポリシー</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="affiliate-note">※ 本サイトは楽天アフィリエイトプログラムに参加しています。商品リンクから購入された場合、運営者に報酬が発生することがあります。</p>
+    <p>© 2026 ガジェット天国</p>
+  </div>
 </footer>
+
+<script>
+// 固定記事（常に表示）
+const FIXED_ARTICLES = [
+  {
+    filename: 'earphone.html',
+    title: '【2026年】ワイヤレスイヤホン おすすめ人気ランキングTOP5',
+    description: 'Sony・Apple・Ankerなど主要モデルを音質・NC性能・コスパで徹底比較。',
+    category: 'イヤホン',
+    date: '2026年4月更新',
+    emoji: '🎧',
+    bg: 'linear-gradient(135deg,#1a1a2e,#16213e)',
+    tag: '人気記事',
+    tagClass: 'tag-fixed',
+    isFixed: true
+  },
+  {
+    filename: 'smartwatch.html',
+    title: '【2026年】スマートウォッチ おすすめ人気ランキングTOP5',
+    description: 'Apple Watch・Galaxy Watch・Garminなど人気モデルを健康機能・バッテリーで比較。',
+    category: 'スマートウォッチ',
+    date: '2026年4月更新',
+    emoji: '⌚',
+    bg: 'linear-gradient(135deg,#0a1628,#1a2a4a)',
+    tag: '注目',
+    tagClass: 'tag-fixed',
+    isFixed: true
+  },
+  {
+    filename: 'battery.html',
+    title: '【2026年】モバイルバッテリー おすすめランキングTOP5',
+    description: '軽量・大容量・PD急速充電対応モデルを用途別に徹底比較。',
+    category: 'モバイルバッテリー',
+    date: '2026年4月更新',
+    emoji: '🔋',
+    bg: 'linear-gradient(135deg,#0f2010,#1a3020)',
+    tag: '保存版',
+    tagClass: 'tag-fixed',
+    isFixed: true
+  }
+];
+
+let allArticles = [];
+let currentCategory = 'all';
+
+function cardHTML(a) {
+  const bg = a.bg || 'linear-gradient(135deg,#1a1a1a,#2a2a2a)';
+  const tagClass = a.tagClass || 'tag-new';
+  const tag = a.tag || 'NEW';
+  return `<a href="${a.filename}" class="article-card">
+  <div class="article-thumb" style="background:${bg}">
+    ${a.emoji || '📱'}
+    <div class="article-tag ${tagClass}">${tag}</div>
+  </div>
+  <div class="article-body">
+    <div class="article-category">${a.category}</div>
+    <div class="article-title">${a.title}</div>
+    <div class="article-desc">${a.description || ''}</div>
+    <div class="article-meta"><span>📅 ${a.date}</span><span class="article-read">読む →</span></div>
+  </div>
+</a>`;
+}
+
+function renderArticles() {
+  const grid = document.getElementById('archiveGrid');
+  const filtered = currentCategory === 'all'
+    ? allArticles
+    : allArticles.filter(a => a.category === currentCategory);
+
+  document.getElementById('articleCount').textContent = allArticles.length;
+
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="empty-state">😅<p>このカテゴリの記事はまだありません。</p></div>';
+    return;
+  }
+  grid.innerHTML = filtered.map(cardHTML).join('');
+}
+
+async function loadArticles() {
+  let autoArticles = [];
+  try {
+    const res = await fetch('articles.json?t=' + Date.now());
+    if (res.ok) {
+      const data = await res.json();
+      autoArticles = data.map(a => ({
+        ...a,
+        tag: 'NEW',
+        tagClass: 'tag-new',
+        bg: 'linear-gradient(135deg,#1a1a1a,#2a2a2a)',
+        isFixed: false
+      }));
+    }
+  } catch(e) { /* articles.jsonがなくても固定記事は表示 */ }
+
+  allArticles = [...FIXED_ARTICLES, ...autoArticles];
+  renderArticles();
+}
+
+// カテゴリフィルター
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentCategory = btn.dataset.category;
+    renderArticles();
+  });
+});
+
+loadArticles();
+</script>
+
 </body>
 </html>
