@@ -1,0 +1,28 @@
+name: Twitter自動投稿
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 毎日日本時間9:00 (UTC 0:00)
+  workflow_dispatch:      # 手動実行も可能
+
+jobs:
+  tweet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install tweepy
+
+      - name: Post tweet
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          API_SECRET: ${{ secrets.API_SECRET }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+        run: python tweet.py
