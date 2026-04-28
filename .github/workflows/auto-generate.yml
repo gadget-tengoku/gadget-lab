@@ -1,17 +1,14 @@
 name: 完全自動化（記事生成・投稿）
-
 on:
   schedule:
     - cron: '0 1 * * *'   # 毎日AM 日本時間10:00
     - cron: '0 12 * * *'  # 毎日PM 日本時間21:00
   workflow_dispatch:
-
 jobs:
   auto-generate:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
     steps:
       - name: リポジトリをチェックアウト
         uses: actions/checkout@v4
@@ -44,7 +41,8 @@ jobs:
           ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
           SLOT: ${{ steps.slot.outputs.slot }}
         run: python auto_generate.py
-        - name: 既存記事を新レイアウトに一括変換
+
+      - name: 既存記事を新レイアウトに一括変換
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
