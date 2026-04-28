@@ -25,7 +25,13 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gadget-tengoku.com/article-android---------------am-20260428.html</loc>
+    <loc>https://gadget-tengoku.com/archive.html</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gadget-tengoku.com/article-キッズ向けスマートウォッチ-am-20260428.html</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
