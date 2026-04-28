@@ -180,59 +180,40 @@ footer{background:var(--black);color:#aaa;padding:48px 5% 28px}
 <section class="articles-section" id="articles">
   <div class="section-header">
     <h2 class="section-title">📝 おすすめ記事</h2>
-    <span style="font-size:13px;color:var(--gray)">専門家が徹底比較</span>
+    <span style="font-size:13px;color:var(--gray)">毎日自動更新中</span>
   </div>
+  <!-- 固定記事 -->
   <div class="article-grid">
-
     <a href="earphone.html" class="article-card">
-      <div class="article-thumb earphone">
-        🎧
-        <div class="article-tag">人気記事</div>
-      </div>
+      <div class="article-thumb earphone">🎧<div class="article-tag">人気記事</div></div>
       <div class="article-body">
         <div class="article-category">イヤホン</div>
         <div class="article-title">【2026年】ワイヤレスイヤホン おすすめ人気ランキングTOP5</div>
         <div class="article-desc">Sony・Apple・Ankerなど主要モデルを音質・NC性能・コスパで徹底比較。</div>
-        <div class="article-meta">
-          <span>📅 2026年4月更新</span>
-          <span class="article-read">読む →</span>
-        </div>
+        <div class="article-meta"><span>📅 2026年4月更新</span><span class="article-read">読む →</span></div>
       </div>
     </a>
-
     <a href="smartwatch.html" class="article-card">
-      <div class="article-thumb smartwatch">
-        ⌚
-        <div class="article-tag">注目</div>
-      </div>
+      <div class="article-thumb smartwatch">⌚<div class="article-tag">注目</div></div>
       <div class="article-body">
         <div class="article-category">スマートウォッチ</div>
         <div class="article-title">【2026年】スマートウォッチ おすすめ人気ランキングTOP5</div>
         <div class="article-desc">Apple Watch・Galaxy Watch・Garminなど人気モデルを健康機能・バッテリーで比較。</div>
-        <div class="article-meta">
-          <span>📅 2026年4月更新</span>
-          <span class="article-read">読む →</span>
-        </div>
+        <div class="article-meta"><span>📅 2026年4月更新</span><span class="article-read">読む →</span></div>
       </div>
     </a>
-
     <a href="battery.html" class="article-card">
-      <div class="article-thumb battery">
-        🔋
-        <div class="article-tag">保存版</div>
-      </div>
+      <div class="article-thumb battery">🔋<div class="article-tag">保存版</div></div>
       <div class="article-body">
         <div class="article-category">モバイルバッテリー</div>
         <div class="article-title">【2026年】モバイルバッテリー おすすめランキングTOP5</div>
-        <div class="article-desc">軽量・大容量・PD急速充電対応モデルを用途別に徹底比較。旅行・通勤・アウトドア別も解説。</div>
-        <div class="article-meta">
-          <span>📅 2026年4月更新</span>
-          <span class="article-read">読む →</span>
-        </div>
+        <div class="article-desc">軽量・大容量・PD急速充電対応モデルを用途別に徹底比較。</div>
+        <div class="article-meta"><span>📅 2026年4月更新</span><span class="article-read">読む →</span></div>
       </div>
     </a>
-
   </div>
+  <!-- 自動生成記事（articles.jsonから動的に読み込み） -->
+  <div id="autoArticles" class="article-grid" style="margin-top:16px"></div>
 </section>
 
 <section class="section" id="products">
@@ -386,6 +367,30 @@ document.getElementById('searchInput').addEventListener('keydown', e => { if (e.
 
 loadProducts('ガジェット 人気', null);
 loadRanking();
+
+async function loadAutoArticles() {
+  try {
+    const res = await fetch('articles.json?t=' + Date.now());
+    if (!res.ok) return;
+    const articles = await res.json();
+    const container = document.getElementById('autoArticles');
+    if (!articles.length || !container) return;
+    container.innerHTML = articles.map(a => `
+      <a href="${a.filename}" class="article-card">
+        <div class="article-thumb" style="background:linear-gradient(135deg,#1a1a1a,#2a2a2a);font-size:48px;display:flex;align-items:center;justify-content:center;height:140px;position:relative">
+          ${a.emoji || '📱'}
+          <div class="article-tag" style="position:absolute;top:8px;left:8px;background:#FF4D00;color:white;font-size:10px;font-weight:700;padding:3px 10px;border-radius:999px">NEW</div>
+        </div>
+        <div class="article-body">
+          <div class="article-category">${a.category}</div>
+          <div class="article-title">${a.title}</div>
+          <div class="article-desc">${a.description}</div>
+          <div class="article-meta"><span>📅 ${a.date}</span><span class="article-read">読む →</span></div>
+        </div>
+      </a>`).join('');
+  } catch(e) { console.log('自動記事スキップ:', e); }
+}
+loadAutoArticles();
 </script>
 </body>
 </html>
