@@ -2,8 +2,9 @@ name: 完全自動化（記事生成・投稿）
 
 on:
   schedule:
-    - cron: '0 1 * * *'  # 毎日日本時間10:00 (UTC 1:00)
-  workflow_dispatch:      # 手動実行も可能
+    - cron: '0 1 * * *'   # 毎日AM 日本時間10:00
+    - cron: '0 12 * * *'  # 毎日PM 日本時間21:00
+  workflow_dispatch:
 
 jobs:
   auto-generate:
@@ -23,6 +24,16 @@ jobs:
       - name: 依存パッケージをインストール
         run: pip install requests tweepy
 
+      - name: スロット判定（AM/PM）
+        id: slot
+        run: |
+          HOUR=$(date -u +%H)
+          if [ "$HOUR" -lt "12" ]; then
+            echo "slot=am" >> $GITHUB_OUTPUT
+          else
+            echo "slot=pm" >> $GITHUB_OUTPUT
+          fi
+
       - name: 記事自動生成・投稿を実行
         env:
           CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
@@ -31,4 +42,5 @@ jobs:
           API_SECRET: ${{ secrets.API_SECRET }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+          SLOT: ${{ steps.slot.outputs.slot }}
         run: python auto_generate.py
