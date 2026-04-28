@@ -3,6 +3,7 @@ import os
 import re
 import requests
 import base64
+import json
 from datetime import datetime
 
 RAKUTEN_APP_ID = '1693b6a4-2e07-4e04-b417-61ae0078af36'
@@ -19,13 +20,13 @@ TWITTER_ACCESS_TOKEN = os.environ.get('ACCESS_TOKEN', '')
 TWITTER_ACCESS_TOKEN_SECRET = os.environ.get('ACCESS_TOKEN_SECRET', '')
 
 ARTICLE_THEMES = [
-    {'keyword': 'ワイヤレスイヤホン ノイキャン 人気', 'title': 'ワイヤレスイヤホン', 'filename': 'earphone-ranking', 'category': 'イヤホン'},
-    {'keyword': 'スマートウォッチ 健康管理 人気', 'title': 'スマートウォッチ', 'filename': 'smartwatch-ranking', 'category': 'スマートウォッチ'},
-    {'keyword': 'モバイルバッテリー 軽量 急速充電', 'title': 'モバイルバッテリー', 'filename': 'battery-ranking', 'category': 'モバイル'},
-    {'keyword': 'スマートホーム LED 人気', 'title': 'スマートホームガジェット', 'filename': 'smarthome-ranking', 'category': 'スマートホーム'},
-    {'keyword': 'ゲーミングマウス 高性能', 'title': 'ゲーミングマウス', 'filename': 'gaming-mouse-ranking', 'category': 'PC周辺機器'},
-    {'keyword': 'Bluetoothスピーカー 防水', 'title': 'Bluetoothスピーカー', 'filename': 'speaker-ranking', 'category': 'オーディオ'},
-    {'keyword': 'USB充電器 GaN 急速充電', 'title': 'USB急速充電器', 'filename': 'charger-ranking', 'category': 'モバイル'},
+    {'keyword': 'ワイヤレスイヤホン ノイキャン 人気', 'title': 'ワイヤレスイヤホン', 'filename': 'earphone-ranking', 'category': 'イヤホン', 'emoji': '🎧'},
+    {'keyword': 'スマートウォッチ 健康管理 人気', 'title': 'スマートウォッチ', 'filename': 'smartwatch-ranking', 'category': 'スマートウォッチ', 'emoji': '⌚'},
+    {'keyword': 'モバイルバッテリー 軽量 急速充電', 'title': 'モバイルバッテリー', 'filename': 'battery-ranking', 'category': 'モバイル', 'emoji': '🔋'},
+    {'keyword': 'スマートホーム LED 人気', 'title': 'スマートホームガジェット', 'filename': 'smarthome-ranking', 'category': 'スマートホーム', 'emoji': '💡'},
+    {'keyword': 'ゲーミングマウス 高性能', 'title': 'ゲーミングマウス', 'filename': 'gaming-mouse-ranking', 'category': 'PC周辺機器', 'emoji': '🖱️'},
+    {'keyword': 'Bluetoothスピーカー 防水', 'title': 'Bluetoothスピーカー', 'filename': 'speaker-ranking', 'category': 'オーディオ', 'emoji': '🔊'},
+    {'keyword': 'USB充電器 GaN 急速充電', 'title': 'USB急速充電器', 'filename': 'charger-ranking', 'category': 'モバイル', 'emoji': '⚡'},
 ]
 
 HTML_TEMPLATE_START = """<!DOCTYPE html>
@@ -97,7 +98,7 @@ def generate_article_body(theme, products):
 商品データ:{product_info}
 
 出力ルール:
-- <body>タグや<html>タグは不要。コンテンツのdivのみ出力
+- <body>タグや<html>タグは不要。divやsectionのみ出力
 - CSSクラスは以下を使用:hero, hero-badge, container, section-title, intro-box, toc, guide-grid, guide-item, guide-item-icon, guide-item-title, guide-item-desc, rank-card, rank-header(gold/silver/bronze), rank-number, rank-label, rank-body, rank-name, rank-shop, rank-review, pros-cons, pros, cons, price-buy, price, btn-buy, table-wrap, faq, faq-item, faq-q, faq-a
 - マークダウン記法は使わない
 - 購入ボタン: <a href="商品URL" class="btn-buy" target="_blank">🛒 楽天で購入する</a>
@@ -140,6 +141,16 @@ def build_html(theme, body_content):
     end = HTML_TEMPLATE_END.format(site_url=SITE_URL)
     return start + body_content + end
 
+def get_github_file(filename):
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{filename}"
+    headers = {'Authorization': f'token {GITHUB_TOKEN}', 'Accept': 'application/vnd.github.v3+json'}
+    res = requests.get(url, headers=headers)
+    if res.status_code == 200:
+        data = res.json()
+        content = base64.b64decode(data['content']).decode('utf-8')
+        return content, data['sha']
+    return None, None
+
 def upload_to_github(filename, content, commit_message):
     url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{filename}"
     headers = {'Authorization': f'token {GITHUB_TOKEN}', 'Accept': 'application/vnd.github.v3+json'}
@@ -157,6 +168,40 @@ def upload_to_github(filename, content, commit_message):
         return True
     print(f"❌ アップロード失敗: {res.status_code}")
     return False
+
+def update_articles_json(theme, filename, today):
+    """記事一覧JSONを更新してトップページに反映"""
+    articles_json, sha = get_github_file('articles.json')
+    if articles_json:
+        articles = json.loads(articles_json)
+    else:
+        articles = []
+
+    year = datetime.now().year
+    new_article = {
+        'title': f"【{year}年最新】{theme['title']} おすすめ人気ランキングTOP5",
+        'filename': filename,
+        'category': theme['category'],
+        'emoji': theme.get('emoji', '📱'),
+        'date': today.strftime('%Y年%m月%d日'),
+        'description': f"{theme['title']}のおすすめをランキング形式で徹底比較。選び方・比較表・FAQも充実。"
+    }
+
+    # 同じファイル名があれば更新、なければ先頭に追加
+    exists = False
+    for i, a in enumerate(articles):
+        if a['filename'] == filename:
+            articles[i] = new_article
+            exists = True
+            break
+    if not exists:
+        articles.insert(0, new_article)
+
+    # 最新20件のみ保持
+    articles = articles[:20]
+
+    upload_to_github('articles.json', json.dumps(articles, ensure_ascii=False, indent=2), f"Auto: 記事一覧更新 ({today.strftime('%Y/%m/%d')})")
+    print(f"✅ articles.json更新完了")
 
 def update_sitemap(new_files):
     today = datetime.now().strftime('%Y-%m-%d')
@@ -204,8 +249,10 @@ def main():
 
     date_str = today.strftime('%Y%m%d')
     filename = f"{theme['filename']}-{date_str}.html"
+
     upload_to_github(filename, article_html, f"Auto: {theme['title']}記事生成 ({today.strftime('%Y/%m/%d')})")
-    upload_to_github('sitemap.xml', update_sitemap([filename]), f"Auto: サイトマップ更新")
+    upload_to_github('sitemap.xml', update_sitemap([filename]), "Auto: サイトマップ更新")
+    update_articles_json(theme, filename, today)
 
     tweet_text = f"🆕 新着記事！\n【{today.year}年最新】{theme['title']} おすすめランキングTOP5\n\n{SITE_URL}/{filename}\n\n#{theme['category']} #ガジェット #楽天"
     post_to_twitter(tweet_text)
