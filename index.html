@@ -59,6 +59,23 @@ nav a:hover{color:var(--black)}
 .section-title{font-family:var(--font-display);font-size:24px;font-weight:800;letter-spacing:-.5px}
 .section-link{font-size:13px;color:var(--accent);font-weight:500}
 
+/* 記事カードセクション */
+.articles-section{padding:52px 5%;background:var(--gray-light)}
+.article-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.article-card{background:white;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:transform .2s,box-shadow .2s;display:block}
+.article-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.1)}
+.article-thumb{height:140px;display:flex;align-items:center;justify-content:center;font-size:60px;position:relative}
+.article-thumb.earphone{background:linear-gradient(135deg,#1a1a2e,#16213e)}
+.article-thumb.smartwatch{background:linear-gradient(135deg,#0a1628,#1a2a4a)}
+.article-thumb.battery{background:linear-gradient(135deg,#0f2010,#1a3020)}
+.article-tag{position:absolute;top:10px;left:10px;background:var(--accent);color:white;font-size:10px;font-weight:700;padding:3px 10px;border-radius:999px}
+.article-body{padding:16px}
+.article-category{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.article-title{font-size:15px;font-weight:700;line-height:1.4;margin-bottom:8px;color:var(--black)}
+.article-desc{font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:12px}
+.article-meta{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--gray)}
+.article-read{color:var(--accent);font-weight:600;font-size:12px}
+
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
 .tab{padding:7px 16px;border-radius:999px;border:1px solid var(--border);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;background:white;color:var(--gray);font-family:var(--font-body)}
 .tab.active,.tab:hover{background:var(--black);color:white;border-color:var(--black)}
@@ -131,6 +148,7 @@ footer{background:var(--black);color:#aaa;padding:48px 5% 28px}
 <header>
   <div class="logo">Gadget<span>天国</span></div>
   <nav>
+    <a href="#articles">記事一覧</a>
     <a href="#products">商品一覧</a>
     <a href="#ranking">ランキング</a>
     <a href="#about">サイトについて</a>
@@ -142,10 +160,10 @@ footer{background:var(--black);color:#aaa;padding:48px 5% 28px}
   <div class="hero-text">
     <div class="hero-eyebrow">楽天市場 リアルタイム更新</div>
     <h1>本当に<em>使える</em><br>ガジェットだけ<br>厳選紹介</h1>
-    <p class="hero-sub">家電・スマートデバイス・音響機器など、楽天市場の人気商品をリアルタイムで取得してご紹介。お得なセール情報も自動更新。</p>
+    <p class="hero-sub">家電・スマートデバイス・音響機器など、楽天市場の人気商品をリアルタイムで取得してご紹介。専門記事で選び方も解説。</p>
     <div class="hero-actions">
-      <a href="#products" class="btn-primary">商品を見る</a>
-      <a href="#ranking" class="btn-ghost">ランキングへ →</a>
+      <a href="#articles" class="btn-primary">記事を読む</a>
+      <a href="#products" class="btn-ghost">商品を見る →</a>
     </div>
   </div>
   <div class="hero-visual">🎧</div>
@@ -157,6 +175,65 @@ footer{background:var(--black);color:#aaa;padding:48px 5% 28px}
     <button onclick="searchProducts()">検索</button>
   </div>
 </div>
+
+<!-- 記事一覧セクション -->
+<section class="articles-section" id="articles">
+  <div class="section-header">
+    <h2 class="section-title">📝 おすすめ記事</h2>
+    <span style="font-size:13px;color:var(--gray)">専門家が徹底比較</span>
+  </div>
+  <div class="article-grid">
+
+    <a href="earphone.html" class="article-card">
+      <div class="article-thumb earphone">
+        🎧
+        <div class="article-tag">人気記事</div>
+      </div>
+      <div class="article-body">
+        <div class="article-category">イヤホン</div>
+        <div class="article-title">【2026年】ワイヤレスイヤホン おすすめ人気ランキングTOP5</div>
+        <div class="article-desc">Sony・Apple・Ankerなど主要モデルを音質・NC性能・コスパで徹底比較。</div>
+        <div class="article-meta">
+          <span>📅 2026年4月更新</span>
+          <span class="article-read">読む →</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="smartwatch.html" class="article-card">
+      <div class="article-thumb smartwatch">
+        ⌚
+        <div class="article-tag">注目</div>
+      </div>
+      <div class="article-body">
+        <div class="article-category">スマートウォッチ</div>
+        <div class="article-title">【2026年】スマートウォッチ おすすめ人気ランキングTOP5</div>
+        <div class="article-desc">Apple Watch・Galaxy Watch・Garminなど人気モデルを健康機能・バッテリーで比較。</div>
+        <div class="article-meta">
+          <span>📅 2026年4月更新</span>
+          <span class="article-read">読む →</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="battery.html" class="article-card">
+      <div class="article-thumb battery">
+        🔋
+        <div class="article-tag">保存版</div>
+      </div>
+      <div class="article-body">
+        <div class="article-category">モバイルバッテリー</div>
+        <div class="article-title">【2026年】モバイルバッテリー おすすめランキングTOP5</div>
+        <div class="article-desc">軽量・大容量・PD急速充電対応モデルを用途別に徹底比較。旅行・通勤・アウトドア別も解説。</div>
+        <div class="article-meta">
+          <span>📅 2026年4月更新</span>
+          <span class="article-read">読む →</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
 
 <section class="section" id="products">
   <div class="section-header">
@@ -199,12 +276,11 @@ footer{background:var(--black);color:#aaa;padding:48px 5% 28px}
       <p class="footer-desc">家電・ガジェット専門メディア。<br>楽天市場の人気商品をリアルタイムで紹介。</p>
     </div>
     <div class="footer-col">
-      <h4>カテゴリ</h4>
+      <h4>記事</h4>
       <ul>
-        <li><a href="#products">イヤホン・スピーカー</a></li>
-        <li><a href="#products">スマートウォッチ</a></li>
-        <li><a href="#products">スマートホーム</a></li>
-        <li><a href="#products">PC周辺機器</a></li>
+        <li><a href="earphone.html">イヤホンランキング</a></li>
+        <li><a href="smartwatch.html">スマートウォッチ比較</a></li>
+        <li><a href="battery.html">バッテリー比較</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -218,12 +294,11 @@ footer{background:var(--black);color:#aaa;padding:48px 5% 28px}
   </div>
   <div class="footer-bottom">
     <p class="affiliate-note">※ 本サイトは楽天アフィリエイトプログラムに参加しています。商品リンクから購入された場合、運営者に報酬が発生することがあります。</p>
-    <p>© 2025 ガジェット天国</p>
+    <p>© 2026 ガジェット天国</p>
   </div>
 </footer>
 
 <script>
-// Cloudflare Workers経由で楽天APIを呼び出す
 const WORKER_URL = 'https://rakuten-proxy.sobamoripaya.workers.dev';
 
 async function fetchRakuten(keyword, hits = 8) {
