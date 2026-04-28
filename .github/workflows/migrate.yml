@@ -1,0 +1,24 @@
+name: 記事レイアウト一括更新
+
+on:
+  workflow_dispatch:  # ← GitHubのActionsタブからボタンで手動実行
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Python セットアップ
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: 依存パッケージインストール
+        run: pip install requests
+
+      - name: 全記事を新レイアウトに変換
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+        run: python migrate_articles.py
