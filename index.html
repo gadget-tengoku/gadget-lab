@@ -287,7 +287,7 @@ async function loadProducts(keyword) {
 // ===== ランキング =====
 async function loadRanking() {
   const list  = document.getElementById('rankingList');
-  const items = await fetchProducts('ガジェット 人気 売れ筋', 5);
+  const items = await fetchProducts('スマートウォッチ 人気', 5);
   if (!items.length) { list.innerHTML = '<p style="color:#bbb;font-size:12px">取得できませんでした</p>'; return; }
   list.innerHTML = items.map((item, i) => {
     const p    = item.Item;
@@ -308,7 +308,7 @@ async function loadRanking() {
 // ===== サイドバー商品 =====
 async function loadSideProducts() {
   const wrap  = document.getElementById('sideProducts');
-  const items = await fetchProducts('イヤホン おすすめ 人気', 4);
+  const items = await fetchProducts('Anker モバイルバッテリー', 4);
   if (!items.length) { wrap.innerHTML = ''; return; }
   wrap.innerHTML = items.map(item => {
     const p    = item.Item;
@@ -338,7 +338,7 @@ document.getElementById('searchInputSp').addEventListener('keydown', e => { if(e
 
 // ===== 初期化 =====
 loadArticles();
-loadProducts('ガジェット 人気');
+loadProducts('ワイヤレスイヤホン');
 loadRanking();
 loadSideProducts();
 </script>
