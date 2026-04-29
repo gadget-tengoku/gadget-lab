@@ -14,42 +14,57 @@ TWITTER_API_SECRET          = os.environ.get('API_SECRET', '')
 TWITTER_ACCESS_TOKEN        = os.environ.get('ACCESS_TOKEN', '')
 TWITTER_ACCESS_TOKEN_SECRET = os.environ.get('ACCESS_TOKEN_SECRET', '')
 
+# ===== 信頼ブランドリスト =====
+TRUSTED_BRANDS = [
+    'anker','sony','apple','samsung','garmin','bose','jbl','panasonic','sharp',
+    'dyson','philips','lg','dell','logicool','logitech','shokz','jabra',
+    'sennheiser','audio-technica','asus','microsoft','google','gopro','dji',
+    'canon','nikon','fujifilm','irobot','ecovacs','switchbot','qrio','buffalo',
+    'elecom','belkin','cio','mophie','anker','hhkb','realforce','razer',
+    'steelseries','hyperx','corsair','sennheiser','beats',
+    # 日本語表記
+    'パナソニック','シャープ','ソニー','アンカー','エレコム','バッファロー',
+    'キヤノン','ニコン','富士フイルム','ダイソン','フィリップス',
+]
+
+def is_trusted(item):
+    p    = item.get('Item', {})
+    text = (p.get('itemName', '') + ' ' + p.get('shopName', '')).lower()
+    return any(b.lower() in text for b in TRUSTED_BRANDS)
+
+# ===== テーマ定義（シンプルなキーワードで確実にヒット） =====
 ALL_THEMES = [
-    {'kw':'Sony WH-1000XM5 ワイヤレスイヤホン ノイキャン','title':'通勤向けノイキャンイヤホン','cat':'イヤホン'},
-    {'kw':'ワイヤレスイヤホン スポーツ 防水 Jabra','title':'スポーツ向けワイヤレスイヤホン','cat':'イヤホン'},
-    {'kw':'ワイヤレスイヤホン 高音質 LDAC Sony','title':'音質重視ワイヤレスイヤホン','cat':'イヤホン'},
-    {'kw':'Anker Soundcore ワイヤレスイヤホン コスパ','title':'コスパ重視ワイヤレスイヤホン','cat':'イヤホン'},
-    {'kw':'Shokz 骨伝導イヤホン OpenRun','title':'骨伝導イヤホン','cat':'イヤホン'},
-    {'kw':'Sony WH-1000XM5 ヘッドホン ノイズキャンセリング','title':'ノイキャンヘッドホン','cat':'オーディオ'},
-    {'kw':'JBL Anker Bluetoothスピーカー 防水','title':'防水Bluetoothスピーカー','cat':'オーディオ'},
-    {'kw':'Garmin スマートウォッチ 健康管理 血圧','title':'健康管理スマートウォッチ','cat':'スマートウォッチ'},
+    {'kw':'Sony WH-1000XM5','title':'通勤向けノイキャンイヤホン','cat':'イヤホン'},
+    {'kw':'Jabra ワイヤレスイヤホン スポーツ','title':'スポーツ向けワイヤレスイヤホン','cat':'イヤホン'},
+    {'kw':'Sony LDAC ワイヤレスイヤホン','title':'音質重視ワイヤレスイヤホン','cat':'イヤホン'},
+    {'kw':'Anker Soundcore イヤホン','title':'コスパ重視ワイヤレスイヤホン','cat':'イヤホン'},
+    {'kw':'Shokz 骨伝導イヤホン','title':'骨伝導イヤホン','cat':'イヤホン'},
+    {'kw':'Sony WH-1000XM5 ヘッドホン','title':'ノイキャンヘッドホン','cat':'オーディオ'},
+    {'kw':'JBL Bluetoothスピーカー 防水','title':'防水Bluetoothスピーカー','cat':'オーディオ'},
+    {'kw':'Garmin スマートウォッチ 健康管理','title':'健康管理スマートウォッチ','cat':'スマートウォッチ'},
     {'kw':'Garmin Forerunner GPS ランニング','title':'ランニング向けGPSウォッチ','cat':'スマートウォッチ'},
-    {'kw':'Samsung Galaxy Watch スマートウォッチ','title':'ビジネス向けスマートウォッチ','cat':'スマートウォッチ'},
-    {'kw':'キッズ スマートウォッチ GPS 子供 見守り','title':'キッズ向けスマートウォッチ','cat':'スマートウォッチ'},
-    {'kw':'Apple Watch SE Series','title':'Apple Watch おすすめモデル','cat':'スマートウォッチ'},
-    {'kw':'Anker CIO モバイルバッテリー 軽量 薄型','title':'軽量薄型モバイルバッテリー','cat':'モバイル'},
-    {'kw':'Anker モバイルバッテリー 大容量 20000mAh','title':'大容量モバイルバッテリー','cat':'モバイル'},
-    {'kw':'Anker GaN充電器 コンパクト 65W','title':'GaNコンパクト充電器','cat':'モバイル'},
+    {'kw':'Samsung Galaxy Watch','title':'ビジネス向けスマートウォッチ','cat':'スマートウォッチ'},
+    {'kw':'Apple Watch SE','title':'Apple Watch おすすめモデル','cat':'スマートウォッチ'},
+    {'kw':'Garmin Venu スマートウォッチ','title':'Garminスマートウォッチ','cat':'スマートウォッチ'},
+    {'kw':'Anker モバイルバッテリー 軽量','title':'軽量薄型モバイルバッテリー','cat':'モバイル'},
+    {'kw':'Anker モバイルバッテリー 20000mAh','title':'大容量モバイルバッテリー','cat':'モバイル'},
+    {'kw':'Anker GaN充電器 65W','title':'GaNコンパクト充電器','cat':'モバイル'},
     {'kw':'Anker Belkin MagSafe ワイヤレス充電器','title':'MagSafe対応ワイヤレス充電器','cat':'モバイル'},
-    {'kw':'Logicool ゲーミングマウス 軽量','title':'軽量ゲーミングマウス','cat':'ゲーミング'},
-    {'kw':'Logicool ゲーミングキーボード メカニカル','title':'メカニカルゲーミングキーボード','cat':'ゲーミング'},
+    {'kw':'Logicool ゲーミングマウス G','title':'軽量ゲーミングマウス','cat':'ゲーミング'},
+    {'kw':'Logicool ゲーミングキーボード G','title':'メカニカルゲーミングキーボード','cat':'ゲーミング'},
     {'kw':'SteelSeries HyperX ゲーミングヘッドセット','title':'ゲーミングヘッドセット','cat':'ゲーミング'},
     {'kw':'ASUS LG ゲーミングモニター 144Hz','title':'ゲーミングモニター','cat':'PC周辺機器'},
-    {'kw':'LG Dell 4Kモニター テレワーク','title':'テレワーク向け4Kモニター','cat':'PC周辺機器'},
-    {'kw':'Logicool Anker ウェブカメラ フルHD','title':'高画質ウェブカメラ','cat':'PC周辺機器'},
-    {'kw':'Anker USBハブ Type-C MacBook','title':'MacBook向けUSB-Cハブ','cat':'PC周辺機器'},
-    {'kw':'Blue Yeti USB コンデンサーマイク 配信','title':'配信向けUSBマイク','cat':'PC周辺機器'},
-    {'kw':'iRobot Ecovacs ロボット掃除機 マッピング','title':'マッピングロボット掃除機','cat':'スマートホーム'},
-    {'kw':'Philips Hue スマート電球 Alexa','title':'スマートLED電球','cat':'スマートホーム'},
-    {'kw':'Arlo 防犯カメラ 屋外 ワイヤレス','title':'屋外ワイヤレス防犯カメラ','cat':'スマートホーム'},
+    {'kw':'LG Dell 4Kモニター','title':'テレワーク向け4Kモニター','cat':'PC周辺機器'},
+    {'kw':'Logicool ウェブカメラ C920','title':'高画質ウェブカメラ','cat':'PC周辺機器'},
+    {'kw':'Anker USBハブ Type-C','title':'MacBook向けUSB-Cハブ','cat':'PC周辺機器'},
+    {'kw':'iRobot ロボット掃除機','title':'マッピングロボット掃除機','cat':'スマートホーム'},
+    {'kw':'Philips Hue スマート電球','title':'スマートLED電球','cat':'スマートホーム'},
     {'kw':'Dyson Panasonic 空気清浄機','title':'高性能空気清浄機','cat':'スマートホーム'},
-    {'kw':'Anker Nebula 小型プロジェクター','title':'小型プロジェクター','cat':'スマートホーム'},
-    {'kw':'GoPro DJI アクションカメラ 4K','title':'4Kアクションカメラ','cat':'カメラ'},
+    {'kw':'Anker Nebula プロジェクター','title':'小型プロジェクター','cat':'スマートホーム'},
+    {'kw':'GoPro アクションカメラ','title':'4Kアクションカメラ','cat':'カメラ'},
     {'kw':'DJI Osmo スマホ ジンバル','title':'スマホ向けジンバル','cat':'カメラ'},
-    {'kw':'Vantrue ドライブレコーダー 前後 4K','title':'前後4Kドライブレコーダー','cat':'カメラ'},
-    {'kw':'Philips Oral-B 電動歯ブラシ 音波','title':'電動歯ブラシ','cat':'生活家電'},
-    {'kw':'Theragun マッサージガン 筋膜リリース','title':'マッサージガン','cat':'生活家電'},
-    {'kw':'Qrio SwitchBot スマートロック 後付け','title':'スマートロック','cat':'スマートホーム'},
+    {'kw':'Philips 電動歯ブラシ ソニッケアー','title':'電動歯ブラシ','cat':'生活家電'},
+    {'kw':'SwitchBot スマートロック','title':'スマートロック','cat':'スマートホーム'},
 ]
 
 # ===== GitHub API =====
@@ -72,24 +87,55 @@ def gh_put(path, content, msg, sha=None):
     print(f"  {'✅' if ok else '❌'} {path}")
     return ok
 
-# ===== 楽天商品取得（Worker経由） =====
-def fetch_products(keyword, hits=5):
-    try:
-        r = requests.get(WORKER_URL, params={'keyword': keyword, 'hits': hits}, timeout=15)
-        if r.ok:
-            items = r.json().get('Items', [])
-            print(f"  {keyword[:30]}... → {len(items)}件")
-            return items
-        print(f"  Worker {r.status_code}")
-    except Exception as e:
-        print(f"  Workerエラー: {e}")
+def gh_delete(path, sha, msg):
+    url  = f'https://api.github.com/repos/{GITHUB_REPO}/contents/{path}'
+    h    = {'Authorization': f'token {GITHUB_TOKEN}', 'Accept': 'application/vnd.github.v3+json'}
+    data = {'message': msg, 'sha': sha}
+    r    = requests.delete(url, headers=h, json=data)
+    ok   = r.status_code in [200, 204]
+    print(f"  {'🗑' if ok else '❌削除失敗'} {path}")
+    return ok
+
+# ===== 楽天商品取得（Worker経由・ブラウザ偽装・リトライあり） =====
+WORKER_HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+    'Referer': 'https://gadget-tengoku.com/',
+    'Origin':  'https://gadget-tengoku.com',
+}
+
+def fetch_products(keyword, hits=10, retries=3):
+    for attempt in range(retries):
+        try:
+            r = requests.get(
+                WORKER_URL,
+                params={'keyword': keyword, 'hits': hits},
+                headers=WORKER_HEADERS,
+                timeout=20
+            )
+            if r.ok:
+                items = r.json().get('Items', [])
+                if items:
+                    print(f"  '{keyword[:30]}' → {len(items)}件")
+                    return items
+            print(f"  Worker {r.status_code} (attempt {attempt+1})")
+        except Exception as e:
+            print(f"  Workerエラー: {e} (attempt {attempt+1})")
+        time.sleep(2)
     return []
+
+def fetch_trusted(keyword, need=5):
+    """信頼ブランドのみ取得。足りなければ全件から補完"""
+    items   = fetch_products(keyword, hits=20)
+    trusted = [i for i in items if is_trusted(i)]
+    if len(trusted) >= 3:
+        return trusted[:need]
+    # 信頼ブランドが少ない場合は全件から（空にしない）
+    return items[:need]
 
 # ===== 記事HTML生成 =====
 def build_html(title, theme, products):
     today = datetime.now().strftime('%Y年%m月%d日')
     year  = datetime.now().year
-
     num_class = ['gold','silver','bronze','normal','normal']
 
     cards = ''
@@ -253,17 +299,76 @@ def update_articles_json(theme, filename, img_url, today):
     gh_put('articles.json', json.dumps(articles, ensure_ascii=False, indent=2), 'Auto: 記事一覧更新', sha)
     return articles
 
+# ===== 既存記事を再生成・空記事削除 =====
+def regenerate_and_cleanup():
+    print('\n既存記事を再生成・クリーンアップ中...')
+    content, _ = gh_get('articles.json')
+    if not content:
+        return
+    articles = json.loads(content)
+    kw_map   = {t['title']: t['kw'] for t in ALL_THEMES}
+
+    keep     = []  # 残す記事
+    updated  = False
+
+    for a in articles:
+        filename  = a.get('filename', '')
+        theme_key = a.get('theme_key', '')
+        title     = a.get('title', '')
+        keyword   = kw_map.get(theme_key)
+
+        if not keyword:
+            print(f'  スキップ（テーマ不明）: {theme_key}')
+            keep.append(a)
+            continue
+
+        print(f'  再生成: {theme_key}')
+        products = fetch_trusted(keyword, need=5)
+
+        if not products:
+            # 商品取得できなかった → 記事をGitHubから削除
+            print(f'  商品0件 → 記事を削除: {filename}')
+            _, sha = gh_get(filename)
+            if sha:
+                gh_delete(filename, sha, f'Cleanup: 空記事を削除 {filename}')
+            updated = True
+            # keep に追加しない（articles.jsonから除外）
+            continue
+
+        html   = build_html(title, theme_key, products)
+        _, sha = gh_get(filename)
+        if gh_put(filename, html, f'Regenerate: {theme_key}', sha):
+            # img_url 更新
+            imgs = products[0].get('Item', {}).get('mediumImageUrls', [])
+            if imgs:
+                raw = imgs[0].get('imageUrl', '') if isinstance(imgs[0], dict) else ''
+                a['img_url'] = re.sub(r'\?_ex=\d+x\d+', '?_ex=400x400', raw)
+                updated = True
+            keep.append(a)
+        else:
+            keep.append(a)  # 更新失敗でも残す
+
+        time.sleep(1.5)
+
+    if updated:
+        _, sha = gh_get('articles.json')
+        gh_put('articles.json', json.dumps(keep, ensure_ascii=False, indent=2), 'Cleanup: articles.json更新', sha)
+        print(f'  articles.json 更新完了（{len(keep)}件）')
+
+    print('再生成・クリーンアップ完了')
+
 # ===== アーカイブ =====
 def build_archive(articles):
+    # サムネあり記事のみ
+    articles = [a for a in articles if a.get('img_url', '').strip()]
     cards = ''
     for a in articles:
-        img     = a.get('img_url', '')
-        img_tag = f'<img src="{img}" alt="{a["title"]}" style="width:100%;height:150px;object-fit:contain;padding:10px;background:#fafafa">' if img else '<div style="height:150px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:12px">No Image</div>'
+        img_tag = f'<img src="{a["img_url"]}" alt="{a["title"]}" style="width:100%;height:150px;object-fit:contain;padding:10px;background:#fafafa">'
         cards  += f'''
 <a href="{a["filename"]}" style="display:block;border:1px solid #e8e8e8;border-radius:6px;overflow:hidden;text-decoration:none;color:#111;transition:box-shadow .2s" onmouseover="this.style.boxShadow=\'0 4px 16px rgba(0,0,0,.08)\'" onmouseout="this.style.boxShadow=\'\'">
   {img_tag}
   <div style="padding:12px;border-top:1px solid #f0f0f0">
-    <div style="font-size:11px;color:#e63900;font-weight:700;margin-bottom:4px;letter-spacing:.05em;text-transform:uppercase">{a.get("category","")}</div>
+    <div style="font-size:11px;color:#e63900;font-weight:700;margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em">{a.get("category","")}</div>
     <div style="font-size:13px;font-weight:700;line-height:1.45;margin-bottom:5px">{a["title"]}</div>
     <div style="font-size:11px;color:#bbb">{a["date"]}</div>
   </div>
@@ -312,45 +417,6 @@ def build_archive(articles):
 </body>
 </html>'''
 
-# ===== 既存記事を一括再生成 =====
-def regenerate_existing():
-    print('\n既存記事を再生成中...')
-    content, _ = gh_get('articles.json')
-    if not content:
-        return
-    articles = json.loads(content)
-    kw_map   = {t['title']: t['kw'] for t in ALL_THEMES}
-
-    for a in articles:
-        filename  = a.get('filename', '')
-        theme_key = a.get('theme_key', '')
-        title     = a.get('title', '')
-        keyword   = kw_map.get(theme_key)
-
-        if not keyword:
-            print(f'  スキップ: {theme_key}')
-            continue
-
-        products = fetch_products(keyword, hits=5)
-        if not products:
-            time.sleep(1)
-            continue
-
-        html   = build_html(title, theme_key, products)
-        _, sha = gh_get(filename)
-        gh_put(filename, html, f'Regenerate: {theme_key}', sha)
-
-        imgs = products[0].get('Item', {}).get('mediumImageUrls', [])
-        if imgs:
-            raw = imgs[0].get('imageUrl', '') if isinstance(imgs[0], dict) else ''
-            a['img_url'] = re.sub(r'\?_ex=\d+x\d+', '?_ex=400x400', raw)
-
-        time.sleep(1)
-
-    _, sha = gh_get('articles.json')
-    gh_put('articles.json', json.dumps(articles, ensure_ascii=False, indent=2), 'Auto: img_url更新', sha)
-    print('既存記事の再生成完了')
-
 # ===== サイトマップ =====
 def build_sitemap(extra):
     today = datetime.now().strftime('%Y-%m-%d')
@@ -360,17 +426,20 @@ def build_sitemap(extra):
         urls.append(f'  <url><loc>{SITE_URL}/{f}</loc><lastmod>{today}</lastmod><priority>0.7</priority></url>')
     return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + '\n'.join(urls) + '\n</urlset>'
 
-# ===== Twitter =====
-def post_twitter(text):
+# ===== Twitter投稿 =====
+def post_twitter(title, url, cat):
     if not all([TWITTER_API_KEY, TWITTER_API_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET]):
+        print('⚠ Twitter: Secrets未設定のためスキップ')
         return
     try:
         import tweepy
-        auth = tweepy.OAuth1UserHandler(TWITTER_API_KEY, TWITTER_API_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET)
-        tweepy.API(auth).update_status(text)
-        print('Twitter投稿成功')
+        auth   = tweepy.OAuth1UserHandler(TWITTER_API_KEY, TWITTER_API_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET)
+        client = tweepy.API(auth)
+        text   = f"新着記事📱\n{title}\n\n楽天市場の実売データで厳選しました。\n\n{url}\n\n#{cat} #ガジェット #楽天 #家電"
+        client.update_status(text[:280])
+        print('✅ Twitter投稿成功')
     except Exception as e:
-        print(f'Twitter投稿エラー: {e}')
+        print(f'❌ Twitter投稿失敗: {e}')
 
 # ===== テーマ選択 =====
 def select_theme():
@@ -380,22 +449,24 @@ def select_theme():
         try: used = {a.get('theme_key','') for a in json.loads(content)[:40]}
         except: pass
     available = [t for t in ALL_THEMES if t['title'] not in used] or ALL_THEMES
-    am = ['イヤホン','オーディオ','スマートウォッチ']
-    pm = ['ゲーミング','PC周辺機器','スマートホーム','カメラ','モバイル','生活家電']
-    pool = [t for t in available if t['cat'] in (am if SLOT=='am' else pm)] or available
+    am_cats = ['イヤホン','オーディオ','スマートウォッチ']
+    pm_cats = ['ゲーミング','PC周辺機器','スマートホーム','カメラ','モバイル','生活家電']
+    pool    = [t for t in available if t['cat'] in (am_cats if SLOT=='am' else pm_cats)] or available
     return random.choice(pool)
 
 # ===== メイン =====
 def main():
     today = datetime.now()
-    print(f"{today.strftime('%Y年%m月%d日')} [{SLOT.upper()}]")
+    print(f"=== {today.strftime('%Y年%m月%d日')} [{SLOT.upper()}] ===")
 
+    # 1. 新記事生成
     theme    = select_theme()
     print(f"テーマ: {theme['title']}")
-    products = fetch_products(theme['kw'], hits=5)
+    products = fetch_trusted(theme['kw'], need=5)
+
     if not products:
-        products = fetch_products('ワイヤレスイヤホン 人気', hits=5)
-    print(f"{len(products)}件取得")
+        print('❌ 商品取得失敗。処理を中断します。')
+        return
 
     title    = f"【{today.year}年最新】{theme['title']} おすすめランキングTOP5"
     html     = build_html(title, theme['title'], products)
@@ -406,6 +477,7 @@ def main():
     _, sha = gh_get(filename)
     gh_put(filename, html, f"Auto: {theme['title']}", sha)
 
+    # サムネ画像URL
     img_url = ''
     if products:
         imgs = products[0].get('Item', {}).get('mediumImageUrls', [])
@@ -414,18 +486,26 @@ def main():
             img_url = re.sub(r'\?_ex=\d+x\d+', '?_ex=400x400', raw)
 
     update_articles_json(theme, filename, img_url, today)
-    regenerate_existing()
 
+    # 2. 既存記事の再生成・空記事削除
+    regenerate_and_cleanup()
+
+    # 3. アーカイブ更新
     content, _ = gh_get('articles.json')
     if content:
-        _, sha = gh_get('archive.html')
-        gh_put('archive.html', build_archive(json.loads(content)), 'Auto: アーカイブ更新', sha)
+        articles = json.loads(content)
+        _, sha   = gh_get('archive.html')
+        gh_put('archive.html', build_archive(articles), 'Auto: アーカイブ更新', sha)
 
+    # 4. サイトマップ更新
     _, sha = gh_get('sitemap.xml')
     gh_put('sitemap.xml', build_sitemap([filename]), 'Auto: サイトマップ', sha)
 
-    post_twitter(f"新着記事\n{title}\n\n{SITE_URL}/{filename}\n\n#{theme['cat']} #ガジェット")
-    print(f"\n完了: {SITE_URL}/{filename}")
+    # 5. Twitter投稿
+    article_url = f"{SITE_URL}/{filename}"
+    post_twitter(title, article_url, theme['cat'])
+
+    print(f"\n=== 完了: {article_url} ===")
 
 if __name__ == '__main__':
     main()
