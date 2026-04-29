@@ -2,8 +2,7 @@
 import os, re, requests, base64, json, random, time
 from datetime import datetime
 
-RAKUTEN_APP_ID       = '1693b6a4-2e07-4e04-b417-61ae0078af36'
-RAKUTEN_ACCESS_KEY   = 'pk_og9K73XUC5Pj2NMihItIkqjAvhhux8P80FmBjdp30PI'
+WORKER_URL           = 'https://rakuten-proxy.sobamoripaya.workers.dev'
 RAKUTEN_AFFILIATE_ID = '533b373d.082b6dc2.533b3742.245bd56b'
 GITHUB_TOKEN         = os.environ['GITHUB_TOKEN']
 GITHUB_REPO          = 'gadget-tengoku/gadget-lab'
@@ -16,43 +15,41 @@ TWITTER_ACCESS_TOKEN        = os.environ.get('ACCESS_TOKEN', '')
 TWITTER_ACCESS_TOKEN_SECRET = os.environ.get('ACCESS_TOKEN_SECRET', '')
 
 ALL_THEMES = [
-    {'kw':'ワイヤレスイヤホン ノイキャン 通勤 Sony Bose','title':'通勤向けノイキャンイヤホン','cat':'イヤホン'},
+    {'kw':'Sony WH-1000XM5 ワイヤレスイヤホン ノイキャン','title':'通勤向けノイキャンイヤホン','cat':'イヤホン'},
     {'kw':'ワイヤレスイヤホン スポーツ 防水 Jabra','title':'スポーツ向けワイヤレスイヤホン','cat':'イヤホン'},
     {'kw':'ワイヤレスイヤホン 高音質 LDAC Sony','title':'音質重視ワイヤレスイヤホン','cat':'イヤホン'},
-    {'kw':'ワイヤレスイヤホン コスパ Anker Soundcore','title':'コスパ重視ワイヤレスイヤホン','cat':'イヤホン'},
-    {'kw':'骨伝導イヤホン Shokz AfterShokz','title':'骨伝導イヤホン','cat':'イヤホン'},
-    {'kw':'ノイズキャンセリング ヘッドホン Sony WH Bose','title':'ノイキャンヘッドホン','cat':'オーディオ'},
-    {'kw':'Bluetoothスピーカー 防水 JBL Anker','title':'防水Bluetoothスピーカー','cat':'オーディオ'},
-    {'kw':'スマートウォッチ 健康管理 血圧 Garmin','title':'健康管理スマートウォッチ','cat':'スマートウォッチ'},
-    {'kw':'スマートウォッチ GPS ランニング Garmin','title':'ランニング向けGPSウォッチ','cat':'スマートウォッチ'},
-    {'kw':'スマートウォッチ ビジネス Samsung Galaxy Watch','title':'ビジネス向けスマートウォッチ','cat':'スマートウォッチ'},
+    {'kw':'Anker Soundcore ワイヤレスイヤホン コスパ','title':'コスパ重視ワイヤレスイヤホン','cat':'イヤホン'},
+    {'kw':'Shokz 骨伝導イヤホン OpenRun','title':'骨伝導イヤホン','cat':'イヤホン'},
+    {'kw':'Sony WH-1000XM5 ヘッドホン ノイズキャンセリング','title':'ノイキャンヘッドホン','cat':'オーディオ'},
+    {'kw':'JBL Anker Bluetoothスピーカー 防水','title':'防水Bluetoothスピーカー','cat':'オーディオ'},
+    {'kw':'Garmin スマートウォッチ 健康管理 血圧','title':'健康管理スマートウォッチ','cat':'スマートウォッチ'},
+    {'kw':'Garmin Forerunner GPS ランニング','title':'ランニング向けGPSウォッチ','cat':'スマートウォッチ'},
+    {'kw':'Samsung Galaxy Watch スマートウォッチ','title':'ビジネス向けスマートウォッチ','cat':'スマートウォッチ'},
     {'kw':'キッズ スマートウォッチ GPS 子供 見守り','title':'キッズ向けスマートウォッチ','cat':'スマートウォッチ'},
-    {'kw':'Apple Watch SE Series 9','title':'Apple Watch おすすめモデル','cat':'スマートウォッチ'},
-    {'kw':'Garmin Forerunner Venu スマートウォッチ','title':'Garminスマートウォッチ','cat':'スマートウォッチ'},
-    {'kw':'モバイルバッテリー 軽量 薄型 Anker CIO','title':'軽量薄型モバイルバッテリー','cat':'モバイル'},
-    {'kw':'モバイルバッテリー 大容量 20000mAh Anker','title':'大容量モバイルバッテリー','cat':'モバイル'},
-    {'kw':'モバイルバッテリー ノートPC 65W PD Anker','title':'ノートPC対応モバイルバッテリー','cat':'モバイル'},
-    {'kw':'GaN充電器 コンパクト 65W Anker CIO','title':'GaNコンパクト充電器','cat':'モバイル'},
-    {'kw':'ワイヤレス充電器 MagSafe Anker Belkin','title':'MagSafe対応ワイヤレス充電器','cat':'モバイル'},
-    {'kw':'ゲーミングマウス 軽量 Logicool Razer','title':'軽量ゲーミングマウス','cat':'ゲーミング'},
-    {'kw':'ゲーミングキーボード メカニカル Logicool HHKB','title':'メカニカルゲーミングキーボード','cat':'ゲーミング'},
-    {'kw':'ゲーミングヘッドセット SteelSeries HyperX','title':'ゲーミングヘッドセット','cat':'ゲーミング'},
-    {'kw':'ゲーミングモニター 144Hz ASUS LG','title':'ゲーミングモニター144Hz','cat':'PC周辺機器'},
-    {'kw':'4Kモニター テレワーク LG Dell','title':'テレワーク向け4Kモニター','cat':'PC周辺機器'},
-    {'kw':'ウェブカメラ フルHD Logicool Anker','title':'高画質ウェブカメラ','cat':'PC周辺機器'},
-    {'kw':'USBハブ Type-C MacBook Anker','title':'MacBook向けUSB-Cハブ','cat':'PC周辺機器'},
-    {'kw':'コンデンサーマイク USB 配信 Blue Yeti','title':'配信向けUSBマイク','cat':'PC周辺機器'},
-    {'kw':'ロボット掃除機 マッピング iRobot Ecovacs','title':'マッピングロボット掃除機','cat':'スマートホーム'},
-    {'kw':'スマート電球 LED Alexa Google Philips Hue','title':'スマートLED電球','cat':'スマートホーム'},
-    {'kw':'防犯カメラ 屋外 ワイヤレス Arlo','title':'屋外ワイヤレス防犯カメラ','cat':'スマートホーム'},
-    {'kw':'空気清浄機 花粉 Dyson Panasonic','title':'高性能空気清浄機','cat':'スマートホーム'},
-    {'kw':'小型プロジェクター Anker Nebula','title':'小型プロジェクター','cat':'スマートホーム'},
-    {'kw':'アクションカメラ 4K GoPro DJI','title':'4Kアクションカメラ','cat':'カメラ'},
-    {'kw':'スマホ ジンバル DJI Osmo','title':'スマホ向けジンバル','cat':'カメラ'},
-    {'kw':'ドライブレコーダー 前後 4K Vantrue','title':'前後4Kドライブレコーダー','cat':'カメラ'},
-    {'kw':'電動歯ブラシ 音波 Philips Oral-B','title':'電動歯ブラシ','cat':'生活家電'},
-    {'kw':'マッサージガン Theragun Hyperice','title':'マッサージガン','cat':'生活家電'},
-    {'kw':'スマートロック 後付け Qrio SwitchBot','title':'スマートロック','cat':'スマートホーム'},
+    {'kw':'Apple Watch SE Series','title':'Apple Watch おすすめモデル','cat':'スマートウォッチ'},
+    {'kw':'Anker CIO モバイルバッテリー 軽量 薄型','title':'軽量薄型モバイルバッテリー','cat':'モバイル'},
+    {'kw':'Anker モバイルバッテリー 大容量 20000mAh','title':'大容量モバイルバッテリー','cat':'モバイル'},
+    {'kw':'Anker GaN充電器 コンパクト 65W','title':'GaNコンパクト充電器','cat':'モバイル'},
+    {'kw':'Anker Belkin MagSafe ワイヤレス充電器','title':'MagSafe対応ワイヤレス充電器','cat':'モバイル'},
+    {'kw':'Logicool ゲーミングマウス 軽量','title':'軽量ゲーミングマウス','cat':'ゲーミング'},
+    {'kw':'Logicool ゲーミングキーボード メカニカル','title':'メカニカルゲーミングキーボード','cat':'ゲーミング'},
+    {'kw':'SteelSeries HyperX ゲーミングヘッドセット','title':'ゲーミングヘッドセット','cat':'ゲーミング'},
+    {'kw':'ASUS LG ゲーミングモニター 144Hz','title':'ゲーミングモニター','cat':'PC周辺機器'},
+    {'kw':'LG Dell 4Kモニター テレワーク','title':'テレワーク向け4Kモニター','cat':'PC周辺機器'},
+    {'kw':'Logicool Anker ウェブカメラ フルHD','title':'高画質ウェブカメラ','cat':'PC周辺機器'},
+    {'kw':'Anker USBハブ Type-C MacBook','title':'MacBook向けUSB-Cハブ','cat':'PC周辺機器'},
+    {'kw':'Blue Yeti USB コンデンサーマイク 配信','title':'配信向けUSBマイク','cat':'PC周辺機器'},
+    {'kw':'iRobot Ecovacs ロボット掃除機 マッピング','title':'マッピングロボット掃除機','cat':'スマートホーム'},
+    {'kw':'Philips Hue スマート電球 Alexa','title':'スマートLED電球','cat':'スマートホーム'},
+    {'kw':'Arlo 防犯カメラ 屋外 ワイヤレス','title':'屋外ワイヤレス防犯カメラ','cat':'スマートホーム'},
+    {'kw':'Dyson Panasonic 空気清浄機','title':'高性能空気清浄機','cat':'スマートホーム'},
+    {'kw':'Anker Nebula 小型プロジェクター','title':'小型プロジェクター','cat':'スマートホーム'},
+    {'kw':'GoPro DJI アクションカメラ 4K','title':'4Kアクションカメラ','cat':'カメラ'},
+    {'kw':'DJI Osmo スマホ ジンバル','title':'スマホ向けジンバル','cat':'カメラ'},
+    {'kw':'Vantrue ドライブレコーダー 前後 4K','title':'前後4Kドライブレコーダー','cat':'カメラ'},
+    {'kw':'Philips Oral-B 電動歯ブラシ 音波','title':'電動歯ブラシ','cat':'生活家電'},
+    {'kw':'Theragun マッサージガン 筋膜リリース','title':'マッサージガン','cat':'生活家電'},
+    {'kw':'Qrio SwitchBot スマートロック 後付け','title':'スマートロック','cat':'スマートホーム'},
 ]
 
 # ===== GitHub API =====
@@ -75,31 +72,25 @@ def gh_put(path, content, msg, sha=None):
     print(f"  {'✅' if ok else '❌'} {path}")
     return ok
 
-# ===== 楽天API =====
+# ===== 楽天商品取得（Worker経由） =====
 def fetch_products(keyword, hits=5):
-    url    = 'https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706'
-    params = {
-        'format': 'json', 'keyword': keyword,
-        'applicationId': RAKUTEN_APP_ID,
-        'affiliateId': RAKUTEN_AFFILIATE_ID,
-        'hits': hits, 'imageFlag': 1, 'sort': '-reviewCount',
-    }
     try:
-        r = requests.get(url, params=params, headers={'Referer': SITE_URL}, timeout=15)
+        r = requests.get(WORKER_URL, params={'keyword': keyword, 'hits': hits}, timeout=15)
         if r.ok:
-            return r.json().get('Items', [])
-        print(f"  楽天API {r.status_code}")
+            items = r.json().get('Items', [])
+            print(f"  {keyword[:30]}... → {len(items)}件")
+            return items
+        print(f"  Worker {r.status_code}")
     except Exception as e:
-        print(f"  楽天APIエラー: {e}")
+        print(f"  Workerエラー: {e}")
     return []
 
-# ===== HTML生成 =====
+# ===== 記事HTML生成 =====
 def build_html(title, theme, products):
     today = datetime.now().strftime('%Y年%m月%d日')
     year  = datetime.now().year
 
-    num_labels = ['1位','2位','3位','4位','5位']
-    num_class  = ['gold','silver','bronze','normal','normal']
+    num_class = ['gold','silver','bronze','normal','normal']
 
     cards = ''
     rows  = ''
@@ -118,14 +109,14 @@ def build_html(title, theme, products):
             raw = imgs[0].get('imageUrl', '') if isinstance(imgs[0], dict) else ''
             img = re.sub(r'\?_ex=\d+x\d+', '?_ex=400x400', raw)
 
-        stars = '★' * int(ra) + '☆' * (5 - int(ra))
-        img_html = f'<img src="{img}" alt="{name}" loading="lazy">' if img else '<div style="width:100%;height:140px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:13px">画像なし</div>'
+        stars    = '★' * int(ra) + '☆' * (5 - int(ra))
+        img_html = f'<img src="{img}" alt="{name}" loading="lazy">' if img else '<div style="color:#ccc;font-size:12px;text-align:center">No Image</div>'
 
         cards += f'''
 <div class="rank-card">
   <div class="rank-header">
     <span class="rank-num {num_class[i]}">{i+1}</span>
-    <span class="rank-label">{num_labels[i]}</span>
+    <span class="rank-label">{i+1}位</span>
     <span class="rank-shop-name">{shop}</span>
   </div>
   <div class="rank-layout">
@@ -135,11 +126,11 @@ def build_html(title, theme, products):
       <div class="rank-review">
         <span class="stars">{stars}</span>
         <span>{ra:.1f}</span>
-        <span class="review-count">（{rc:,}件）</span>
+        <span class="review-count">({rc:,}件のレビュー)</span>
       </div>
       <div class="price-area">
         <div class="price">¥{price:,} <small>税込</small></div>
-        <a href="{url}" class="btn-buy" target="_blank" rel="noopener sponsored"></a>
+        <a href="{url}" class="btn-buy" target="_blank" rel="noopener sponsored">楽天市場で購入する</a>
       </div>
     </div>
   </div>
@@ -161,7 +152,6 @@ def build_html(title, theme, products):
 <link rel="stylesheet" href="article-style.css">
 </head>
 <body>
-
 <header>
   <div class="header-inner">
     <a href="{SITE_URL}/" class="logo">Gadget<span>天国</span></a>
@@ -184,9 +174,8 @@ def build_html(title, theme, products):
 </div>
 
 <div class="container">
-
   <div class="intro-box">
-    この記事では、楽天市場の実際の売れ筋・レビュー数をもとに<strong>{theme}</strong>のおすすめモデルをTOP5形式でご紹介します。価格・評価・レビュー数を総合的に判断しています。
+    この記事では、楽天市場の実際の売れ筋・レビュー数をもとに<strong>{theme}</strong>のおすすめモデルをTOP5形式でご紹介します。価格・評価・レビュー数を総合的に判断して選出しています。
   </div>
 
   <nav class="toc">
@@ -217,25 +206,12 @@ def build_html(title, theme, products):
   <section id="guide">
     <h2 class="section-title">選び方のポイント</h2>
     <div class="guide-grid">
-      <div class="guide-item">
-        <div class="guide-item-title">予算を決める</div>
-        <div class="guide-item-desc">価格帯によっておすすめモデルが変わります。まず予算を明確にしましょう。</div>
-      </div>
-      <div class="guide-item">
-        <div class="guide-item-title">レビュー数を確認</div>
-        <div class="guide-item-desc">レビューが多いほど実績あり。1,000件以上なら安心して選べます。</div>
-      </div>
-      <div class="guide-item">
-        <div class="guide-item-title">用途に合わせる</div>
-        <div class="guide-item-desc">毎日の使い方をイメージして、必要な機能を絞り込みましょう。</div>
-      </div>
-      <div class="guide-item">
-        <div class="guide-item-title">メーカー保証を確認</div>
-        <div class="guide-item-desc">国内正規品は保証が充実。初期不良にも対応しやすいです。</div>
-      </div>
+      <div class="guide-item"><div class="guide-item-title">予算を決める</div><div class="guide-item-desc">価格帯によっておすすめモデルが変わります。まず予算を明確にしましょう。</div></div>
+      <div class="guide-item"><div class="guide-item-title">レビュー数を確認</div><div class="guide-item-desc">レビューが多いほど実績あり。1,000件以上なら安心して選べます。</div></div>
+      <div class="guide-item"><div class="guide-item-title">用途に合わせる</div><div class="guide-item-desc">毎日の使い方をイメージして、必要な機能を絞り込みましょう。</div></div>
+      <div class="guide-item"><div class="guide-item-title">保証を確認</div><div class="guide-item-desc">国内正規品は保証が充実。初期不良にも対応しやすいです。</div></div>
     </div>
   </section>
-
 </div>
 
 <footer>
@@ -248,9 +224,8 @@ def build_html(title, theme, products):
     </div>
   </div>
   <p class="footer-note">※本サイトは楽天アフィリエイトプログラムに参加しています。商品リンクから購入された場合、運営者に報酬が発生することがあります。掲載価格は{today}時点の楽天市場価格です。</p>
-  <p style="text-align:center;margin-top:12px;font-size:11px;color:#555">© {year} ガジェット天国</p>
+  <p style="text-align:center;margin-top:12px;font-size:11px;color:#444">© {year} ガジェット天国</p>
 </footer>
-
 </body>
 </html>'''
 
@@ -283,14 +258,14 @@ def build_archive(articles):
     cards = ''
     for a in articles:
         img     = a.get('img_url', '')
-        img_tag = f'<img src="{img}" alt="{a["title"]}" style="width:100%;height:160px;object-fit:contain;padding:10px;background:#fafafa">' if img else f'<div style="height:160px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:13px">画像なし</div>'
+        img_tag = f'<img src="{img}" alt="{a["title"]}" style="width:100%;height:150px;object-fit:contain;padding:10px;background:#fafafa">' if img else '<div style="height:150px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:12px">No Image</div>'
         cards  += f'''
-<a href="{a["filename"]}" class="archive-card" style="display:block;text-decoration:none;color:#111">
+<a href="{a["filename"]}" style="display:block;border:1px solid #e8e8e8;border-radius:6px;overflow:hidden;text-decoration:none;color:#111;transition:box-shadow .2s" onmouseover="this.style.boxShadow=\'0 4px 16px rgba(0,0,0,.08)\'" onmouseout="this.style.boxShadow=\'\'">
   {img_tag}
-  <div style="padding:14px;border-top:1px solid #f0f0f0">
-    <div style="font-size:11px;color:#e63900;font-weight:700;margin-bottom:5px">{a.get("category","")}</div>
-    <div style="font-size:13px;font-weight:700;line-height:1.45;margin-bottom:6px">{a["title"]}</div>
-    <div style="font-size:11px;color:#aaa">{a["date"]}</div>
+  <div style="padding:12px;border-top:1px solid #f0f0f0">
+    <div style="font-size:11px;color:#e63900;font-weight:700;margin-bottom:4px;letter-spacing:.05em;text-transform:uppercase">{a.get("category","")}</div>
+    <div style="font-size:13px;font-weight:700;line-height:1.45;margin-bottom:5px">{a["title"]}</div>
+    <div style="font-size:11px;color:#bbb">{a["date"]}</div>
   </div>
 </a>'''
 
@@ -299,7 +274,7 @@ def build_archive(articles):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>記事アーカイブ | ガジェット天国</title>
+<title>記事一覧 | ガジェット天国</title>
 <meta name="description" content="ガジェット天国の全記事一覧。イヤホン・スマートウォッチ・ガジェットの最新比較記事。">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3514849475707540" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -313,14 +288,14 @@ def build_archive(articles):
     <nav><a href="{SITE_URL}/">トップ</a></nav>
   </div>
 </header>
-<div style="border-bottom:1px solid #e0e0e0;padding:24px 20px">
+<div style="border-bottom:1px solid #e8e8e8;padding:24px 20px">
   <div style="max-width:1000px;margin:0 auto">
-    <h1 style="font-size:24px;font-weight:900;color:#111">記事一覧</h1>
-    <p style="font-size:13px;color:#999;margin-top:6px">全{len(articles)}記事 | 毎日更新</p>
+    <h1 style="font-size:22px;font-weight:900">記事一覧</h1>
+    <p style="font-size:13px;color:#aaa;margin-top:5px">全{len(articles)}記事 | 毎日更新</p>
   </div>
 </div>
-<div style="max-width:1000px;margin:0 auto;padding:28px 20px 60px">
-  <div class="archive-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px">
+<div style="max-width:1000px;margin:0 auto;padding:24px 20px 56px">
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px">
     {cards}
   </div>
 </div>
@@ -345,7 +320,6 @@ def regenerate_existing():
         return
     articles = json.loads(content)
     kw_map   = {t['title']: t['kw'] for t in ALL_THEMES}
-    updated  = False
 
     for a in articles:
         filename  = a.get('filename', '')
@@ -357,29 +331,24 @@ def regenerate_existing():
             print(f'  スキップ: {theme_key}')
             continue
 
-        print(f'  {theme_key}')
         products = fetch_products(keyword, hits=5)
         if not products:
-            print(f'  商品取得失敗')
             time.sleep(1)
             continue
 
-        html    = build_html(title, theme_key, products)
-        _, sha  = gh_get(filename)
+        html   = build_html(title, theme_key, products)
+        _, sha = gh_get(filename)
         gh_put(filename, html, f'Regenerate: {theme_key}', sha)
 
-        # img_url 更新
         imgs = products[0].get('Item', {}).get('mediumImageUrls', [])
         if imgs:
             raw = imgs[0].get('imageUrl', '') if isinstance(imgs[0], dict) else ''
             a['img_url'] = re.sub(r'\?_ex=\d+x\d+', '?_ex=400x400', raw)
-            updated = True
 
-        time.sleep(1.2)
+        time.sleep(1)
 
-    if updated:
-        _, sha = gh_get('articles.json')
-        gh_put('articles.json', json.dumps(articles, ensure_ascii=False, indent=2), 'Auto: img_url更新', sha)
+    _, sha = gh_get('articles.json')
+    gh_put('articles.json', json.dumps(articles, ensure_ascii=False, indent=2), 'Auto: img_url更新', sha)
     print('既存記事の再生成完了')
 
 # ===== サイトマップ =====
@@ -421,10 +390,11 @@ def main():
     today = datetime.now()
     print(f"{today.strftime('%Y年%m月%d日')} [{SLOT.upper()}]")
 
-    # 新記事生成
     theme    = select_theme()
     print(f"テーマ: {theme['title']}")
-    products = fetch_products(theme['kw'], hits=5) or fetch_products('ガジェット 人気', hits=5)
+    products = fetch_products(theme['kw'], hits=5)
+    if not products:
+        products = fetch_products('ワイヤレスイヤホン 人気', hits=5)
     print(f"{len(products)}件取得")
 
     title    = f"【{today.year}年最新】{theme['title']} おすすめランキングTOP5"
@@ -443,22 +413,17 @@ def main():
             raw     = imgs[0].get('imageUrl', '') if isinstance(imgs[0], dict) else ''
             img_url = re.sub(r'\?_ex=\d+x\d+', '?_ex=400x400', raw)
 
-    articles = update_articles_json(theme, filename, img_url, today)
-
-    # 既存記事を新レイアウトで再生成
+    update_articles_json(theme, filename, img_url, today)
     regenerate_existing()
 
-    # アーカイブ更新
     content, _ = gh_get('articles.json')
     if content:
         _, sha = gh_get('archive.html')
         gh_put('archive.html', build_archive(json.loads(content)), 'Auto: アーカイブ更新', sha)
 
-    # サイトマップ
     _, sha = gh_get('sitemap.xml')
     gh_put('sitemap.xml', build_sitemap([filename]), 'Auto: サイトマップ', sha)
 
-    # Twitter
     post_twitter(f"新着記事\n{title}\n\n{SITE_URL}/{filename}\n\n#{theme['cat']} #ガジェット")
     print(f"\n完了: {SITE_URL}/{filename}")
 
