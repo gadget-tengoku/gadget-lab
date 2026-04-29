@@ -205,30 +205,69 @@ const WORKER = 'https://rakuten-proxy.sobamoripaya.workers.dev';
 let allArticles = [];
 let currentCat  = 'all';
 
-// ===== 記事読み込み =====
+// 信頼ブランドリスト
+const TRUSTED_BRANDS = [
+  'anker','sony','apple','samsung','garmin','bose','jbl','panasonic','sharp',
+  'dyson','philips','lg','dell','logicool','logitech','shokz','jabra',
+  'sennheiser','audio-technica','オーディオテクニカ','asus','microsoft',
+  'google','amazon','echo','kindle','gopro','dji','canon','nikon','fujifilm',
+  'iRobot','ecovacs','irobot','switchbot','qrio','buffalo','elecom',
+  'belkin','mophie','hhkb','realforce','cio','エレコム','バッファロー',
+  'パナソニック','シャープ','ソニー','サムスン','アップル','アンカー'
+];
+
+function isTrusted(name, shop) {
+  const lower = (name + ' ' + shop).toLowerCase();
+  return TRUSTED_BRANDS.some(b => lower.includes(b.toLowerCase()));
+}
+
+// ===== 楽天商品取得 =====
+async function fetchProducts(keyword, hits = 10) {
+  try {
+    const r = await fetch(`${WORKER}?keyword=${encodeURIComponent(keyword)}&hits=${hits}`);
+    if (!r.ok) return [];
+    return (await r.json()).Items || [];
+  } catch(e) { return []; }
+}
+
+// ブランドフィルター済み商品を取得（最低n件確保のためリトライ）
+async function fetchTrusted(keyword, need = 5) {
+  const items   = await fetchProducts(keyword, 20);
+  const trusted = items.filter(i => isTrusted(i.Item?.itemName || '', i.Item?.shopName || ''));
+  // 信頼ブランドが少なければ全件返す（完全に空にしない）
+  return trusted.length >= need ? trusted.slice(0, need) : items.slice(0, need);
+}
+
+function stars(avg) {
+  const n = parseFloat(avg) || 0;
+  return '★'.repeat(Math.floor(n)) + '☆'.repeat(5 - Math.floor(n));
+}
+
+// ===== 記事読み込み（サムネなし除外） =====
 async function loadArticles() {
   try {
     const r = await fetch('articles.json?t=' + Date.now());
     if (!r.ok) return;
-    allArticles = await r.json();
+    const all = await r.json();
+    // サムネ画像あるものだけ
+    allArticles = all.filter(a => a.img_url && a.img_url.trim() !== '');
     renderArticles();
   } catch(e) { console.log('記事読込エラー:', e); }
 }
 
 function renderArticles() {
   const grid = document.getElementById('articleGrid');
-  const list = currentCat === 'all' ? allArticles : allArticles.filter(a => a.category === currentCat);
+  const list = currentCat === 'all'
+    ? allArticles
+    : allArticles.filter(a => a.category === currentCat);
   if (!list.length) {
-    grid.innerHTML = '<p style="color:#bbb;font-size:13px;grid-column:1/-1">記事がありません。</p>';
+    grid.innerHTML = '<p style="color:#bbb;font-size:13px;grid-column:1/-1;padding:20px">記事がありません。</p>';
     return;
   }
-  grid.innerHTML = list.map(a => {
-    const img = a.img_url
-      ? `<img src="${a.img_url}" alt="${a.title}" loading="lazy">`
-      : `<div class="article-thumb-placeholder">${a.category || 'ガジェット'}</div>`;
-    return `<a href="${a.filename}" class="article-card">
+  grid.innerHTML = list.map(a => `
+    <a href="${a.filename}" class="article-card">
       <div class="article-thumb">
-        ${img}
+        <img src="${a.img_url}" alt="${a.title}" loading="lazy">
         <span class="article-cat-tag">${a.category}</span>
       </div>
       <div class="article-body">
@@ -236,8 +275,7 @@ function renderArticles() {
         <div class="article-title">${a.title}</div>
         <div class="article-date">${a.date}</div>
       </div>
-    </a>`;
-  }).join('');
+    </a>`).join('');
 }
 
 function switchCat(cat, btn) {
@@ -247,32 +285,22 @@ function switchCat(cat, btn) {
   renderArticles();
 }
 
-// ===== 楽天商品取得 =====
-async function fetchProducts(keyword, hits = 6) {
-  try {
-    const r = await fetch(`${WORKER}?keyword=${encodeURIComponent(keyword)}&hits=${hits}`);
-    if (!r.ok) return [];
-    return (await r.json()).Items || [];
-  } catch(e) { return []; }
-}
-
-function stars(avg) {
-  const n = parseFloat(avg) || 0;
-  return '★'.repeat(Math.floor(n)) + '☆'.repeat(5 - Math.floor(n));
-}
-
 // ===== 注目商品 =====
 async function loadProducts(keyword) {
   const grid  = document.getElementById('productGrid');
-  const items = await fetchProducts(keyword, 6);
-  if (!items.length) { grid.innerHTML = '<p style="color:#bbb;font-size:13px">商品を取得できませんでした。</p>'; return; }
-  grid.innerHTML = items.map(item => {
+  grid.innerHTML = '<div class="loading-box" style="grid-column:1/-1"><div class="spinner"></div>商品を取得中...</div>';
+  const items = await fetchTrusted(keyword, 6);
+  if (!items.length) {
+    grid.innerHTML = '';
+    return;
+  }
+  grid.innerHTML = items.slice(0,6).map(item => {
     const p    = item.Item;
     const img  = p.mediumImageUrls?.[0]?.imageUrl || '';
     const link = p.affiliateUrl || p.itemUrl;
     return `<a href="${link}" target="_blank" rel="noopener sponsored" style="display:block;border:1px solid #e8e8e8;border-radius:6px;overflow:hidden;text-decoration:none;color:#111;transition:box-shadow .2s" onmouseover="this.style.boxShadow='0 4px 14px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow=''">
       <div style="height:140px;background:#fafafa;display:flex;align-items:center;justify-content:center;padding:10px;border-bottom:1px solid #f0f0f0">
-        ${img ? `<img src="${img}" alt="${p.itemName}" style="max-height:120px;object-fit:contain" loading="lazy">` : '<span style="color:#ccc;font-size:12px">No Image</span>'}
+        ${img ? `<img src="${img}" alt="${p.itemName}" style="max-height:120px;object-fit:contain" loading="lazy">` : ''}
       </div>
       <div style="padding:10px 12px">
         <div style="font-size:12px;font-weight:700;line-height:1.4;margin-bottom:5px;color:#111;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${p.itemName}</div>
@@ -284,12 +312,21 @@ async function loadProducts(keyword) {
   }).join('');
 }
 
-// ===== ランキング =====
+// ===== ランキング（信頼ブランドのみ） =====
 async function loadRanking() {
   const list  = document.getElementById('rankingList');
-  const items = await fetchProducts('スマートウォッチ 人気', 5);
-  if (!items.length) { list.innerHTML = '<p style="color:#bbb;font-size:12px">取得できませんでした</p>'; return; }
-  list.innerHTML = items.map((item, i) => {
+  // 複数キーワードを順番に試す
+  const keywords = ['Sony WH-1000XM5','Anker イヤホン','Apple Watch','Garmin スマートウォッチ'];
+  let items = [];
+  for (const kw of keywords) {
+    const res = await fetchProducts(kw, 3);
+    const trusted = res.filter(i => isTrusted(i.Item?.itemName || '', i.Item?.shopName || ''));
+    items = [...items, ...trusted];
+    if (items.length >= 5) break;
+    await new Promise(r => setTimeout(r, 300));
+  }
+  if (!items.length) { list.innerHTML = ''; return; }
+  list.innerHTML = items.slice(0,5).map((item, i) => {
     const p    = item.Item;
     const img  = p.mediumImageUrls?.[0]?.imageUrl || '';
     const link = p.affiliateUrl || p.itemUrl;
@@ -305,12 +342,12 @@ async function loadRanking() {
   }).join('');
 }
 
-// ===== サイドバー商品 =====
+// ===== サイドバー商品（信頼ブランドのみ） =====
 async function loadSideProducts() {
   const wrap  = document.getElementById('sideProducts');
-  const items = await fetchProducts('Anker モバイルバッテリー', 4);
+  const items = await fetchTrusted('Anker モバイルバッテリー', 4);
   if (!items.length) { wrap.innerHTML = ''; return; }
-  wrap.innerHTML = items.map(item => {
+  wrap.innerHTML = items.slice(0,4).map(item => {
     const p    = item.Item;
     const img  = p.mediumImageUrls?.[0]?.imageUrl || '';
     const link = p.affiliateUrl || p.itemUrl;
@@ -338,7 +375,7 @@ document.getElementById('searchInputSp').addEventListener('keydown', e => { if(e
 
 // ===== 初期化 =====
 loadArticles();
-loadProducts('ワイヤレスイヤホン');
+loadProducts('Sony Anker ワイヤレスイヤホン');
 loadRanking();
 loadSideProducts();
 </script>
