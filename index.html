@@ -312,25 +312,34 @@ async function loadProducts(keyword) {
   }).join('');
 }
 
-// ===== ランキング（信頼ブランドのみ） =====
+// ===== ランキング（信頼ブランド・10件） =====
 async function loadRanking() {
-  const list  = document.getElementById('rankingList');
-  // 複数キーワードを順番に試す
-  const keywords = ['Sony WH-1000XM5','Anker イヤホン','Apple Watch','Garmin スマートウォッチ'];
+  const list = document.getElementById('rankingList');
+  // カテゴリ別に並行取得して10件揃える
+  const keywords = [
+    'Sony ワイヤレスイヤホン WH-1000XM5',
+    'Anker モバイルバッテリー',
+    'Apple Watch SE',
+    'Garmin スマートウォッチ',
+    'Logicool ゲーミング',
+  ];
   let items = [];
   for (const kw of keywords) {
-    const res = await fetchProducts(kw, 3);
-    const trusted = res.filter(i => isTrusted(i.Item?.itemName || '', i.Item?.shopName || ''));
-    items = [...items, ...trusted];
-    if (items.length >= 5) break;
-    await new Promise(r => setTimeout(r, 300));
+    const res     = await fetchProducts(kw, 4);
+    const trusted = res.filter(i => isTrusted(i.Item?.itemName||'', i.Item?.shopName||''));
+    // 除外ワード（アクセサリー類）
+    const exclude = ['バンド','ベルト','ケース','カバー','フィルム','イヤーパッド','クッション','交換','補修','充電ケーブル'];
+    const clean   = trusted.filter(i => !exclude.some(ex => (i.Item?.itemName||'').includes(ex)));
+    items = [...items, ...clean];
+    if (items.length >= 10) break;
+    await new Promise(r => setTimeout(r, 200));
   }
   if (!items.length) { list.innerHTML = ''; return; }
-  list.innerHTML = items.slice(0,5).map((item, i) => {
+  list.innerHTML = items.slice(0,10).map((item, i) => {
     const p    = item.Item;
     const img  = p.mediumImageUrls?.[0]?.imageUrl || '';
     const link = p.affiliateUrl || p.itemUrl;
-    const cls  = ['r1','r2','r3','',''][i];
+    const cls  = i===0?'r1':i===1?'r2':i===2?'r3':'';
     return `<a href="${link}" target="_blank" rel="noopener sponsored" class="rank-widget" style="text-decoration:none">
       <span class="rw-num ${cls}">${i+1}</span>
       ${img ? `<img class="rw-img" src="${img}" alt="${p.itemName}" loading="lazy">` : '<div class="rw-img" style="background:#f5f5f5"></div>'}
