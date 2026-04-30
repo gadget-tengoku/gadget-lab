@@ -6,8 +6,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:#fff;color:#111;line-heigh
 a{text-decoration:none;color:inherit}
 img{max-width:100%;height:auto;display:block}
 
-/* HEADER */
-header{background:#fff;border-bottom:2px solid #111;position:sticky;top:0;z-index:100}
+/* ===== HEADER ===== */
+header{background:#fff;border-bottom:2px solid #111;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .header-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:54px}
 .logo{font-size:20px;font-weight:900;color:#111;letter-spacing:-.5px}
 .logo span{color:#e63900}
@@ -15,36 +15,45 @@ nav{display:flex;gap:24px}
 nav a{font-size:13px;color:#555;font-weight:500}
 nav a:hover{color:#e63900}
 
-/* ARTICLE HERO */
-.article-hero{padding:28px 0 24px;border-bottom:1px solid #e8e8e8}
+/* ===== ARTICLE HERO ===== */
+.article-hero{padding:28px 0 24px;border-bottom:3px solid #111;background:#fff}
 .article-hero-inner{max-width:860px;margin:0 auto;padding:0 20px}
 .article-cat{font-size:11px;font-weight:700;color:#e63900;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
 .article-hero h1{font-size:clamp(20px,2.8vw,30px);font-weight:900;line-height:1.35;margin-bottom:10px;letter-spacing:-.3px}
-.article-meta{font-size:12px;color:#aaa;display:flex;gap:16px}
+.article-meta{font-size:12px;color:#aaa;display:flex;gap:16px;flex-wrap:wrap}
 
-/* CONTAINER */
+/* ===== CONTAINER ===== */
 .container{max-width:860px;margin:0 auto;padding:28px 20px 56px}
 
-/* INTRO */
-.intro-box{background:#fafafa;border-left:4px solid #e63900;padding:14px 18px;margin-bottom:24px;font-size:14px;line-height:1.85;color:#333;border-radius:0 4px 4px 0}
+/* ===== BOXES ===== */
+.intro-box{background:#fafafa;border-left:4px solid #e63900;padding:14px 18px;margin-bottom:20px;font-size:14px;line-height:1.85;color:#333;border-radius:0 4px 4px 0}
+.result-box{background:#111;color:#fff;border-radius:6px;padding:16px 20px;margin-bottom:20px}
+.result-box-label{font-size:11px;color:#e63900;font-weight:700;margin-bottom:6px;letter-spacing:.05em}
+.result-box-text{font-size:14px;line-height:1.8}
+.result-box-text strong{color:#ffd700}
+.persona-box{background:#fff8f0;border-left:4px solid #e63900;padding:14px 18px;margin-bottom:20px;border-radius:0 4px 4px 0}
+.persona-label{font-size:11px;color:#e63900;font-weight:700;margin-bottom:4px}
+.persona-text{font-size:14px;color:#333;margin-bottom:4px}
+.pain-text{font-size:13px;color:#888}
 
-/* TOC */
+/* ===== TOC ===== */
 .toc{border:1px solid #e8e8e8;border-radius:6px;padding:16px 20px;margin-bottom:28px}
 .toc-title{font-size:13px;font-weight:700;margin-bottom:10px;color:#111}
+.toc-title::before{content:'📋 '}
 .toc ol{padding-left:18px}
 .toc li{font-size:13px;margin-bottom:4px;color:#555}
 .toc a{color:#e63900}
 .toc a:hover{text-decoration:underline}
 
-/* SECTION TITLE */
+/* ===== SECTION TITLE ===== */
 h2.section-title{font-size:19px;font-weight:900;border-bottom:2px solid #111;padding-bottom:8px;margin:32px 0 18px;letter-spacing:-.3px}
 
-/* RANK CARD */
-.rank-card{border:1px solid #e8e8e8;border-radius:6px;overflow:hidden;margin-bottom:14px;background:#fff;transition:box-shadow .2s}
-.rank-card:hover{box-shadow:0 4px 18px rgba(0,0,0,.08)}
+/* ===== RANK CARD ===== */
+.rank-card{border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;margin-bottom:20px;background:#fff;transition:box-shadow .2s}
+.rank-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.1)}
 
-.rank-header{display:flex;align-items:center;gap:12px;padding:10px 16px;background:#fafafa;border-bottom:1px solid #e8e8e8}
-.rank-num{font-size:26px;font-weight:900;min-width:34px;line-height:1}
+.rank-header{display:flex;align-items:center;gap:12px;padding:12px 18px;background:#fafafa;border-bottom:1px solid #e8e8e8}
+.rank-num{font-size:28px;font-weight:900;min-width:36px;line-height:1}
 .rank-num.gold  {color:#c8972a}
 .rank-num.silver{color:#909090}
 .rank-num.bronze{color:#a0674a}
@@ -53,21 +62,62 @@ h2.section-title{font-size:19px;font-weight:900;border-bottom:2px solid #111;pad
 .rank-shop-name{font-size:11px;color:#bbb;margin-left:auto}
 
 /* 画像左・情報右 */
-.rank-layout{display:grid;grid-template-columns:190px 1fr}
-.rank-img-col{background:#fafafa;border-right:1px solid #f0f0f0;display:flex;align-items:center;justify-content:center;padding:16px;min-height:190px}
-.rank-img-col img{width:100%;max-height:170px;object-fit:contain}
+.rank-layout{display:grid;grid-template-columns:200px 1fr}
+.rank-img-col{background:#fafafa;border-right:1px solid #f0f0f0;display:flex;align-items:center;justify-content:center;padding:16px;min-height:200px}
+.rank-img-col img{width:100%;max-height:180px;object-fit:contain}
 .rank-info-col{padding:16px 18px;display:flex;flex-direction:column;gap:8px}
 .rank-name{font-size:14px;font-weight:700;line-height:1.5;color:#111}
-.rank-review{font-size:13px;color:#666;display:flex;align-items:center;gap:5px}
-.stars{color:#f5a623}
-.review-count{font-size:12px;color:#bbb}
-.price-area{margin-top:auto;padding-top:10px;border-top:1px solid #f0f0f0}
-.price{font-size:22px;font-weight:900;color:#e63900}
-.price small{font-size:12px;color:#aaa;font-weight:400}
-.btn-buy{display:inline-block;background:#e63900;color:#fff;font-size:13px;font-weight:700;padding:10px 20px;border-radius:4px;margin-top:10px;transition:background .15s;cursor:pointer}
-.btn-buy:hover{background:#c42f00}
 
-/* TABLE */
+/* レビュー */
+.review-block{margin:6px 0}
+.review-stars-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.stars{color:#f5a623;font-size:16px}
+.review-score{font-size:18px;font-weight:900;color:#111}
+.review-max{font-size:13px;color:#aaa}
+.review-link{font-size:12px;color:#e63900}
+.review-bar-wrap{background:#f0f0f0;border-radius:4px;height:6px;width:160px}
+.review-bar{background:#f5a623;height:6px;border-radius:4px}
+
+/* 価格・CTAエリア */
+.price-area{margin-top:auto;padding-top:12px;border-top:1px solid #f0f0f0}
+.price-row{display:flex;align-items:baseline;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.price{font-size:26px;font-weight:900;color:#e63900;letter-spacing:-.5px}
+.price small{font-size:12px;color:#aaa;font-weight:400}
+.price-note{font-size:11px;color:#aaa}
+
+/* ★ メインCTAボタン（大型・目立つ） */
+.btn-buy{
+  display:block;
+  background:#e63900;
+  color:#fff;
+  font-size:15px;
+  font-weight:900;
+  padding:14px 20px;
+  border-radius:6px;
+  text-align:center;
+  transition:background .15s,transform .1s;
+  letter-spacing:.02em;
+  box-shadow:0 4px 12px rgba(230,57,0,.3);
+}
+.btn-buy:hover{background:#c42f00;transform:translateY(-1px);box-shadow:0 6px 16px rgba(230,57,0,.4)}
+.btn-buy::before{content:'🛒 '}
+
+.btn-review{
+  display:block;
+  background:#fff;
+  color:#e63900;
+  font-size:13px;
+  font-weight:700;
+  padding:9px 20px;
+  border-radius:6px;
+  text-align:center;
+  border:2px solid #e63900;
+  margin-top:8px;
+  transition:all .15s;
+}
+.btn-review:hover{background:#fff5f2}
+
+/* ===== 比較表 ===== */
 .table-wrap{overflow-x:auto;border:1px solid #e8e8e8;border-radius:6px;margin-bottom:24px}
 table{width:100%;border-collapse:collapse;font-size:13px;min-width:460px}
 thead th{background:#111;color:#fff;padding:10px 12px;text-align:center;font-weight:700;font-size:12px}
@@ -79,24 +129,42 @@ tbody td:first-child{text-align:left;font-weight:700}
 .rank-no{display:inline-block;background:#111;color:#fff;font-size:10px;font-weight:700;padding:1px 5px;border-radius:3px;margin-right:4px}
 .best{color:#e63900;font-weight:700}
 
-/* GUIDE */
+/* ===== 選び方 ===== */
 .guide-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:20px}
 .guide-item{border:1px solid #e8e8e8;border-radius:6px;padding:14px}
 .guide-item-title{font-size:13px;font-weight:700;margin-bottom:5px;color:#111}
 .guide-item-desc{font-size:12px;color:#666;line-height:1.6}
 
-/* FOOTER */
+/* ===== FAQ ===== */
+.faq-wrap{background:#fafafa;border:1px solid #e8e8e8;border-radius:6px;padding:0 20px;margin-bottom:24px}
+.faq-item{border-bottom:1px solid #f0f0f0;padding:16px 0}
+.faq-item:last-child{border-bottom:none}
+.faq-q{font-weight:700;color:#111;margin-bottom:6px;font-size:14px}
+.faq-q::before{content:'Q. ';color:#e63900}
+.faq-a{font-size:13px;color:#555;line-height:1.8}
+.faq-a::before{content:'A. ';font-weight:700;color:#111}
+
+/* ===== 最終CTA バナー ===== */
+.final-cta{background:linear-gradient(135deg,#111,#2a2a2a);color:#fff;border-radius:8px;padding:24px;text-align:center;margin-top:28px}
+.final-cta-title{font-size:16px;font-weight:900;margin-bottom:6px}
+.final-cta-sub{font-size:13px;color:#aaa;margin-bottom:16px}
+.final-cta-btn{display:inline-block;background:#e63900;color:#fff;font-size:14px;font-weight:900;padding:13px 32px;border-radius:6px;box-shadow:0 4px 14px rgba(230,57,0,.4);transition:all .15s}
+.final-cta-btn:hover{background:#c42f00;transform:translateY(-1px)}
+
+/* ===== FOOTER ===== */
 footer{background:#111;color:#777;padding:24px 20px}
 .footer-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .footer-logo{font-size:18px;font-weight:900;color:#fff;letter-spacing:-.3px}
 .footer-logo span{color:#e63900}
-.footer-links{display:flex;gap:20px}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
 .footer-links a{font-size:12px;color:#777}
 .footer-links a:hover{color:#fff}
 .footer-note{font-size:11px;color:#444;margin-top:14px;line-height:1.7;max-width:1000px;margin-inline:auto;display:block}
 
+/* ===== RESPONSIVE ===== */
 @media(max-width:600px){
   .rank-layout{grid-template-columns:1fr}
   .rank-img-col{border-right:none;border-bottom:1px solid #f0f0f0;min-height:140px}
-  .btn-buy{display:block;text-align:center}
+  .price-row{flex-direction:column;gap:4px}
+  h2.section-title{font-size:17px}
 }
