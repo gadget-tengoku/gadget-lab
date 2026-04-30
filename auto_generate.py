@@ -910,11 +910,21 @@ def build_archive(articles):
 # ===== サイトマップ =====
 def build_sitemap(extra):
     today = datetime.now().strftime('%Y-%m-%d')
-    bases = ['','earphone.html','smartwatch.html','battery.html','archive.html','privacy.html']
-    urls  = [f'  <url><loc>{SITE_URL}/{u}</loc><lastmod>{today}</lastmod><priority>{"1.0" if u=="" else "0.8"}</priority></url>' for u in bases]
+    bases = [
+        ('', '1.0', 'daily'),
+        ('earphone.html', '0.9', 'weekly'),
+        ('smartwatch.html', '0.9', 'weekly'),
+        ('battery.html', '0.9', 'weekly'),
+        ('gaming.html', '0.9', 'weekly'),
+        ('telework.html', '0.9', 'weekly'),
+        ('archive.html', '0.8', 'daily'),
+        ('privacy.html', '0.4', 'monthly'),
+    ]
+    urls = [f'  <url><loc>{SITE_URL}/{u}</loc><lastmod>{today}</lastmod><changefreq>{freq}</changefreq><priority>{pri}</priority></url>'
+            for u, pri, freq in bases]
     for f in extra:
-        urls.append(f'  <url><loc>{SITE_URL}/{f}</loc><lastmod>{today}</lastmod><priority>0.7</priority></url>')
-    return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+'\n'.join(urls)+'\n</urlset>'
+        urls.append(f'  <url><loc>{SITE_URL}/{f}</loc><lastmod>{today}</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>')
+    return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + '\n'.join(urls) + '\n</urlset>'
 
 # ===== Twitter =====
 def post_twitter(title, url, theme_obj):
