@@ -3,101 +3,112 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ガジェット天国 | 最新家電・ガジェット情報</title>
-<meta name="description" content="家電・ガジェット専門メディア。イヤホン・スマートウォッチ・モバイルバッテリーなど楽天市場の人気商品をランキング形式で紹介。">
+<title>ガジェット天国 | 家電・ガジェットの比較・ランキング</title>
+<meta name="description" content="家電・ガジェット専門メディア。イヤホン・スマートウォッチ・モバイルバッテリーなど楽天市場の人気商品をランキング・比較記事で紹介。失敗しない選び方も解説。">
 <link rel="canonical" href="https://gadget-tengoku.com/">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3514849475707540" crossorigin="anonymous"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"ガジェット天国","url":"https://gadget-tengoku.com/"}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Noto Sans JP',sans-serif;background:#fff;color:#111;line-height:1.7;-webkit-font-smoothing:antialiased}
+body{font-family:'Noto Sans JP',sans-serif;background:#f5f5f3;color:#111;line-height:1.7;-webkit-font-smoothing:antialiased}
 a{text-decoration:none;color:inherit}
 img{max-width:100%;height:auto;display:block}
 
-/* ===== HEADER ===== */
-header{background:#fff;border-bottom:2px solid #111;position:sticky;top:0;z-index:100}
+/* HEADER */
+header{background:#fff;border-bottom:2px solid #111;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:54px}
 .logo{font-size:22px;font-weight:900;color:#111;letter-spacing:-.5px}
 .logo span{color:#e63900}
-.header-nav{display:flex;align-items:center;gap:28px}
+.header-nav{display:flex;align-items:center;gap:24px}
 .header-nav a{font-size:13px;color:#555;font-weight:500}
 .header-nav a:hover{color:#e63900}
 .header-search{display:flex;gap:0}
-.header-search input{padding:7px 14px;border:1px solid #ddd;border-right:none;border-radius:4px 0 0 4px;font-size:13px;font-family:inherit;outline:none;width:200px}
+.header-search input{padding:7px 14px;border:1px solid #ddd;border-right:none;border-radius:4px 0 0 4px;font-size:13px;font-family:inherit;outline:none;width:220px}
 .header-search input:focus{border-color:#111}
-.header-search button{background:#111;color:#fff;border:none;padding:7px 14px;border-radius:0 4px 4px 0;font-size:13px;cursor:pointer;font-family:inherit}
+.header-search button{background:#111;color:#fff;border:none;padding:7px 16px;border-radius:0 4px 4px 0;font-size:13px;cursor:pointer;font-family:inherit;font-weight:700}
 .header-search button:hover{background:#e63900}
 
-/* ===== CATEGORY NAV ===== */
+/* CATEGORY NAV */
 .cat-nav{border-bottom:1px solid #e8e8e8;background:#fff}
 .cat-nav-inner{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
 .cat-nav-inner::-webkit-scrollbar{display:none}
-.cat-btn{padding:12px 18px;font-size:13px;font-weight:500;color:#555;white-space:nowrap;border-bottom:2px solid transparent;transition:all .15s;cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit}
-.cat-btn:hover,.cat-btn.active{color:#e63900;border-bottom-color:#e63900}
+.cat-btn{padding:11px 18px;font-size:13px;font-weight:500;color:#555;white-space:nowrap;border-bottom:2px solid transparent;cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;transition:all .15s}
+.cat-btn:hover,.cat-btn.active{color:#e63900;border-bottom-color:#e63900;font-weight:700}
 
-/* ===== MAIN LAYOUT ===== */
-.main-wrap{max-width:1100px;margin:0 auto;padding:28px 20px;display:grid;grid-template-columns:1fr 320px;gap:32px}
+/* MAIN */
+.main-wrap{max-width:1100px;margin:0 auto;padding:24px 20px;display:grid;grid-template-columns:1fr 300px;gap:28px}
 
-/* ===== 記事グリッド ===== */
-.articles-section h2{font-size:16px;font-weight:900;border-left:4px solid #e63900;padding-left:10px;margin-bottom:16px;letter-spacing:-.2px}
+/* 記事グリッド */
+.section-label{font-size:16px;font-weight:900;border-left:4px solid #e63900;padding-left:10px;margin-bottom:16px;letter-spacing:-.2px}
 
-.article-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:32px}
-
-.article-card{border:1px solid #e8e8e8;border-radius:6px;overflow:hidden;display:block;transition:box-shadow .2s}
-.article-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.article-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:28px}
+.article-card{border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;display:block;background:#fff;transition:box-shadow .2s}
+.article-card:hover{box-shadow:0 6px 20px rgba(0,0,0,.1)}
 .article-thumb{height:160px;overflow:hidden;background:#fafafa;position:relative;display:flex;align-items:center;justify-content:center}
-.article-thumb img{width:100%;height:100%;object-fit:contain;padding:12px}
-.article-thumb-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f5f5f5,#ebebeb);color:#ccc;font-size:12px}
-.article-cat-tag{position:absolute;top:8px;left:8px;background:#e63900;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;letter-spacing:.04em}
+.article-thumb img{width:100%;height:100%;object-fit:contain;padding:10px}
+.article-cat-tag{position:absolute;top:8px;left:8px;background:#e63900;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px}
 .article-body{padding:12px 14px}
-.article-cat{font-size:11px;color:#e63900;font-weight:700;margin-bottom:5px;letter-spacing:.05em;text-transform:uppercase}
+.article-cat{font-size:11px;color:#e63900;font-weight:700;margin-bottom:4px;letter-spacing:.04em;text-transform:uppercase}
 .article-title{font-size:13px;font-weight:700;line-height:1.5;margin-bottom:6px;color:#111;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .article-date{font-size:11px;color:#bbb}
 
-/* ===== サイドバー ===== */
+/* 注目商品 */
+.product-grid-home{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+.product-card-home{border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#fff;transition:box-shadow .2s}
+.product-card-home:hover{box-shadow:0 4px 16px rgba(0,0,0,.09)}
+.pc-thumb{height:130px;background:#fafafa;display:flex;align-items:center;justify-content:center;padding:10px;border-bottom:1px solid #f0f0f0}
+.pc-thumb img{max-height:110px;object-fit:contain}
+.pc-body{padding:10px 12px}
+.pc-name{font-size:12px;font-weight:700;line-height:1.4;margin-bottom:6px;color:#111;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pc-review{font-size:11px;color:#aaa;margin-bottom:4px}
+.pc-price{font-size:16px;font-weight:900;color:#e63900;margin-bottom:8px}
+.pc-btn{display:block;background:#e63900;color:#fff;text-align:center;font-size:11px;font-weight:700;padding:7px;border-radius:4px;transition:background .15s}
+.pc-btn:hover{background:#c42f00}
+
+/* SIDEBAR */
 .sidebar{}
-.sidebar-section{margin-bottom:28px}
-.sidebar-title{font-size:14px;font-weight:900;border-left:4px solid #e63900;padding-left:10px;margin-bottom:14px;letter-spacing:-.2px}
+.sb-section{background:#fff;border:1px solid #e8e8e8;border-radius:8px;padding:16px;margin-bottom:20px}
+.sb-title{font-size:14px;font-weight:900;border-left:4px solid #e63900;padding-left:8px;margin-bottom:14px}
 
-/* 商品ウィジェット */
-.product-widget{border:1px solid #e8e8e8;border-radius:6px;overflow:hidden;margin-bottom:10px;display:flex;gap:0;transition:box-shadow .2s}
-.product-widget:hover{box-shadow:0 2px 12px rgba(0,0,0,.07)}
-.pw-img{width:80px;min-height:80px;background:#fafafa;display:flex;align-items:center;justify-content:center;flex-shrink:0;border-right:1px solid #f0f0f0;padding:8px}
-.pw-img img{width:60px;height:60px;object-fit:contain}
-.pw-body{padding:10px 12px;display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}
-.pw-name{font-size:12px;font-weight:700;line-height:1.4;color:#111;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.pw-price{font-size:14px;font-weight:900;color:#e63900}
-.pw-review{font-size:11px;color:#aaa}
-.pw-btn{display:block;background:#e63900;color:#fff;text-align:center;font-size:11px;font-weight:700;padding:5px 8px;border-radius:3px;margin-top:4px;transition:background .15s}
-.pw-btn:hover{background:#c42f00}
-
-/* ランキングサイドバー */
-.rank-widget{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f0f0f0}
-.rank-widget:last-child{border-bottom:none}
-.rw-num{font-size:20px;font-weight:900;min-width:28px;color:#ccc;line-height:1}
+/* ランキング */
+.rank-widget{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f5f5f5;text-decoration:none;color:#111;transition:opacity .15s}
+.rank-widget:last-child{border-bottom:none;padding-bottom:0}
+.rank-widget:hover{opacity:.75}
+.rw-num{font-size:20px;font-weight:900;min-width:28px;line-height:1}
 .rw-num.r1{color:#c8972a}
 .rw-num.r2{color:#909090}
 .rw-num.r3{color:#a0674a}
-.rw-img{width:52px;height:52px;object-fit:contain;background:#fafafa;border:1px solid #f0f0f0;border-radius:4px;padding:4px;flex-shrink:0}
+.rw-num.rn{color:#ddd}
+.rw-img{width:50px;height:50px;object-fit:contain;background:#fafafa;border:1px solid #f0f0f0;border-radius:4px;padding:3px;flex-shrink:0}
 .rw-info{flex:1;min-width:0}
 .rw-name{font-size:12px;font-weight:700;line-height:1.4;color:#111;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .rw-price{font-size:13px;font-weight:900;color:#e63900;margin-top:2px}
+.rw-review{font-size:10px;color:#aaa}
+
+/* サイドバー商品 */
+.sb-product{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f5f5f5;text-decoration:none;color:#111}
+.sb-product:last-child{border-bottom:none}
+.sb-product:hover{opacity:.75}
+.sp-img{width:56px;height:56px;object-fit:contain;background:#fafafa;border:1px solid #f0f0f0;border-radius:4px;padding:4px;flex-shrink:0}
+.sp-body{flex:1;min-width:0}
+.sp-name{font-size:12px;font-weight:700;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sp-price{font-size:13px;font-weight:900;color:#e63900;margin-top:3px}
+.sp-btn{display:block;background:#e63900;color:#fff;text-align:center;font-size:11px;font-weight:700;padding:6px;border-radius:3px;margin-top:5px}
 
 /* ローディング */
-.loading-box{text-align:center;padding:20px;color:#bbb;font-size:13px}
+.loading-box{text-align:center;padding:30px;color:#bbb;font-size:13px}
 .spinner{width:24px;height:24px;border:2px solid #f0f0f0;border-top-color:#e63900;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 8px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ===== 検索バー（SP） ===== */
-.search-bar-sp{display:none;padding:12px 16px;border-bottom:1px solid #e8e8e8;background:#fafafa}
-.search-bar-sp .inner{display:flex;gap:0}
-.search-bar-sp input{flex:1;padding:8px 14px;border:1px solid #ddd;border-right:none;border-radius:4px 0 0 4px;font-size:14px;font-family:inherit;outline:none}
-.search-bar-sp button{background:#111;color:#fff;border:none;padding:8px 16px;border-radius:0 4px 4px 0;font-size:13px;cursor:pointer;font-family:inherit}
+/* SP検索 */
+.search-sp{display:none;padding:12px 16px;border-bottom:1px solid #e8e8e8;background:#fafafa}
+.search-sp .inner{display:flex}
+.search-sp input{flex:1;padding:9px 14px;border:1px solid #ddd;border-right:none;border-radius:4px 0 0 4px;font-size:14px;font-family:inherit;outline:none}
+.search-sp button{background:#111;color:#fff;border:none;padding:9px 16px;border-radius:0 4px 4px 0;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 footer{background:#111;color:#666;padding:24px 20px;margin-top:20px}
 .footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .footer-logo{font-size:18px;font-weight:900;color:#fff;letter-spacing:-.3px}
@@ -107,15 +118,16 @@ footer{background:#111;color:#666;padding:24px 20px;margin-top:20px}
 .footer-links a:hover{color:#fff}
 .footer-note{font-size:11px;color:#444;margin-top:14px;line-height:1.7;max-width:1100px;margin-inline:auto;display:block}
 
-@media(max-width:900px){
+@media(max-width:960px){
   .main-wrap{grid-template-columns:1fr}
   .sidebar{display:none}
   .header-search{display:none}
-  .search-bar-sp{display:block}
-  .article-grid{grid-template-columns:1fr}
+  .search-sp{display:block}
+  .product-grid-home{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:480px){
-  .header-nav a:not(.logo){display:none}
+  .article-grid{grid-template-columns:1fr}
+  .product-grid-home{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -130,7 +142,7 @@ footer{background:#111;color:#666;padding:24px 20px;margin-top:20px}
       <a href="/privacy.html">プライバシー</a>
     </nav>
     <div class="header-search">
-      <input type="text" id="searchInput" placeholder="商品・記事を検索...">
+      <input type="text" id="searchInput" placeholder="例：ノイキャンイヤホン、Anker...">
       <button onclick="doSearch()">検索</button>
     </div>
   </div>
@@ -149,39 +161,44 @@ footer{background:#111;color:#666;padding:24px 20px;margin-top:20px}
   </div>
 </div>
 
-<div class="search-bar-sp">
+<div class="search-sp">
   <div class="inner">
-    <input type="text" id="searchInputSp" placeholder="商品・記事を検索...">
+    <input type="text" id="searchInputSp" placeholder="ガジェットを検索...">
     <button onclick="doSearch()">検索</button>
   </div>
 </div>
 
 <div class="main-wrap">
-  <!-- 記事エリア -->
   <main>
-    <section id="articles-section">
-      <h2>最新記事</h2>
-      <div class="article-grid" id="articleGrid">
-        <div class="loading-box" style="grid-column:1/-1"><div class="spinner"></div>記事を読み込み中...</div>
-      </div>
-    </section>
+    <!-- 記事一覧 -->
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px">
+      <div class="section-label">最新記事</div>
+      <a href="/archive.html" style="font-size:13px;color:#e63900;font-weight:700">全記事を見る →</a>
+    </div>
+    <div class="article-grid" id="articleGrid">
+      <div class="loading-box" style="grid-column:1/-1"><div class="spinner"></div>記事を読み込み中...</div>
+    </div>
 
-    <section id="products-section" style="margin-bottom:32px">
-      <h2 style="font-size:16px;font-weight:900;border-left:4px solid #e63900;padding-left:10px;margin-bottom:16px">注目商品</h2>
-      <div id="productGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px">
+    <!-- 注目商品 -->
+    <div id="products-section">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px">
+        <div class="section-label">注目商品</div>
+        <a href="https://www.rakuten.co.jp/" target="_blank" rel="noopener" style="font-size:13px;color:#e63900;font-weight:700">楽天でもっと見る →</a>
+      </div>
+      <div class="product-grid-home" id="productGrid">
         <div class="loading-box" style="grid-column:1/-1"><div class="spinner"></div>商品を取得中...</div>
       </div>
-    </section>
+    </div>
   </main>
 
-  <!-- サイドバー -->
+  <!-- SIDEBAR -->
   <aside class="sidebar">
-    <div class="sidebar-section">
-      <div class="sidebar-title" id="ranking">売れ筋ランキング</div>
+    <div class="sb-section">
+      <div class="sb-title" id="ranking">売れ筋ランキング TOP10</div>
       <div id="rankingList"><div class="loading-box"><div class="spinner"></div></div></div>
     </div>
-    <div class="sidebar-section">
-      <div class="sidebar-title">おすすめ商品</div>
+    <div class="sb-section">
+      <div class="sb-title">Anker おすすめ</div>
       <div id="sideProducts"><div class="loading-box"><div class="spinner"></div></div></div>
     </div>
   </aside>
@@ -205,24 +222,29 @@ const WORKER = 'https://rakuten-proxy.sobamoripaya.workers.dev';
 let allArticles = [];
 let currentCat  = 'all';
 
-// 信頼ブランドリスト
-const TRUSTED_BRANDS = [
+const TRUSTED = [
   'anker','sony','apple','samsung','garmin','bose','jbl','panasonic','sharp',
   'dyson','philips','lg','dell','logicool','logitech','shokz','jabra',
-  'sennheiser','audio-technica','オーディオテクニカ','asus','microsoft',
-  'google','amazon','echo','kindle','gopro','dji','canon','nikon','fujifilm',
-  'iRobot','ecovacs','irobot','switchbot','qrio','buffalo','elecom',
-  'belkin','mophie','hhkb','realforce','cio','エレコム','バッファロー',
-  'パナソニック','シャープ','ソニー','サムスン','アップル','アンカー'
+  'sennheiser','audio-technica','asus','gopro','dji','canon','nikon',
+  'irobot','ecovacs','switchbot','buffalo','elecom','belkin','cio',
+  'razer','steelseries','hyperx','corsair','beats','soundcore',
+  'パナソニック','シャープ','ソニー','アンカー','エレコム',
+];
+const EXCLUDE_WORDS = [
+  'バンド','ベルト','ケース','カバー','フィルム','イヤーパッド',
+  'クッション','交換','補修','ケーブル','パーツ','ソール','替えブラシ',
+  'フィルター','スペア','マウント','アーム','スタンド',
 ];
 
 function isTrusted(name, shop) {
-  const lower = (name + ' ' + shop).toLowerCase();
-  return TRUSTED_BRANDS.some(b => lower.includes(b.toLowerCase()));
+  const t = (name + ' ' + shop).toLowerCase();
+  return TRUSTED.some(b => t.includes(b.toLowerCase()));
+}
+function isClean(name) {
+  return !EXCLUDE_WORDS.some(ex => name.includes(ex));
 }
 
-// ===== 楽天商品取得 =====
-async function fetchProducts(keyword, hits = 10) {
+async function fetchProducts(keyword, hits=20) {
   try {
     const r = await fetch(`${WORKER}?keyword=${encodeURIComponent(keyword)}&hits=${hits}`);
     if (!r.ok) return [];
@@ -230,29 +252,19 @@ async function fetchProducts(keyword, hits = 10) {
   } catch(e) { return []; }
 }
 
-// ブランドフィルター済み商品を取得（最低n件確保のためリトライ）
-async function fetchTrusted(keyword, need = 5) {
-  const items   = await fetchProducts(keyword, 20);
-  const trusted = items.filter(i => isTrusted(i.Item?.itemName || '', i.Item?.shopName || ''));
-  // 信頼ブランドが少なければ全件返す（完全に空にしない）
-  return trusted.length >= need ? trusted.slice(0, need) : items.slice(0, need);
-}
-
 function stars(avg) {
-  const n = parseFloat(avg) || 0;
-  return '★'.repeat(Math.floor(n)) + '☆'.repeat(5 - Math.floor(n));
+  const n = Math.floor(parseFloat(avg)||0);
+  return '★'.repeat(n) + '☆'.repeat(5-n);
 }
 
-// ===== 記事読み込み（サムネなし除外） =====
+/* 記事読み込み（サムネあり・信頼ブランドのみ） */
 async function loadArticles() {
   try {
     const r = await fetch('articles.json?t=' + Date.now());
     if (!r.ok) return;
-    const all = await r.json();
-    // サムネ画像あるものだけ
-    allArticles = all.filter(a => a.img_url && a.img_url.trim() !== '');
+    allArticles = (await r.json()).filter(a => a.img_url && a.img_url.trim());
     renderArticles();
-  } catch(e) { console.log('記事読込エラー:', e); }
+  } catch(e) {}
 }
 
 function renderArticles() {
@@ -261,7 +273,7 @@ function renderArticles() {
     ? allArticles
     : allArticles.filter(a => a.category === currentCat);
   if (!list.length) {
-    grid.innerHTML = '<p style="color:#bbb;font-size:13px;grid-column:1/-1;padding:20px">記事がありません。</p>';
+    grid.innerHTML = '<p style="color:#bbb;font-size:13px;grid-column:1/-1;padding:20px">記事がありません</p>';
     return;
   }
   grid.innerHTML = list.map(a => `
@@ -285,94 +297,87 @@ function switchCat(cat, btn) {
   renderArticles();
 }
 
-// ===== 注目商品 =====
+/* 注目商品 */
 async function loadProducts(keyword) {
-  const grid  = document.getElementById('productGrid');
-  grid.innerHTML = '<div class="loading-box" style="grid-column:1/-1"><div class="spinner"></div>商品を取得中...</div>';
-  const items = await fetchTrusted(keyword, 6);
-  if (!items.length) {
-    grid.innerHTML = '';
-    return;
-  }
-  grid.innerHTML = items.slice(0,6).map(item => {
-    const p    = item.Item;
-    const img  = p.mediumImageUrls?.[0]?.imageUrl || '';
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = '<div class="loading-box" style="grid-column:1/-1"><div class="spinner"></div>取得中...</div>';
+  const all = await fetchProducts(keyword, 30);
+  const items = all.filter(i => isTrusted(i.Item?.itemName||'', i.Item?.shopName||'') && isClean(i.Item?.itemName||'')).slice(0,6);
+  if (!items.length) { grid.innerHTML = ''; return; }
+  grid.innerHTML = items.map(item => {
+    const p = item.Item;
+    const img = p.mediumImageUrls?.[0]?.imageUrl || '';
     const link = p.affiliateUrl || p.itemUrl;
-    return `<a href="${link}" target="_blank" rel="noopener sponsored" style="display:block;border:1px solid #e8e8e8;border-radius:6px;overflow:hidden;text-decoration:none;color:#111;transition:box-shadow .2s" onmouseover="this.style.boxShadow='0 4px 14px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow=''">
-      <div style="height:140px;background:#fafafa;display:flex;align-items:center;justify-content:center;padding:10px;border-bottom:1px solid #f0f0f0">
-        ${img ? `<img src="${img}" alt="${p.itemName}" style="max-height:120px;object-fit:contain" loading="lazy">` : ''}
-      </div>
-      <div style="padding:10px 12px">
-        <div style="font-size:12px;font-weight:700;line-height:1.4;margin-bottom:5px;color:#111;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${p.itemName}</div>
-        <div style="font-size:11px;color:#aaa;margin-bottom:4px">${stars(p.reviewAverage)} (${Number(p.reviewCount||0).toLocaleString()}件)</div>
-        <div style="font-size:15px;font-weight:900;color:#e63900;margin-bottom:6px">¥${Number(p.itemPrice).toLocaleString()}</div>
-        <div style="background:#e63900;color:#fff;text-align:center;font-size:11px;font-weight:700;padding:5px;border-radius:3px">楽天で購入する</div>
+    return `<a href="${link}" target="_blank" rel="noopener sponsored" class="product-card-home">
+      <div class="pc-thumb">${img ? `<img src="${img}" alt="${p.itemName}" loading="lazy">` : ''}</div>
+      <div class="pc-body">
+        <div class="pc-name">${p.itemName}</div>
+        <div class="pc-review">${stars(p.reviewAverage)} (${Number(p.reviewCount||0).toLocaleString()}件)</div>
+        <div class="pc-price">¥${Number(p.itemPrice).toLocaleString()}</div>
+        <span class="pc-btn">楽天で購入する</span>
       </div>
     </a>`;
   }).join('');
 }
 
-// ===== ランキング（信頼ブランド・10件） =====
+/* ランキング（10件・信頼ブランド・アクセサリー除外） */
 async function loadRanking() {
   const list = document.getElementById('rankingList');
-  // カテゴリ別に並行取得して10件揃える
-  const keywords = [
-    'Sony ワイヤレスイヤホン WH-1000XM5',
-    'Anker モバイルバッテリー',
-    'Apple Watch SE',
-    'Garmin スマートウォッチ',
-    'Logicool ゲーミング',
+  const kwList = [
+    'Sony WH-1000XM5 ワイヤレスイヤホン',
+    'Anker PowerCore モバイルバッテリー',
+    'Apple Watch SE 本体',
+    'Garmin スマートウォッチ 本体',
+    'Logicool ゲーミングマウス 本体',
   ];
   let items = [];
-  for (const kw of keywords) {
-    const res     = await fetchProducts(kw, 4);
-    const trusted = res.filter(i => isTrusted(i.Item?.itemName||'', i.Item?.shopName||''));
-    // 除外ワード（アクセサリー類）
-    const exclude = ['バンド','ベルト','ケース','カバー','フィルム','イヤーパッド','クッション','交換','補修','充電ケーブル'];
-    const clean   = trusted.filter(i => !exclude.some(ex => (i.Item?.itemName||'').includes(ex)));
-    items = [...items, ...clean];
+  for (const kw of kwList) {
+    const res = await fetchProducts(kw, 5);
+    const ok  = res.filter(i => isTrusted(i.Item?.itemName||'', i.Item?.shopName||'') && isClean(i.Item?.itemName||''));
+    items = [...items, ...ok];
     if (items.length >= 10) break;
     await new Promise(r => setTimeout(r, 200));
   }
   if (!items.length) { list.innerHTML = ''; return; }
+  const numCls = (i) => i===0?'r1':i===1?'r2':i===2?'r3':'rn';
   list.innerHTML = items.slice(0,10).map((item, i) => {
-    const p    = item.Item;
-    const img  = p.mediumImageUrls?.[0]?.imageUrl || '';
+    const p = item.Item;
+    const img = p.mediumImageUrls?.[0]?.imageUrl || '';
     const link = p.affiliateUrl || p.itemUrl;
-    const cls  = i===0?'r1':i===1?'r2':i===2?'r3':'';
-    return `<a href="${link}" target="_blank" rel="noopener sponsored" class="rank-widget" style="text-decoration:none">
-      <span class="rw-num ${cls}">${i+1}</span>
-      ${img ? `<img class="rw-img" src="${img}" alt="${p.itemName}" loading="lazy">` : '<div class="rw-img" style="background:#f5f5f5"></div>'}
+    return `<a href="${link}" target="_blank" rel="noopener sponsored" class="rank-widget">
+      <span class="rw-num ${numCls(i)}">${i+1}</span>
+      ${img ? `<img class="rw-img" src="${img}" alt="${p.itemName}" loading="lazy">` : '<div class="rw-img"></div>'}
       <div class="rw-info">
         <div class="rw-name">${p.itemName}</div>
         <div class="rw-price">¥${Number(p.itemPrice).toLocaleString()}</div>
+        <div class="rw-review">${stars(p.reviewAverage)} (${Number(p.reviewCount||0).toLocaleString()}件)</div>
       </div>
     </a>`;
   }).join('');
 }
 
-// ===== サイドバー商品（信頼ブランドのみ） =====
+/* サイドバー商品 */
 async function loadSideProducts() {
   const wrap  = document.getElementById('sideProducts');
-  const items = await fetchTrusted('Anker モバイルバッテリー', 4);
+  const all   = await fetchProducts('Anker 人気', 20);
+  const items = all.filter(i => isTrusted(i.Item?.itemName||'', i.Item?.shopName||'') && isClean(i.Item?.itemName||'')).slice(0,5);
   if (!items.length) { wrap.innerHTML = ''; return; }
-  wrap.innerHTML = items.slice(0,4).map(item => {
-    const p    = item.Item;
-    const img  = p.mediumImageUrls?.[0]?.imageUrl || '';
+  wrap.innerHTML = items.map(item => {
+    const p = item.Item;
+    const img = p.mediumImageUrls?.[0]?.imageUrl || '';
     const link = p.affiliateUrl || p.itemUrl;
-    return `<a href="${link}" target="_blank" rel="noopener sponsored" class="product-widget" style="text-decoration:none">
-      <div class="pw-img">${img ? `<img src="${img}" alt="${p.itemName}" style="width:60px;height:60px;object-fit:contain" loading="lazy">` : ''}</div>
-      <div class="pw-body">
-        <div class="pw-name">${p.itemName}</div>
-        <div class="pw-price">¥${Number(p.itemPrice).toLocaleString()}</div>
-        <div class="pw-review">${stars(p.reviewAverage)} (${Number(p.reviewCount||0).toLocaleString()}件)</div>
-        <span class="pw-btn">楽天で見る</span>
+    return `<a href="${link}" target="_blank" rel="noopener sponsored" class="sb-product">
+      ${img ? `<img class="sp-img" src="${img}" alt="${p.itemName}" loading="lazy">` : '<div class="sp-img"></div>'}
+      <div class="sp-body">
+        <div class="sp-name">${p.itemName}</div>
+        <div class="sp-price">¥${Number(p.itemPrice).toLocaleString()}</div>
+        <span class="sp-btn">楽天で見る</span>
       </div>
     </a>`;
   }).join('');
 }
 
-// ===== 検索 =====
+/* 検索 */
 function doSearch() {
   const q = (document.getElementById('searchInput').value || document.getElementById('searchInputSp').value || '').trim();
   if (!q) return;
@@ -382,9 +387,9 @@ function doSearch() {
 document.getElementById('searchInput').addEventListener('keydown', e => { if(e.key==='Enter') doSearch(); });
 document.getElementById('searchInputSp').addEventListener('keydown', e => { if(e.key==='Enter') doSearch(); });
 
-// ===== 初期化 =====
+/* 初期化 */
 loadArticles();
-loadProducts('Sony Anker ワイヤレスイヤホン');
+loadProducts('Sony Anker Garmin イヤホン 人気');
 loadRanking();
 loadSideProducts();
 </script>
