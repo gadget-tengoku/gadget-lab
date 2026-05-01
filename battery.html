@@ -341,7 +341,7 @@
       <span class="product-tag">編集部イチオシ</span>
     </div>
     <div class="product-body">
-      <div class="product-img-col"><span style="opacity:.4">🔋</span></div>
+      <div class="product-img-col"><div data-product-kw="Anker PowerCore 10000 PD Redux" style="width:100%;min-height:160px;display:flex;align-items:center;justify-content:center;background:#fafafa;border-radius:6px;font-size:48px;opacity:.3">🔋</div></div>
       <div class="product-info">
         <div class="product-name">Anker PowerCore 10000 PD Redux</div>
         <div class="product-subtitle">「180gなのに急速充電対応。3,990円という価格が信じられなかった」</div>
@@ -371,7 +371,7 @@
       <span class="product-tag" style="background:#333">最薄・最軽量</span>
     </div>
     <div class="product-body">
-      <div class="product-img-col"><span style="opacity:.4">⚡</span></div>
+      <div class="product-img-col"><div data-product-kw="CIO SMARTCOBY PRO SLIM" style="width:100%;min-height:160px;display:flex;align-items:center;justify-content:center;background:#fafafa;border-radius:6px;font-size:48px;opacity:.3">⚡</div></div>
       <div class="product-info">
         <div class="product-name">CIO SMARTCOBY PRO SLIM 10000mAh</div>
         <div class="product-subtitle">「薄さがポケットに入るレベル。30W急速充電がAnkerを超えた」</div>
@@ -401,7 +401,7 @@
       <span class="product-tag" style="background:#777">200W出力</span>
     </div>
     <div class="product-body">
-      <div class="product-img-col"><span style="opacity:.4">💻</span></div>
+      <div class="product-img-col"><div data-product-kw="Anker Prime 20000" style="width:100%;min-height:160px;display:flex;align-items:center;justify-content:center;background:#fafafa;border-radius:6px;font-size:48px;opacity:.3">💻</div></div>
       <div class="product-info">
         <div class="product-name">Anker Prime 20000mAh Power Bank</div>
         <div class="product-subtitle">「MacBook ProとiPhoneを同時急速充電できる唯一の選択肢」</div>
@@ -430,7 +430,7 @@
       <span style="font-size:12px;font-weight:700;color:#555">旅行・大容量 特化</span>
     </div>
     <div class="product-body">
-      <div class="product-img-col"><span style="opacity:.4">✈️</span></div>
+      <div class="product-img-col"><div data-product-kw="Anker PowerCore 25600 PD" style="width:100%;min-height:160px;display:flex;align-items:center;justify-content:center;background:#fafafa;border-radius:6px;font-size:48px;opacity:.3">✈️</div></div>
       <div class="product-info">
         <div class="product-name">Anker PowerCore III Elite 25600 PD</div>
         <div class="product-subtitle">「3泊4日の旅行でコンセントを一度も使わなかった」</div>
@@ -459,7 +459,7 @@
       <span style="font-size:12px;font-weight:700;color:#555">コスパ・アウトドア向け大容量</span>
     </div>
     <div class="product-body">
-      <div class="product-img-col"><span style="opacity:.4">🏕️</span></div>
+      <div class="product-img-col"><div data-product-kw="Anker PowerCore 20000" style="width:100%;min-height:160px;display:flex;align-items:center;justify-content:center;background:#fafafa;border-radius:6px;font-size:48px;opacity:.3">🏕️</div></div>
       <div class="product-info">
         <div class="product-name">Anker PowerCore 20000</div>
         <div class="product-subtitle">「5,990円で20,000mAh。コスパ計算すると断トツ」</div>
@@ -561,5 +561,51 @@
     <p style="text-align:center;margin-top:12px;font-size:11px;color:#444">© 2026 ガジェット天国</p>
   </div>
 </footer>
+
+<script>
+/* ===== 商品画像を楽天APIから動的取得 ===== */
+(function(){
+  const WORKER = 'https://rakuten-proxy.sobamoripaya.workers.dev';
+  const TRUSTED = ['anker','sony','apple','samsung','garmin','bose','jbl','panasonic','logicool','logitech','shokz','jabra','steelseries','hyperx','corsair','razer','soundcore','belkin','cio','amazfit','blue','roborock','irobot','ecovacs','switchbot','gopro','dji','philips'];
+
+  function isTrusted(name){
+    return TRUSTED.some(b=>name.toLowerCase().includes(b));
+  }
+
+  async function fetchImg(keyword){
+    try{
+      const r = await fetch(WORKER+'?keyword='+encodeURIComponent(keyword)+'&hits=10');
+      if(!r.ok) return null;
+      const data = await r.json();
+      const items = (data.Items||[]).filter(i=>{
+        const name = i.Item?.itemName||'';
+        return isTrusted(name);
+      });
+      if(!items.length) return null;
+      const imgs = items[0].Item?.mediumImageUrls||[];
+      const raw = imgs[0]?.imageUrl||'';
+      return raw.replace(/\?_ex=\d+x\d+/,'?_ex=400x400');
+    }catch(e){return null;}
+  }
+
+  async function loadImages(){
+    const thumbs = document.querySelectorAll('[data-product-kw]');
+    for(const el of thumbs){
+      const kw = el.getAttribute('data-product-kw');
+      const imgUrl = await fetchImg(kw);
+      if(imgUrl){
+        el.innerHTML = '<img src="'+imgUrl+'" alt="'+kw+'" loading="lazy" style="width:100%;max-height:180px;object-fit:contain;border-radius:4px">';
+      }
+    }
+  }
+
+  // ページ読み込み後に実行
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', loadImages);
+  } else {
+    loadImages();
+  }
+})();
+</script>
 </body>
 </html>
