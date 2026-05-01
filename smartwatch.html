@@ -339,9 +339,7 @@
       <span class="product-tag">編集部イチオシ</span>
     </div>
     <div class="product-body">
-      <div class="product-img-col">
-        <div style="font-size:80px;text-align:center;opacity:.5">⌚</div>
-      </div>
+      <div class="product-img-col"><div data-product-kw="Apple Watch SE 第2世代 本体" style="width:100%;min-height:160px;display:flex;align-items:center;justify-content:center;background:#fafafa;border-radius:6px;font-size:56px;opacity:.3">⌚</div></div>
       <div class="product-info">
         <div>
           <div class="product-name">Apple Watch SE（第2世代）</div>
@@ -376,9 +374,7 @@
       <span class="product-tag" style="background:#333">バッテリー最強</span>
     </div>
     <div class="product-body">
-      <div class="product-img-col">
-        <div style="font-size:80px;text-align:center;opacity:.5">🏃</div>
-      </div>
+      <div class="product-img-col"><div data-product-kw="Garmin Venu 3 本体" style="width:100%;min-height:160px;display:flex;align-items:center;justify-content:center;background:#fafafa;border-radius:6px;font-size:56px;opacity:.3">🏃</div></div>
       <div class="product-info">
         <div>
           <div class="product-name">Garmin Venu 3</div>
@@ -413,9 +409,7 @@
       <span class="product-tag" style="background:#777">GPS最強</span>
     </div>
     <div class="product-body">
-      <div class="product-img-col">
-        <div style="font-size:80px;text-align:center;opacity:.5">🏅</div>
-      </div>
+      <div class="product-img-col"><div data-product-kw="Garmin Forerunner 265 本体" style="width:100%;min-height:160px;display:flex;align-items:center;justify-content:center;background:#fafafa;border-radius:6px;font-size:56px;opacity:.3">🏅</div></div>
       <div class="product-info">
         <div>
           <div class="product-name">Garmin Forerunner 265</div>
@@ -449,9 +443,7 @@
       <span style="font-size:12px;font-weight:700;color:#555">Androidユーザー・ビジネス向け</span>
     </div>
     <div class="product-body">
-      <div class="product-img-col">
-        <div style="font-size:80px;text-align:center;opacity:.5">💼</div>
-      </div>
+      <div class="product-img-col"><div data-product-kw="Samsung Galaxy Watch 6 本体" style="width:100%;min-height:160px;display:flex;align-items:center;justify-content:center;background:#fafafa;border-radius:6px;font-size:56px;opacity:.3">💼</div></div>
       <div class="product-info">
         <div>
           <div class="product-name">Samsung Galaxy Watch 6</div>
@@ -485,9 +477,7 @@
       <span style="font-size:12px;font-weight:700;color:#555">コスパ最強・2万円以下</span>
     </div>
     <div class="product-body">
-      <div class="product-img-col">
-        <div style="font-size:80px;text-align:center;opacity:.5">💰</div>
-      </div>
+      <div class="product-img-col"><div data-product-kw="Amazfit GTR 4 本体" style="width:100%;min-height:160px;display:flex;align-items:center;justify-content:center;background:#fafafa;border-radius:6px;font-size:56px;opacity:.3">💰</div></div>
       <div class="product-info">
         <div>
           <div class="product-name">Amazfit GTR 4</div>
@@ -604,5 +594,33 @@
   </div>
 </footer>
 
+
+<script>
+(function(){
+  const WORKER = 'https://rakuten-proxy.sobamoripaya.workers.dev';
+  const TRUSTED = ['anker','sony','apple','samsung','garmin','bose','jabra','shokz','steelseries','hyperx','corsair','razer','soundcore','belkin','cio','amazfit','blue','logicool','logitech','irobot','ecovacs','switchbot','gopro','dji','philips'];
+  function isTrusted(n){ return TRUSTED.some(b=>n.toLowerCase().includes(b)); }
+  async function fetchImg(kw){
+    try{
+      const r=await fetch(WORKER+'?keyword='+encodeURIComponent(kw)+'&hits=10');
+      if(!r.ok) return null;
+      const d=await r.json();
+      const items=(d.Items||[]).filter(i=>isTrusted(i.Item?.itemName||''));
+      if(!items.length) return null;
+      const raw=items[0].Item?.mediumImageUrls?.[0]?.imageUrl||'';
+      return raw.replace(/\?_ex=\d+x\d+/,'?_ex=400x400');
+    }catch(e){return null;}
+  }
+  async function loadImages(){
+    const els=document.querySelectorAll('[data-product-kw]');
+    for(const el of els){
+      const url=await fetchImg(el.getAttribute('data-product-kw'));
+      if(url) el.innerHTML='<img src="'+url+'" alt="'+el.getAttribute('data-product-kw')+'" loading="lazy" style="width:100%;max-height:180px;object-fit:contain">';
+    }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',loadImages);
+  else loadImages();
+})();
+</script>
 </body>
 </html>
