@@ -673,6 +673,24 @@ def build_html(title, theme_obj, products):
         exp       = comments[i % len(comments)]
         img_html  = f'<img src="{img}" alt="{name}" loading="lazy" style="width:100%;max-height:180px;object-fit:contain">' if img else f'<div style="font-size:48px;text-align:center;opacity:.3">{["🎧","⌚","🔋","💻","🎮","📷"][i%6]}</div>'
 
+        # おすすめな人/おすすめしない人（順位に応じたペルソナを割当）
+        persona_for_list = [
+            '✓ 用途に最適化された性能を求める方<br>✓ 信頼ブランドで失敗したくない方<br>✓ 長く使える定番モデルを選びたい方',
+            '✓ コスパを重視して選びたい方<br>✓ 初めてこのカテゴリを買う方<br>✓ 1〜2万円台で実用品が欲しい方',
+            '✓ 特定用途に特化した機能が欲しい方<br>✓ 競合と差別化された機能を試したい方<br>✓ サブとして使い分けたい方',
+            '✓ 機能と価格のバランスを取りたい方<br>✓ 中堅ブランドの実力を試したい方',
+            '✓ 大容量・高出力が必要な方<br>✓ 上位モデルを試してみたい方',
+        ]
+        persona_not_list = [
+            '✗ 予算を最優先に決めている方<br>✗ 用途が「なんとなく」の方<br>✗ 機能を使いこなさない方',
+            '✗ 最高スペックを求める方<br>✗ プロ用途で使う方',
+            '✗ 万能モデルが欲しい方<br>✗ 初めての方',
+            '✗ 最安値だけで決める方<br>✗ シンプルさを最優先する方',
+            '✗ 軽量・コンパクト最優先の方<br>✗ 予算1万円以下の方',
+        ]
+        persona_for = persona_for_list[i] if i < len(persona_for_list) else persona_for_list[0]
+        persona_not = persona_not_list[i] if i < len(persona_not_list) else persona_not_list[0]
+
         cards_html += f'''
 <div class="rank-card">
   <div class="rank-header">
@@ -701,16 +719,27 @@ def build_html(title, theme_obj, products):
         </div>
       </div>
       <div style="margin-top:auto;padding-top:10px;border-top:1px solid #f0f0f0">
+        <!-- おすすめな人/おすすめしない人 -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+          <div style="background:#f0fff4;border:1px solid #b2dfcc;border-radius:6px;padding:10px 12px;font-size:11px;line-height:1.7">
+            <div style="font-weight:700;color:#1a5c2e;margin-bottom:4px;font-size:11px">🙆 こんな人におすすめ</div>
+            <div style="color:#555">{persona_for}</div>
+          </div>
+          <div style="background:#fff5f5;border:1px solid #ffcccc;border-radius:6px;padding:10px 12px;font-size:11px;line-height:1.7">
+            <div style="font-weight:700;color:#8b0000;margin-bottom:4px;font-size:11px">🙅 おすすめしない人</div>
+            <div style="color:#555">{persona_not}</div>
+          </div>
+        </div>
         <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:10px;flex-wrap:wrap">
           <div style="font-size:26px;font-weight:900;color:#e63900">¥{price:,}</div>
-          <small style="font-size:11px;color:#aaa">税込（楽天市場参照）※変動あり</small>
+          <small style="font-size:11px;color:#aaa">楽天参照価格（{today}時点・変動あり）</small>
         </div>
-        <a href="{url}" target="_blank" rel="noopener sponsored" class="btn-buy">🛍️ 楽天で今すぐ確認する →</a>
+        <a href="{url}" target="_blank" rel="noopener sponsored" class="btn-buy">🛍️ 楽天で最新価格・在庫を確認する →</a>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px">
-          <a href="{amz_url}" target="_blank" rel="noopener" style="display:block;background:#FF9900;color:#fff;text-align:center;font-size:11px;font-weight:700;padding:7px;border-radius:4px">🛒 Amazonで見る</a>
-          <a href="{yah_url}" target="_blank" rel="noopener" style="display:block;background:#FF0033;color:#fff;text-align:center;font-size:11px;font-weight:700;padding:7px;border-radius:4px">🟡 Yahoo!で見る</a>
+          <a href="{amz_url}" target="_blank" rel="noopener" style="display:block;background:#FF9900;color:#fff;text-align:center;font-size:11px;font-weight:700;padding:7px;border-radius:4px">🛒 Amazonで価格を比較</a>
+          <a href="{yah_url}" target="_blank" rel="noopener" style="display:block;background:#FF0033;color:#fff;text-align:center;font-size:11px;font-weight:700;padding:7px;border-radius:4px">🟡 Yahoo!でPayPay還元</a>
         </div>
-        <a href="{rev_url}" target="_blank" rel="noopener" class="btn-review" style="margin-top:6px">口コミ（{rc:,}件）を読んでから決める →</a>
+        <a href="{rev_url}" target="_blank" rel="noopener" class="btn-review" style="margin-top:6px">📝 楽天レビュー（{rc:,}件）を見てから選ぶ →</a>
       </div>
     </div>
   </div>
@@ -908,6 +937,13 @@ def build_html(title, theme_obj, products):
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:20px">
       {summary_top3}
+    </div>
+    <!-- 大きな楽天検索ボタン -->
+    <div style="background:linear-gradient(135deg,#e63900,#c42f00);color:#fff;border-radius:8px;padding:24px 20px;text-align:center;margin-top:20px;box-shadow:0 4px 16px rgba(230,57,0,.3)">
+      <div style="font-size:15px;font-weight:900;margin-bottom:6px">まだ迷っていますか？</div>
+      <div style="font-size:13px;opacity:.9;margin-bottom:14px;line-height:1.7">楽天で「{kw_short}」を検索して<br>今売れているモデルをチェック</div>
+      <a href="https://search.rakuten.co.jp/search/mall/{requests.utils.quote(kw_short)}/" target="_blank" rel="noopener sponsored" style="display:inline-block;background:#fff;color:#e63900;font-size:14px;font-weight:900;padding:12px 28px;border-radius:6px;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.1)">🛍️ 楽天で「{kw_short}」を今すぐ検索する →</a>
+      <div style="font-size:11px;opacity:.8;margin-top:10px">ポイント還元込みの価格・在庫もチェックできます</div>
     </div>
   </section>
 
