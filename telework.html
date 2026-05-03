@@ -464,48 +464,56 @@
   </div>
 </footer>
 
+
+
+
+
+
 <script>
-/* ===== 商品画像を楽天APIから動的取得 ===== */
 (function(){
   const WORKER = 'https://rakuten-proxy.sobamoripaya.workers.dev';
-  const TRUSTED = ['anker','sony','apple','samsung','garmin','bose','jbl','panasonic','logicool','logitech','shokz','jabra','steelseries','hyperx','corsair','razer','soundcore','belkin','cio','amazfit','blue','roborock','irobot','ecovacs','switchbot','gopro','dji','philips'];
-
+  const TRUSTED = ['anker','sony','apple','samsung','garmin','bose','jbl','panasonic','sharp','dyson','logicool','logitech','shokz','jabra','asus','gopro','dji','canon','nikon','irobot','ecovacs','switchbot','elecom','belkin','cio','razer','steelseries','hyperx','corsair','beats','soundcore','ugreen','blue','amazfit','fitbit','rode','msi','dell','lg','philips','bauhutte','moft','boyata','jackery','ecoflow','bluetti','aftershokz'];
+  
   function isTrusted(name){
-    return TRUSTED.some(b=>name.toLowerCase().includes(b));
+    const n = (name||'').toLowerCase();
+    return TRUSTED.some(b => n.includes(b));
   }
-
+  
   async function fetchImg(keyword){
     try{
-      const r = await fetch(WORKER+'?keyword='+encodeURIComponent(keyword)+'&hits=10');
+      const url = WORKER + '?keyword=' + encodeURIComponent(keyword) + '&hits=15';
+      const r = await fetch(url);
       if(!r.ok) return null;
       const data = await r.json();
-      const items = (data.Items||[]).filter(i=>{
-        const name = i.Item?.itemName||'';
-        return isTrusted(name);
-      });
+      const items = (data.Items||[]).filter(i => isTrusted(i.Item?.itemName||''));
       if(!items.length) return null;
       const imgs = items[0].Item?.mediumImageUrls||[];
       const raw = imgs[0]?.imageUrl||'';
-      return raw.replace(/\?_ex=\d+x\d+/,'?_ex=400x400');
-    }catch(e){return null;}
-  }
-
-  async function loadImages(){
-    const thumbs = document.querySelectorAll('[data-product-kw]');
-    for(const el of thumbs){
-      const kw = el.getAttribute('data-product-kw');
-      const imgUrl = await fetchImg(kw);
-      if(imgUrl){
-        el.innerHTML = '<img src="'+imgUrl+'" alt="'+kw+'" loading="lazy" style="width:100%;max-height:180px;object-fit:contain;border-radius:4px">';
-      }
+      return raw.replace(/\?_ex=\d+x\d+/, '?_ex=400x400');
+    }catch(e){
+      return null;
     }
   }
-
-  // ページ読み込み後に実行
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded', loadImages);
+  
+  async function loadAllImages(){
+    const els = document.querySelectorAll('[data-product-kw]');
+    const promises = Array.from(els).map(async (el) => {
+      const kw = el.getAttribute('data-product-kw');
+      try{
+        const url = await fetchImg(kw);
+        if(url){
+          el.innerHTML = '<img src="' + url + '" alt="' + kw + '" loading="lazy" style="width:100%;max-height:180px;object-fit:contain;border-radius:4px">';
+          el.style.background = '#fff';
+        }
+      }catch(e){}
+    });
+    await Promise.all(promises);
+  }
+  
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', loadAllImages);
   } else {
-    loadImages();
+    loadAllImages();
   }
 })();
 </script>
