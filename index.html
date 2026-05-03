@@ -233,8 +233,8 @@ footer{background:#111;color:#666;padding:28px 16px;margin-top:30px}
 
 <!-- HERO -->
 <div class="hero">
-  <h1>失敗しないガジェット選び。<br>用途別に<strong>「本当に使えるモデル」</strong>だけ厳選</h1>
-  <p>楽天市場の実売データ・レビュー数をもとに、編集部が用途別に比較。<br>「買って後悔した」をゼロにするための専門メディアです。</p>
+  <h1>買って後悔しないガジェット選び。<br><strong>「どれを買えばいいか」を3分で解決</strong></h1>
+  <p>イヤホン・スマートウォッチ・モバイルバッテリーを用途別に比較。<br>楽天・Amazon・Yahoo!の実売データから「本当に使えるモデル」だけを厳選します。</p>
   <div class="hero-cta">
     <a href="/earphone.html" class="hc-1">🎧 ノイキャンイヤホン比較</a>
     <a href="/smartwatch.html" class="hc-1">⌚ スマートウォッチ比較</a>
@@ -447,7 +447,7 @@ footer{background:#111;color:#666;padding:28px 16px;margin-top:30px}
         <div>
           <div class="ei-name">編集長</div>
           <div class="ei-role">イヤホン・オーディオ担当</div>
-          <div class="ei-bio">家電・ガジェット歴10年。年間30本以上を実機検証。</div>
+          <div class="ei-bio">家電・ガジェット歴10年。Sony・Anker・Jabraなど主要ブランドを愛用中。</div>
         </div>
       </div>
       <div class="editor-row">
@@ -593,13 +593,17 @@ async function loadArticles(){
     if(!r.ok) return;
     const all = await r.json();
     allArticles = all.filter(a=>a.img_url && a.img_url.trim());
-    if(allArticles.length>=4) renderArticles();
+    if(allArticles.length>=1) renderArticles();
   }catch(e){}
 }
 
 function renderArticles(){
   const grid = document.getElementById('articleGrid');
   const list = currentCat==='all' ? allArticles : allArticles.filter(a=>a.category===currentCat);
+  if(!list.length && currentCat!=='all'){
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#aaa;padding:30px">このカテゴリの記事は順次追加中です</div>';
+    return;
+  }
   if(!list.length) return;
   grid.innerHTML = list.slice(0,8).map(a=>`
     <a href="${a.filename}" class="article-card">
@@ -619,7 +623,7 @@ function switchCat(cat,btn){
   currentCat=cat;
   document.querySelectorAll('.cat-pill').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  if(allArticles.length>=4) renderArticles();
+  if(allArticles.length>=1) renderArticles();
 }
 
 /* 検索 */
