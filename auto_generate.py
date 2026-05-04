@@ -544,11 +544,18 @@ def is_trusted(item):
     return any(b.lower() in text for b in TRUSTED_BRANDS)
 
 def is_clean(item, theme):
-    name = item.get('Item',{}).get('itemName','')
-    excl = theme.get('exclude',[])
-    must = theme.get('must',[])
-    if any(ex in name for ex in excl): return False
-    if must and not any(m in name for m in must): return False
+    name       = item.get('Item',{}).get('itemName','')
+    name_lower = name.lower()
+    excl       = theme.get('exclude',[])
+    must       = theme.get('must',[])
+    # 除外ワードチェック（先頭20文字での判定で「ケース」が末尾にある正規品も通す）
+    name_head  = name[:30]
+    if any(ex in name_head for ex in excl): return False
+    # mustチェックは大文字小文字無視
+    if must:
+        must_lower = [m.lower() for m in must]
+        if not any(m in name_lower for m in must_lower):
+            return False
     return True
 
 def deduplicate(items, max_same=1):
@@ -602,13 +609,13 @@ def fetch_diverse_products(theme, need=5):
     """
     keywords = theme.get('keywords', [theme.get('kw', theme['title'])])
     all_items   = []
-    seen_models = set()  # モデルキーで重複チェック
-    MIN_REVIEWS = 3      # 最低レビュー件数
+    seen_models = set()
+    MIN_REVIEWS = 3
 
     for kw in keywords:
         if len(all_items) >= need:
             break
-        items = fetch_products(kw, hits=10)
+        items = fetch_products(kw, hits=30)  # 10→30に増やして取得母数を確保
         picked = False
         for item in items:
             p     = item.get('Item', {})
@@ -616,24 +623,21 @@ def fetch_diverse_products(theme, need=5):
             rc    = int(p.get('reviewCount', 0))
             model = extract_model_key(name)
 
-            # 既に同じモデルがある → スキップ
             if model in seen_models:
                 continue
-            # 信頼ブランド・除外ワードチェック
             if not is_trusted(item):
                 continue
             if not is_clean(item, theme):
                 continue
-            # レビュー件数が最低基準を満たさない → スキップ（ただし後続がなければ緩める）
             if rc < MIN_REVIEWS:
                 continue
 
             seen_models.add(model)
             all_items.append(item)
             picked = True
-            break  # このキーワードから1商品だけ取る
+            break
 
-        # レビュー条件で1つも取れなかった場合は条件を緩めて再試行
+        # レビュー条件を緩めて再試行
         if not picked and items:
             for item in items:
                 p     = item.get('Item', {})
@@ -653,10 +657,10 @@ def fetch_diverse_products(theme, need=5):
 
     print(f"  取得結果: {len(all_items)}件（{len(keywords)}キーワード使用）")
 
-    # 5件に足りない場合はフォールバック（テーマタイトルで広く検索）
+    # フォールバック1: テーマタイトルで広く検索
     if len(all_items) < need:
-        print(f"  不足分をフォールバック取得中...")
-        fallback = fetch_products(theme['title'], hits=20)
+        print(f"  不足分をフォールバック取得中（タイトル検索）...")
+        fallback = fetch_products(theme['title'], hits=30)
         for item in fallback:
             if len(all_items) >= need:
                 break
@@ -672,6 +676,52 @@ def fetch_diverse_products(theme, need=5):
             seen_models.add(model)
             all_items.append(item)
 
+    # フォールバック2: kw_shortで検索（さらに広く）
+    if len(all_items) < need and theme.get('kw_short'):
+        print(f"  まだ不足。kw_shortでフォールバック...")
+        fallback2 = fetch_products(theme['kw_short'], hits=30)
+        for item in fallback2:
+            if len(all_items) >= need:
+                break
+            p     = item.get('Item', {})
+            name  = p.get('itemName', '')
+            model = extract_model_key(name)
+            if model in seen_models:
+                continue
+            if not is_trusted(item):
+                continue
+            # 最終フォールバックではmustチェックをスキップして取得確保
+            seen_models.add(model)
+            all_items.append(item)
+
+    # フォールバック3: ブランド名のみで検索（最終手段）
+    if len(all_items) < need:
+        print(f"  最終フォールバック：信頼ブランド検索")
+        # 各キーワードからブランド名だけを抽出
+        brand_keywords = []
+        for kw in keywords[:3]:
+            first_word = kw.split()[0] if kw else ''
+            if first_word and first_word not in brand_keywords:
+                brand_keywords.append(first_word)
+        for bkw in brand_keywords:
+            if len(all_items) >= need:
+                break
+            items3 = fetch_products(bkw, hits=20)
+            for item in items3:
+                if len(all_items) >= need:
+                    break
+                p     = item.get('Item', {})
+                name  = p.get('itemName', '')
+                model = extract_model_key(name)
+                if model in seen_models:
+                    continue
+                if not is_trusted(item):
+                    continue
+                seen_models.add(model)
+                all_items.append(item)
+            time.sleep(0.5)
+
+    print(f"  最終取得結果: {len(all_items)}件")
     return all_items[:need]
 
 # ===== 体験型コメント生成 =====
@@ -1466,8 +1516,20 @@ def main():
     print(f"テーマ: {theme['title']}")
     products = fetch_diverse_products(theme, need=5)
 
+    # 取得失敗時は別テーマで最大5回まで再試行
+    retry_count = 0
+    while not products and retry_count < 5:
+        retry_count += 1
+        print(f'\n⚠️ 商品取得失敗 → 別テーマで再試行 ({retry_count}/5)')
+        # 異なるカテゴリのテーマを選ぶ
+        fallback_themes = [t for t in ALL_THEMES if t['title'] != theme['title']]
+        if not fallback_themes: break
+        theme = random.choice(fallback_themes)
+        print(f'再試行テーマ: {theme["title"]}')
+        products = fetch_diverse_products(theme, need=5)
+
     if not products:
-        print('❌ 商品取得失敗'); return
+        print('❌ 商品取得失敗（5回試行すべて失敗）'); return
 
     title    = f"【{today.year}年】{theme['title']}おすすめ5選｜用途別徹底比較"
     html     = build_html(title, theme, products)
