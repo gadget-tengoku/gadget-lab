@@ -812,14 +812,23 @@ def build_html(title, theme_obj, products):
     # ===== ② 悩みリスト =====
     problem_li = ''.join(f'<li>{p}</li>' for p in problems)
 
-    # ===== ③ 用途別ペルソナ =====
+    # ===== ③ 用途別ペルソナ（3要素・4要素両対応） =====
     persona_html = ''
-    for emoji, label, desc, rec in personas:
+    for p in personas:
+        if len(p) == 4:
+            emoji, label, desc, rec = p
+        elif len(p) == 3:
+            emoji, label, desc = p
+            rec = desc  # 3要素の場合はdescをrecとしても表示
+            desc = ''   # descは空にしてrecだけ表示
+        else:
+            continue  # 不正な要素数はスキップ
+        desc_html = f'<div style="font-size:11px;color:#666;margin-bottom:6px;line-height:1.45">{desc}</div>' if desc else ''
         persona_html += f'''
 <div style="border:1px solid #e8e8e8;border-radius:8px;padding:12px;text-align:center">
   <div style="font-size:22px;margin-bottom:5px">{emoji}</div>
   <div style="font-weight:700;font-size:12px;margin-bottom:3px">{label}</div>
-  <div style="font-size:11px;color:#666;margin-bottom:6px;line-height:1.45">{desc}</div>
+  {desc_html}
   <div style="font-size:11px;font-weight:700;color:#e63900">→ {rec}</div>
 </div>'''
 
