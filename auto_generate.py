@@ -1268,12 +1268,16 @@ def update_articles_json(theme_obj, filename, img_url, today):
         if a['filename']==filename:
             articles[i]=new; updated=True; break
     if not updated: articles.insert(0,new)
-    articles = articles[:50]
+    articles = articles[:100]
     gh_put('articles.json', json.dumps(articles,ensure_ascii=False,indent=2), 'Auto: 記事一覧更新', sha)
     return articles
 
 # ===== 既存記事再生成・クリーンアップ =====
 def regenerate_and_cleanup():
+    """既存記事の価格情報・テンプレートを最新化する。
+    - 楽天API失敗時は既存記事を削除せずに保持（記事数を維持）
+    - テーマ不明な古い記事も削除しない（手動アップ記事を保護）
+    """
     print('\n既存記事を再生成中...')
     content,_ = gh_get('articles.json')
     if not content: return
@@ -1287,19 +1291,19 @@ def regenerate_and_cleanup():
         title     = a.get('title','')
         theme_obj = theme_map.get(theme_key)
 
+        # テーマ不明 → 削除せず保持（記事数維持優先）
         if not theme_obj:
-            print(f'  テーマ不明→削除: {theme_key}')
-            _,sha = gh_get(filename)
-            if sha: gh_delete(filename,sha,f'Cleanup: {filename}')
+            print(f'  テーマ不明→保持: {theme_key}')
+            keep.append(a)
             continue
 
         print(f'  再生成: {theme_key}')
         products = fetch_diverse_products(theme_obj, need=5)
 
+        # 商品取得失敗 → 削除せず保持（記事数維持優先）
         if not products:
-            print(f'  商品0件→削除: {filename}')
-            _,sha = gh_get(filename)
-            if sha: gh_delete(filename,sha,f'Cleanup: 商品なし {filename}')
+            print(f'  商品取得失敗→保持: {filename}')
+            keep.append(a)
             continue
 
         html   = build_html(title, theme_obj, products)
@@ -1442,7 +1446,7 @@ def select_theme():
     content,_ = gh_get('articles.json')
     used = set()
     if content:
-        try: used = {a.get('theme_key','') for a in json.loads(content)[:60]}
+        try: used = {a.get('theme_key','') for a in json.loads(content)[:100]}
         except: pass
     available = [t for t in ALL_THEMES if t['title'] not in used] or ALL_THEMES
     # AM枠：イヤホン・スマートウォッチ（検索ボリューム高）
