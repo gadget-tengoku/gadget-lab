@@ -23,10 +23,8 @@ jobs:
 
       - name: Run regeneration
         env:
-          API_KEY: ${{ secrets.API_KEY }}
-          AFFILIATE_ID: ${{ secrets.AFFILIATE_ID }}
-          RAKUTEN_APP_ID: ${{ secrets.API_KEY }}
-          RAKUTEN_AFFILIATE_ID: ${{ secrets.AFFILIATE_ID }}
+          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+          RAKUTEN_AFFILIATE_ID: ${{ secrets.RAKUTEN_AFFILIATE_ID }}
         run: python regenerate_all.py
 
       - name: Commit changes
