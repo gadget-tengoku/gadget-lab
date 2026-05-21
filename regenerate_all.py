@@ -165,6 +165,19 @@ ARTICLES = [
 # ===================================================
 # カテゴリ別フィルタ設定
 # ===================================================
+# 全カテゴリ共通のアクセサリ・消耗品除外ワード（本体誤爆しないことを検証済み）
+COMMON_EXCLUDE = [
+    "保護フィルム", "保護シート", "保護ケース",
+    "バンド", "ベルト", "ストラップ",
+    "交換用", "互換品", "互換バッテリー",
+    "ホルダー", "ポーチ", "収納ケース",
+    "シール", "ステッカー", "スキンシール",
+    "イヤーピース", "イヤーチップ", "イヤーパッド",
+    "紙パック", "ダストパック", "メンテナンス",
+    "替え", "スペア", "予備パーツ", "クリーナー",
+]
+
+
 CATEGORY_CONFIG = {
     "earphone_wireless": {
         "label": "ワイヤレスイヤホン",
@@ -321,6 +334,10 @@ def fetch_rakuten(keyword, config):
         for item in items:
             name = item.get("itemName", "")
             if len(name) < config["min_title_length"]:
+                continue
+            if any(ng in name for ng in COMMON_EXCLUDE):
+                continue
+            if config.get("label") != "ワイヤレスイヤホン" and ("ケース" in name or "カバー" in name):
                 continue
             if any(ng in name for ng in config["exclude"]):
                 continue
