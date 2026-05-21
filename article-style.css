@@ -207,6 +207,7 @@ ul li::marker { color: var(--accent); }
 }
 
 /* Rank badges */
+.rank::before, .rank::after { content: none !important; }
 .rank, .rank-no, .ranking-num, .badge-rank {
   display: inline-block;
   font-family: var(--mono);
