@@ -1,0 +1,112 @@
+name: 軸外・重複記事を一括削除
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Delete off-axis and duplicate articles
+        run: |
+          # 軸外記事（在宅ワーカーと無関係）
+          rm -f "article-4Kアクションカメラ完全比較-am-20260516.html"
+          rm -f "article-FPS向け軽量ゲーミングマウス選び方-pm-20260504.html"
+          rm -f "article-スポーツ-ランニング向けワイヤレスイヤホン-am-20260430.html"
+          rm -f "article-スマートロックおすすめ-賃貸対応-pm-20260515.html"
+          rm -f "article-スマート電球Wi-Fi対応おすすめ-pm-20260514.html"
+          rm -f "article-ポータブル電源-アウトドア向け-pm-20260511.html"
+          rm -f "article-ポータブル電源-アウトドア向け-pm-20260518.html"
+          rm -f "article-マッピングロボット掃除機比較-pm-20260430.html"
+          rm -f "article-ランニング-マラソン向けGPSスマートウォッチ-am-20260507.html"
+          rm -f "article-寝るときに使える睡眠用ワイヤレスイヤホン-am-20260505.html"
+          rm -f "article-賃貸でもできるスマートホーム入門-am-20260514.html"
+          rm -f "article-賃貸でもできるスマートホーム入門-pm-20260516.html"
+          rm -f "article-骨伝導イヤホン完全ガイド-am-20260504.html"
+          # 重複記事（同テーマの新しい方を削除、古い方を残す）
+          rm -f "article-iPhone-15用-MagSafe充電器-pm-20260518.html"
+          rm -f "article-ウェブカメラおすすめ比較-pm-20260517.html"
+          rm -f "article-ゲーミングメカニカルキーボード比較-pm-20260519.html"
+          rm -f "article-テレワーク-在宅ワーク向けガジェット-pm-20260519.html"
+          rm -f "article-毎日持ち歩けるコスパ最強モバイルバッテリー-am-20260515.html"
+          rm -f "article-通勤-在宅ワーク向けノイキャンイヤホン-am-20260517.html"
+          echo "削除完了"
+          ls article-*.html | wc -l | xargs echo "残り記事数:"
+
+      - name: Rebuild articles.json from existing files
+        run: |
+          python3 << 'PYEOF'
+          import os, json, glob, re
+          from datetime import datetime, timezone, timedelta
+          JST = timezone(timedelta(hours=9))
+
+          # 残っている記事ファイルを走査
+          files = sorted(glob.glob("article-*.html"))
+          # カテゴリ推定マップ
+          def guess_category(fn):
+              if "イヤホン" in fn or "ノイキャン" in fn or "USB-Cイヤホン" in fn: return "earphone_wireless"
+              if "スマートウォッチ" in fn or "Apple-Watch" in fn: return "smartwatch"
+              if "モバイルバッテリー" in fn or "MagSafe充電器" in fn or "GaN充電器" in fn: return "mobile_battery"
+              if "マウス" in fn: return "wireless_mouse"
+              if "ウェブカメラ" in fn: return "webcam"
+              if "ヘッドセット" in fn: return "headset"
+              if "マイク" in fn: return "usb_microphone"
+              if "モニター" in fn: return "monitor_4k"
+              if "スタンド" in fn: return "laptop_stand"
+              if "キーボード" in fn: return "wireless_mouse"
+              if "ガジェット" in fn: return "wireless_mouse"
+              return "wireless_mouse"
+
+          articles = []
+          for fn in files:
+              # ファイルからタイトルを抽出
+              try:
+                  with open(fn, encoding="utf-8") as f:
+                      content = f.read()
+                  m = re.search(r'<title>(.*?)(?:\s*-\s*ガジェット天国)?</title>', content)
+                  title = m.group(1).strip() if m else fn
+                  dm = re.search(r'-(\d{8})\.html$', fn)
+                  date = datetime.strptime(dm.group(1), "%Y%m%d").strftime("%Y-%m-%d") if dm else "2026-05-01"
+              except Exception:
+                  title, date = fn, "2026-05-01"
+              articles.append({"filename": fn, "title": title, "category": guess_category(fn), "lead": "", "date": date})
+
+          articles.sort(key=lambda x: x["date"], reverse=True)
+          with open("articles.json", "w", encoding="utf-8") as f:
+              json.dump(articles, f, ensure_ascii=False, indent=2)
+          print(f"articles.json 再構築: {len(articles)}件")
+
+          # sitemap.xml 再生成
+          today = datetime.now(JST).strftime("%Y-%m-%d")
+          SITE = "https://gadget-tengoku.com"
+          static = ["", "earphone.html", "smartwatch.html", "battery.html", "telework.html", "gaming.html", "archive.html", "about.html", "review-policy.html", "ad-policy.html", "privacy.html"]
+          xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+          for p in static:
+              pr = "1.0" if p=="" else "0.6" if p in ("about.html","review-policy.html","ad-policy.html","privacy.html") else "0.9"
+              xml += f'  <url><loc>{SITE}/{p}</loc><lastmod>{today}</lastmod><priority>{pr}</priority></url>\n'
+          for a in articles:
+              xml += f'  <url><loc>{SITE}/{a["filename"]}</loc><lastmod>{a["date"]}</lastmod><priority>0.7</priority></url>\n'
+          xml += '</urlset>\n'
+          with open("sitemap.xml", "w", encoding="utf-8") as f:
+              f.write(xml)
+          print("sitemap.xml 再生成完了")
+          PYEOF
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Cleanup: 軸外13本・重複6本を削除、articles.json/sitemap.xml再構築"
+          git push
