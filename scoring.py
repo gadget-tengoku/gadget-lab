@@ -139,6 +139,20 @@ def calculate_score(item: dict, config: dict) -> Optional[int]:
 # ===========================================================
 # 商品フィルタ関数
 # ===========================================================
+# 全カテゴリ共通のアクセサリ・消耗品除外ワード
+# （本体商品を誤爆しないことを検証済み。"単体"等を付けず素のワードで弾く）
+COMMON_EXCLUDE = [
+    "保護フィルム", "保護シート", "保護ケース",
+    "バンド", "ベルト", "ストラップ",
+    "交換用", "互換品", "互換バッテリー",
+    "ホルダー", "ポーチ", "収納ケース",
+    "シール", "ステッカー", "スキンシール",
+    "イヤーピース", "イヤーチップ", "イヤーパッド",
+    "紙パック", "ダストパック", "メンテナンス",
+    "替え", "スペア", "予備パーツ", "クリーナー",
+]
+
+
 def is_valid_product(item: dict, config: dict, min_review_count: int) -> bool:
     """
     商品が「本体商品」として有効か判定する。
@@ -150,7 +164,23 @@ def is_valid_product(item: dict, config: dict, min_review_count: int) -> bool:
     if len(name) < config["min_title_length"]:
         return False
 
-    # 除外キーワードチェック（消耗品・部品系）
+    # 共通アクセサリ除外（全カテゴリ適用）
+    if any(ng in name for ng in COMMON_EXCLUDE):
+        return False
+
+    # "ケース"・"カバー" の扱いはカテゴリで分岐
+    if config.get("label") == "ワイヤレスイヤホン":
+        # イヤホンは充電ケースが本体付属。ただし "ケース カバー" 等アクセサリ語が重なる場合は除外
+        ear_accessory = ["シリコンケース", "ケースカバー", "保護ケース", "ケース 保護",
+                         "カバー", "ケース シリコン", "ケース用", "用ケース"]
+        if any(w in name for w in ear_accessory):
+            return False
+    else:
+        # イヤホン以外は "ケース"・"カバー" を含めば原則アクセサリとして除外
+        if "ケース" in name or "カバー" in name:
+            return False
+
+    # カテゴリ固有の除外キーワードチェック
     if any(ng in name for ng in config["exclude"]):
         return False
 
