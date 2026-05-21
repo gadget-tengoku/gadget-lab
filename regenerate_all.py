@@ -368,40 +368,83 @@ def calculate_score(item, config):
 # テンプレ商品説明（Claude API不使用、データから決定論的に生成）
 # ===================================================
 def generate_summary(item, config):
-    """商品名・価格・レビュー情報から「らしい」説明を生成。"""
     name = item.get("itemName", "")
     price = item.get("itemPrice", 0)
     rc = item.get("reviewCount", 0)
     ra = item.get("reviewAverage", 0)
-    found_features = [f for f in config["features"] if f.lower() in name.lower()]
+    found = [f for f in config["features"] if f.lower() in name.lower()]
 
-    # レビュー件数による信頼度
-    if rc >= 500:
-        review_phrase = f"楽天レビュー{rc}件・平均{ra:.1f}と母数十分な評価が安定している"
-    elif rc >= 100:
-        review_phrase = f"楽天レビュー{rc}件・平均{ra:.1f}でユーザー層の評価が見える水準"
-    else:
-        review_phrase = f"楽天レビュー{rc}件・平均{ra:.1f}、件数は少ないが評価点は高め"
+    # 価格・件数・評価から「指紋」を作り、商品ごとに違う文型を選ぶ
+    fp_price = price % 3
+    fp_review = rc % 4
+    fp_feat = (price + rc) % 3
 
-    # 価格帯
-    mid_lo = config["min_price"] * 1.5
-    mid_hi = config["max_price"] * 0.7
+    # --- 価格に関する一文（数値で具体的に） ---
+    mid_lo, mid_hi = config["min_price"] * 1.5, config["max_price"] * 0.7
     if price <= mid_lo:
-        price_phrase = "エントリー価格帯"
+        price_variants = [
+            f"¥{price:,}という価格は、このカテゴリでは入門〜中堅クラス",
+            f"¥{price:,}と手を出しやすく、最初の1台や買い替えの候補にしやすい",
+            f"予算を抑えたい人向けの¥{price:,}という価格設定",
+        ]
     elif price >= mid_hi:
-        price_phrase = "プレミアム価格帯"
+        price_variants = [
+            f"¥{price:,}とこのカテゴリでは上位の価格帯",
+            f"¥{price:,}と決して安くはないが、その分スペックは充実しやすい価格帯",
+            f"¥{price:,}というハイエンド寄りの価格",
+        ]
     else:
-        price_phrase = "ボリュームゾーンの価格帯"
+        price_variants = [
+            f"¥{price:,}と、価格と機能のバランスが取りやすい中位帯",
+            f"¥{price:,}という、最も選ばれやすい価格ゾーン",
+            f"¥{price:,}でこのカテゴリの主力価格帯に位置する",
+        ]
+    price_sentence = price_variants[fp_price]
 
-    # 特徴キーワード
-    if found_features:
-        feature_phrase = f"「{found_features[0]}」を含む特徴がタイトルに明示されており、{config['angle']}という観点でも選択肢に入る"
+    # --- レビューに関する一文（件数で語り口を変える） ---
+    if rc >= 1000:
+        review_variants = [
+            f"レビューは{rc}件と非常に多く、平均{ra:.1f}。これだけ件数があると評価のブレは小さい",
+            f"{rc}件という大量のレビューで平均{ra:.1f}を維持しているのは安心材料",
+            f"母数{rc}件・平均{ra:.1f}。この規模のレビュー数は信頼性の裏付けになる",
+        ]
+    elif rc >= 300:
+        review_variants = [
+            f"レビュー{rc}件・平均{ra:.1f}と、判断材料としては十分な件数",
+            f"{rc}件のレビューで平均{ra:.1f}。評価傾向が見える水準に達している",
+            f"平均{ra:.1f}（{rc}件）で、ユーザー層の評価がそれなりに固まっている",
+        ]
+    elif rc >= 100:
+        review_variants = [
+            f"レビューは{rc}件・平均{ra:.1f}。まだ件数は伸びる余地があるが評価は良好",
+            f"{rc}件で平均{ra:.1f}。新しめのモデルか、ニッチ寄りの可能性",
+            f"平均{ra:.1f}（{rc}件）。件数は中程度なので口コミ内容も確認したい",
+        ]
     else:
-        feature_phrase = f"{config['angle']}という観点では基本性能を押さえた1台"
+        review_variants = [
+            f"レビューは{rc}件と少なめだが平均{ra:.1f}と高い。発売間もないか玄人向けか",
+            f"{rc}件・平均{ra:.1f}。母数が小さいので評価は参考程度に見るのが無難",
+            f"平均{ra:.1f}ながらレビュー{rc}件と少なく、判断は慎重に",
+        ]
+    review_sentence = review_variants[fp_review]
 
-    summary = f"{price_phrase}。{review_phrase}。{feature_phrase}。"
-    return summary
+    # --- 機能に関する一文 ---
+    if found:
+        feat_str = "・".join(found[:2])
+        feat_variants = [
+            f"商品名には{feat_str}が含まれ、{config['angle']}を求める人と相性がいい",
+            f"{feat_str}に対応している点が、{config['angle']}という観点で効いてくる",
+            f"{feat_str}を備えており、用途が「{config['angle']}」ならチェックしておきたい",
+        ]
+    else:
+        feat_variants = [
+            f"派手な特徴はないが、{config['angle']}という基本は押さえている",
+            f"{config['angle']}という観点では、突出はしないものの堅実な選択肢",
+            f"スペック表記は控えめ。{config['angle']}重視なら詳細仕様の確認を推奨",
+        ]
+    feat_sentence = feat_variants[fp_feat]
 
+    return f"{price_sentence}。{review_sentence}。{feat_sentence}。"
 
 def generate_recommend(item, rank, config):
     """おすすめする人のフレーズ。商品の特性とランクに応じて変える。"""
@@ -478,6 +521,8 @@ FOOTER_HTML = '''<footer>
         <ul>
           <li><a href="archive.html">記事一覧</a></li>
           <li><a href="about.html">編集部</a></li>
+          <li><a href="review-policy.html">レビュー方針</a></li>
+          <li><a href="ad-policy.html">広告ポリシー</a></li>
           <li><a href="privacy.html">プライバシーポリシー</a></li>
         </ul>
       </div>
