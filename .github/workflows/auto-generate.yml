@@ -2,9 +2,7 @@ name: 日次記事自動生成（v2）
 
 on:
   schedule:
-    # JST 10:00 = UTC 01:00
     - cron: '0 1 * * *'
-    # JST 21:00 = UTC 12:00
     - cron: '0 12 * * *'
   workflow_dispatch:
 
@@ -16,12 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: "3.11"
+          python-version: "3.12"
 
       - name: Install dependencies
         run: pip install requests
