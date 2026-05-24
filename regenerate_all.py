@@ -205,7 +205,8 @@ BRAND_TRUST = {
 # 楽天API
 # ===================================================
 def fetch_rakuten(keyword, config):
-    """品質フィルタを通過した商品を返す。フォールバック付き。"""
+    """品質フィルタを通過した商品を返す。フォールバック付き。
+    minPrice/maxPrice はAPIに渡さず、取得後にコード側でフィルタ（400エラー回避）。"""
     fallback_rc = [config["min_review_count"], max(5, config["min_review_count"] // 2), 3]
     for min_rc in fallback_rc:
         params = {
@@ -213,8 +214,6 @@ def fetch_rakuten(keyword, config):
             "affiliateId": RAKUTEN_AFFILIATE_ID,
             "keyword": keyword,
             "genreId": config["genre_id"],
-            "minPrice": config["min_price"],
-            "maxPrice": config["max_price"],
             "hits": 30,
             "sort": "-reviewCount",
             "format": "json",
@@ -224,11 +223,25 @@ def fetch_rakuten(keyword, config):
                 "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601",
                 params=params, timeout=15,
             )
+            if r.status_code != 200:
+                log(f"  ⚠ Rakuten API {r.status_code}: {r.text[:200]}")
             r.raise_for_status()
             items = [it["Item"] for it in r.json().get("Items", [])]
         except Exception as e:
             log(f"  ⚠ Rakuten API error: {e}")
-            items = []
+            # genreIdを外して再試行（genreId無効が原因の場合の保険）
+            try:
+                params.pop("genreId", None)
+                r = requests.get(
+                    "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601",
+                    params=params, timeout=15,
+                )
+                r.raise_for_status()
+                items = [it["Item"] for it in r.json().get("Items", [])]
+                log(f"  ℹ genreIdなしで再取得: {len(items)}件")
+            except Exception as e2:
+                log(f"  ⚠ 再試行も失敗: {e2}")
+                items = []
         filtered = []
         for item in items:
             name = item.get("itemName", "")
