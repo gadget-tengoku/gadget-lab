@@ -104,14 +104,24 @@ CATEGORY_CONFIG = {
 def fetch_rakuten(keyword, config):
     fallback_rc = [config["min_review_count"], max(5, config["min_review_count"] // 2), 3]
     for min_rc in fallback_rc:
-        params = {"applicationId": RAKUTEN_APP_ID, "affiliateId": RAKUTEN_AFFILIATE_ID, "keyword": keyword, "genreId": config["genre_id"], "minPrice": config["min_price"], "maxPrice": config["max_price"], "hits": 30, "sort": "-reviewCount", "format": "json"}
+        params = {"applicationId": RAKUTEN_APP_ID, "affiliateId": RAKUTEN_AFFILIATE_ID, "keyword": keyword, "genreId": config["genre_id"], "hits": 30, "sort": "-reviewCount", "format": "json"}
         try:
             r = requests.get("https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601", params=params, timeout=15)
+            if r.status_code != 200:
+                log(f"  ⚠ Rakuten API {r.status_code}: {r.text[:200]}")
             r.raise_for_status()
             items = [it["Item"] for it in r.json().get("Items", [])]
         except Exception as e:
             log(f"  ⚠ Rakuten error: {e}")
-            items = []
+            try:
+                params.pop("genreId", None)
+                r = requests.get("https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601", params=params, timeout=15)
+                r.raise_for_status()
+                items = [it["Item"] for it in r.json().get("Items", [])]
+                log(f"  ℹ genreIdなしXで再取得: {len(items)}件")
+            except Exception as e2:
+                log(f"  ⚠ 再試行も失敗: {e2}")
+                items = []
         filtered = [it for it in items if is_valid_product(it, config, min_rc)]
         if len(filtered) >= 5:
             return filtered[:10]
