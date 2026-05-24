@@ -184,6 +184,20 @@ def is_valid_product(item: dict, config: dict, min_review_count: int) -> bool:
     if any(ng in name for ng in config["exclude"]):
         return False
 
+    # 価格レンジチェック（本体価格として現実的な範囲か）
+    # アクセサリは本体より極端に安いため、min_priceを下回るものは除外
+    # 例: スマートウォッチ本体¥5000以上 → ¥1,080のバンドは弾かれる
+    price = item.get("itemPrice", 0)
+    if price < config["min_price"] or price > config["max_price"]:
+        return False
+
+    # 複数機種が列挙された商品名は「対応アクセサリ」の典型パターン
+    # 例: "Forerunner 220J 230J 235J" のように型番が3つ以上並ぶ → 互換品の可能性大
+    import re
+    model_numbers = re.findall(r'\d{2,4}[A-Za-z]?', name)
+    if len(model_numbers) >= 4:
+        return False
+
     # レビュー件数チェック
     if item.get("reviewCount", 0) < min_review_count:
         return False
