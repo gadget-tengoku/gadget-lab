@@ -240,6 +240,14 @@ def fetch_rakuten(keyword, config):
                 continue
             if any(ng in name for ng in config["exclude"]):
                 continue
+            # 価格レンジチェック（アクセサリは本体より極端に安い）
+            _price = item.get("itemPrice", 0)
+            if _price < config["min_price"] or _price > config["max_price"]:
+                continue
+            # 複数型番が並ぶ商品名は対応アクセサリの典型
+            import re as _re
+            if len(_re.findall(r"\d{2,4}[A-Za-z]?", name)) >= 4:
+                continue
             if item.get("reviewCount", 0) < min_rc:
                 continue
             if item.get("reviewAverage", 0) < config["min_review_average"]:
