@@ -24,8 +24,8 @@ from datetime import datetime, timezone, timedelta
 # ===================================================
 # 設定
 # ===================================================
-RAKUTEN_APP_ID = os.environ.get("API_KEY") or os.environ.get("RAKUTEN_APP_ID", "")
-RAKUTEN_AFFILIATE_ID = os.environ.get("AFFILIATE_ID") or os.environ.get("RAKUTEN_AFFILIATE_ID", "")
+RAKUTEN_APP_ID = os.environ.get("RAKUTEN_APP_ID") or os.environ.get("API_KEY", "")
+RAKUTEN_AFFILIATE_ID = os.environ.get("RAKUTEN_AFFILIATE_ID") or os.environ.get("AFFILIATE_ID", "")
 SITE_URL = "https://gadget-tengoku.com"
 JST = timezone(timedelta(hours=9))
 
@@ -654,6 +654,9 @@ def render_article(article, products, config):
 # メイン処理
 # ===================================================
 def main():
+    # 環境変数チェック + 値の先頭をログ（デバッグ用、全体は出さない）
+    log(f"  ℹ APP_ID先頭8文字: {RAKUTEN_APP_ID[:8] if RAKUTEN_APP_ID else '(空)'}... 長さ{len(RAKUTEN_APP_ID)}")
+    log(f"  ℹ AFFILIATE_ID先頭8文字: {RAKUTEN_AFFILIATE_ID[:8] if RAKUTEN_AFFILIATE_ID else '(空)'}... 長さ{len(RAKUTEN_AFFILIATE_ID)}")
     if not RAKUTEN_APP_ID or not RAKUTEN_AFFILIATE_ID:
         log("❌ ERROR: RAKUTEN_APP_ID / RAKUTEN_AFFILIATE_ID environment variables not set")
         log("   (also tried: API_KEY / AFFILIATE_ID)")
