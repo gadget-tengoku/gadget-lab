@@ -522,6 +522,9 @@ def regenerate_sitemap(articles):
 # メイン
 # ===========================================================
 def main():
+    # 環境変数チェック + 値の先頭をログ（デバッグ用、全体は出さない）
+    log(f"  ℹ APP_ID先頭8文字: {RAKUTEN_APP_ID[:8] if RAKUTEN_APP_ID else '(空)'}... 長さ{len(RAKUTEN_APP_ID)}")
+    log(f"  ℹ AFFILIATE_ID先頭8文字: {RAKUTEN_AFFILIATE_ID[:8] if RAKUTEN_AFFILIATE_ID else '(空)'}... 長さ{len(RAKUTEN_AFFILIATE_ID)}")
     if not RAKUTEN_APP_ID or not RAKUTEN_AFFILIATE_ID:
         log("❌ RAKUTEN_APP_ID / RAKUTEN_AFFILIATE_ID not set")
         sys.exit(1)
