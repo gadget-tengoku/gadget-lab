@@ -9,7 +9,14 @@ document.addEventListener('click', function (event) {
   if (!link || typeof gtag !== 'function') return;
   const url = link.href;
   const text = (link.innerText || link.getAttribute('aria-label') || '').trim().slice(0, 120);
-  if (url.includes('hb.afl.rakuten.co.jp')) {
+  if (url.includes('x.com/gadget_tengoku') || url.includes('github.com/gadget-tengoku/gadget-lab/issues')) {
+    gtag('event', 'contact_link_click', {
+      contact_channel: url.includes('x.com') ? 'X' : 'GitHub Issues',
+      link_url: url,
+      page_path: location.pathname,
+      transport_type: 'beacon'
+    });
+  } else if (url.includes('hb.afl.rakuten.co.jp')) {
     gtag('event', 'rakuten_affiliate_click', {
       affiliate_network: 'Rakuten',
       link_url: url,
