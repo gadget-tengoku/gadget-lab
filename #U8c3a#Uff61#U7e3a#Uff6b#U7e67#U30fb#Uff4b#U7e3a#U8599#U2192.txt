@@ -1,0 +1,21 @@
+ガジェット天国：コード側で完了した項目
+
+・GA4設置と楽天アフィリエイトクリック計測
+・外部リンククリック計測
+・robots.txtとsitemap.xml
+・RSSフィード
+・404ページ
+・favicon / Webアプリ設定
+・OGP / Twitterカード / canonical / robotsメタの統一
+・プライバシー、広告、レビュー方針の内容統一
+・アクセシビリティ（本文スキップ、フォーカス表示）
+・危険な自動生成ワークフローを実行不能化
+
+GitHubへ反映後に人が操作する項目
+1. Google Search Consoleで sitemap.xml を送信
+   https://gadget-tengoku.com/sitemap.xml
+2. GA4で rakuten_affiliate_click が通常イベント一覧に出たら星を押してキーイベント化
+3. 楽天アフィリエイト管理画面でクリック数と成果を定期確認
+4. 記事内容に実体験を追記（PC構成、使用機器、実際に試した設定）
+
+注意：古い自動生成記事は削除せずnoindexのまま残しています。GitHubのWebアップロードでは削除処理ができないためです。

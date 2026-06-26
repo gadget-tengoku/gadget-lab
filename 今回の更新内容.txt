@@ -1,26 +1,12 @@
-ガジェット天国 信頼性ページ一括更新
+ガジェット天国 既存7記事 強化版
 
-追加・更新内容
-- 運営者情報を現在のサイト方針に合わせて全面更新
-- プライバシーポリシーをGA4・楽天アフィリエイト・外部窓口の実態に合わせて更新
-- お問い合わせページを新規追加
-- 全公開ページのメニューとフッターに「お問い合わせ」を追加
-- 広告ポリシーに現在利用中の広告サービスを明記
-- レビュー方針に情報源と訂正窓口を追加
-- sitemap.xmlへお問い合わせページを追加
-- GA4で問い合わせリンクのクリックを contact_link_click として計測
+・7記事の導入文と結論を改善
+・確認手順を順番化
+・症状別の表とチェックリストを追加
+・FAQを追加
+・Article / FAQPage 構造化データを追加
+・内部リンクを関連テーマへ最適化
+・楽天アフィリエイトリンクとGA4計測を維持
+・未確認の使用感や数値は断定していません
 
-反映方法
-1. このZIPを展開
-2. gadget-lab-mainフォルダの中身をすべて選択
-3. GitHubの Add file → Upload files
-4. ドラッグ＆ドロップ
-5. Commit changes
-6. Actionsでpages build and deploymentが緑になるまで待つ
-
-公開後の確認URL
-https://gadget-tengoku.com/about.html
-https://gadget-tengoku.com/privacy.html
-https://gadget-tengoku.com/contact.html
-https://gadget-tengoku.com/ad-policy.html
-https://gadget-tengoku.com/review-policy.html
+反映方法：このフォルダの中身をGitHubへ上書きアップロードしてください。

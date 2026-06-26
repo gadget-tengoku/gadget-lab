@@ -1,0 +1,10 @@
+【まとめて反映する方法】
+1. このZIPを右クリックして「すべて展開」
+2. 中の gadget-lab-main フォルダを開く
+3. Ctrl+A で中身をすべて選択
+4. GitHub の Add file → Upload files を開く
+5. 選択した中身をドラッグ＆ドロップ
+6. Commit changes を押す
+7. Actions の pages build and deployment が緑になったら公開完了
+
+注意：gadget-lab-mainフォルダ自体ではなく、中身をアップロードしてください。

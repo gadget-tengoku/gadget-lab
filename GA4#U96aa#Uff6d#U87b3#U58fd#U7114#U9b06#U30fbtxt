@@ -1,0 +1,19 @@
+Google Analytics 4 設定済み
+
+測定ID: G-Z0N6LDFJV5
+
+この更新では、すべてのHTMLページにGA4タグを追加しました。
+楽天アフィリエイトリンクのクリック時には、
+「rakuten_affiliate_click」というイベントも送信します。
+
+反映方法
+1. このフォルダ内のファイルとフォルダをすべて選択
+2. GitHubの Add file → Upload files
+3. ドラッグ＆ドロップ
+4. Commit changes
+5. Pagesの公開完了後、Google Analyticsの「リアルタイム」で確認
+
+確認方法
+- 自分でサイトを開く
+- 楽天リンクを1回クリック
+- GA4のリアルタイムまたはDebugViewでイベントを確認
