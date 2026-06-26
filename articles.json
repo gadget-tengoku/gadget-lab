@@ -1,1 +1,44 @@
-[]
+[
+  {
+    "title": "550HzモニターなのにVALORANTで300FPSしか出ない原因と確認項目",
+    "url": "valorant-550hz-300fps.html",
+    "date": "2026-06-27",
+    "category": "VALORANT"
+  },
+  {
+    "title": "VALORANT向け240Hzモニターの選び方｜安いモデルで失敗しない確認ポイント",
+    "url": "valorant-240hz-monitor-guide.html",
+    "date": "2026-06-27",
+    "category": "VALORANT · MONITOR"
+  },
+  {
+    "title": "VALORANTでFPSが出ないときの確認順｜GPU・CPU・設定を切り分ける",
+    "url": "valorant-fps-troubleshooting.html",
+    "date": "2026-06-27",
+    "category": "VALORANT · PC SETTINGS"
+  },
+  {
+    "title": "Quest 3SでSteamVRを始める前に必要なもの｜有線・無線の違い",
+    "url": "quest3s-steamvr-setup.html",
+    "date": "2026-06-27",
+    "category": "VR · QUEST 3S"
+  },
+  {
+    "title": "PICO 4でSteamVR画面が二重に見えるときの確認項目",
+    "url": "pico4-steamvr-double-screen.html",
+    "date": "2026-06-27",
+    "category": "VR · PICO 4"
+  },
+  {
+    "title": "キーボードを押しても反応しないときの確認順｜Windows PC向け",
+    "url": "keyboard-not-responding-windows.html",
+    "date": "2026-06-27",
+    "category": "DEVICE TROUBLE · KEYBOARD"
+  },
+  {
+    "title": "コントローラーの右スティックが反応しないときの切り分け方",
+    "url": "controller-right-stick-not-working.html",
+    "date": "2026-06-27",
+    "category": "DEVICE TROUBLE · CONTROLLER"
+  }
+]

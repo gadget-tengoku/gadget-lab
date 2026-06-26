@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://gadget-tengoku.com/</loc><priority>1.0</priority></url>
-  <url><loc>https://gadget-tengoku.com/archive.html</loc><priority>0.8</priority></url>
-  <url><loc>https://gadget-tengoku.com/about.html</loc><priority>0.7</priority></url>
-  <url><loc>https://gadget-tengoku.com/review-policy.html</loc><priority>0.6</priority></url>
-  <url><loc>https://gadget-tengoku.com/ad-policy.html</loc><priority>0.5</priority></url>
-  <url><loc>https://gadget-tengoku.com/privacy.html</loc><priority>0.5</priority></url>
-  <url><loc>https://gadget-tengoku.com/valorant-550hz-300fps.html</loc><priority>0.8</priority></url>
+  <url><loc>https://gadget-tengoku.com/</loc><lastmod>2026-06-27</lastmod></url>
+  <url><loc>https://gadget-tengoku.com/archive.html</loc><lastmod>2026-06-27</lastmod></url>
+  <url><loc>https://gadget-tengoku.com/about.html</loc><lastmod>2026-06-27</lastmod></url>
+  <url><loc>https://gadget-tengoku.com/review-policy.html</loc><lastmod>2026-06-27</lastmod></url>
+  <url><loc>https://gadget-tengoku.com/ad-policy.html</loc><lastmod>2026-06-27</lastmod></url>
+  <url><loc>https://gadget-tengoku.com/privacy.html</loc><lastmod>2026-06-27</lastmod></url>
+  <url><loc>https://gadget-tengoku.com/valorant-550hz-300fps.html</loc><lastmod>2026-06-27</lastmod></url>
+  <url><loc>https://gadget-tengoku.com/valorant-240hz-monitor-guide.html</loc><lastmod>2026-06-27</lastmod></url>
+  <url><loc>https://gadget-tengoku.com/valorant-fps-troubleshooting.html</loc><lastmod>2026-06-27</lastmod></url>
+  <url><loc>https://gadget-tengoku.com/quest3s-steamvr-setup.html</loc><lastmod>2026-06-27</lastmod></url>
+  <url><loc>https://gadget-tengoku.com/pico4-steamvr-double-screen.html</loc><lastmod>2026-06-27</lastmod></url>
+  <url><loc>https://gadget-tengoku.com/keyboard-not-responding-windows.html</loc><lastmod>2026-06-27</lastmod></url>
+  <url><loc>https://gadget-tengoku.com/controller-right-stick-not-working.html</loc><lastmod>2026-06-27</lastmod></url>
 </urlset>
