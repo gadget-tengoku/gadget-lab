@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0N6LDFJV5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Z0N6LDFJV5');
+
+  document.addEventListener('click', function (event) {
+    const link = event.target.closest('a[href*="hb.afl.rakuten.co.jp"]');
+    if (!link) return;
+    gtag('event', 'rakuten_affiliate_click', {
+      link_url: link.href,
+      link_text: (link.innerText || link.getAttribute('aria-label') || '').trim(),
+      page_path: location.pathname
+    });
+  });
+</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, follow">
