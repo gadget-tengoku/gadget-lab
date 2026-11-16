@@ -44,14 +44,28 @@ details>p{padding:0 20px 16px;margin:0}
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}.reveal.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.bar-fill{transition:none}}
 @media(max-width:760px){.stat-grid{grid-template-columns:1fr}}
+
+.hero-img{display:block;width:100%;height:auto;aspect-ratio:1200/630;border-radius:20px;margin:22px 0 4px;border:1px solid var(--line);box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.learn{background:linear-gradient(135deg,rgba(123,167,255,.12),rgba(114,230,177,.08));border:1px solid rgba(123,167,255,.4);border-radius:18px;padding:18px 20px;margin:24px 0}
+.learn-title{font-weight:900;font-size:1.05rem;margin-bottom:10px}
+.learn ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.learn li{display:flex;gap:12px;align-items:center;background:rgba(11,16,32,.55);border-radius:12px;padding:10px 14px;font-weight:700}
+.learn li .e{font-size:1.5rem;line-height:1}
+.writer{display:flex;gap:16px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px 20px;margin:24px 0}
+.writer svg{flex:0 0 64px}.writer-name{font-weight:900;margin-bottom:8px}
+.writer-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.writer-tags span{font-size:.8rem;font-weight:800;background:rgba(114,230,177,.14);color:var(--accent);border:1px solid rgba(114,230,177,.35);border-radius:999px;padding:3px 10px}
+.writer p{margin:0;font-size:.92rem;color:var(--muted)}
+.content h2{position:relative;padding-left:16px}
+.content h2::before{content:"";position:absolute;left:0;top:.2em;bottom:.2em;width:6px;border-radius:3px;background:linear-gradient(var(--accent),var(--accent2))}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "USB-C充電器でノートPCが充電されない・遅いときの確認｜W数とケーブル", "description": "USB-C充電器でノートPCが充電されない、充電が遅い、使いながらだと減る場合に、充電器のW数、ケーブルの対応W数、端子を確認する方法。", "datePublished": "2026-11-16", "dateModified": "2026-11-16", "author": {"@type": "Person", "name": "ガジェット天国 管理人", "url": "https://gadget-tengoku.com/about.html"}, "publisher": {"@type": "Organization", "name": "ガジェット天国", "url": "https://gadget-tengoku.com/"}, "mainEntityOfPage": "https://gadget-tengoku.com/usb-c-laptop-not-charging.html"}</script>
 </head><body><a class="skip-link" href="#main">本文へ移動</a><header class="header"><div class="wrap header-inner"><a class="logo" href="/">Gadget<span>天国</span></a><nav aria-label="メインナビゲーション"><a href="/">ホーム</a><a href="archive.html">記事</a><a href="about.html">運営者</a><a href="review-policy.html">レビュー方針</a><a href="contact.html">お問い合わせ</a></nav></div></header><main id="main">
 <section class="article-hero"><div class="wrap content"><div class="eyebrow">PC WORK · POWER</div><h1>USB-C充電器でノートPCが充電されない・遅いときの確認｜W数とケーブル</h1>
-<div class="meta">公開：2026年11月16日　更新：2026年11月16日　／　執筆：ガジェット天国 管理人</div></div></section>
+<div class="meta">公開：2026年11月16日　更新：2026年11月16日　／　執筆：ガジェット天国 管理人</div><img class="hero-img" src="img/usbc.svg" alt="USB-C充電器でノートPCが充電されない・遅いときの確認｜W数とケーブル" width="1200" height="630"></div></section>
 <section class="section" style="padding-top:10px"><div class="wrap content">
 <p class="lead">USB-C充電器でノートPCが充電されない、充電が遅い、使いながらだと減る場合に、充電器のW数、ケーブルの対応W数、端子を確認する方法。上から順に試せるように並べています。</p>
-<div class="note"><span class="source-tag">調査・手順</span>この記事は、OS・メーカーの公開情報と一般的な切り分け手順をもとにまとめたものです。特定製品の実機レビューではありません。</div>
+<div class="note"><span class="source-tag">調査・手順</span>この記事は、OS・メーカーの公開情報と一般的な切り分け手順をもとにまとめたものです。特定製品の実機レビューではありません。</div><div class="learn"><div class="learn-title">📌 この記事でわかること</div><ul><li><span class="e">⚡</span>充電器のW数の見方</li><li><span class="e">🧵</span>ケーブルにも上限がある話</li><li><span class="e">🔌</span>充電できる端子の見分け方</li></ul></div>
 <section class="block reveal"><div class="conclusion"><h3>📌 先に結論</h3>
 <p>USB-C充電器でノートPCが充電されない・充電が遅いときは、<mark>「充電器のW数」「ケーブルの対応W数」「挿している端子」</mark> の3つを確認します。</p>
 <p>USB-Cの充電器とケーブルは見た目が同じでも、<strong>流せる電力がまったく違う</strong>のが落とし穴です。</p></div></section>
