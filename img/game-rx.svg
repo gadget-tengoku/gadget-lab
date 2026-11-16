@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#121a36"/><stop offset="1" stop-color="#0b1020"/></linearGradient>
+<linearGradient id="ill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#72e6b1"/><stop offset="1" stop-color="#2fbf8a"/></linearGradient>
+<radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#72e6b1" stop-opacity=".45"/><stop offset="1" stop-color="#72e6b1" stop-opacity="0"/></radialGradient>
+<pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="2" fill="#fff" opacity=".06"/></pattern></defs>
+<rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#dots)"/>
+<circle cx="920" cy="320" r="330" fill="url(#glow)"/>
+<g transform="translate(64,96)"><rect width="206" height="58" rx="29" fill="url(#ill)"/>
+<text x="28" y="40" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="30" fill="#0b1020">ミニゲーム</text></g>
+<text x="64" y="270" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="92" fill="#fff">反応速度</text>
+<text x="64" y="385" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="92" fill="#72e6b1">何ms？</text>
+<text x="64" y="470" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="700" font-size="30" fill="#aab4d4">緑になったらクリック！</text>
+<rect x="64" y="520" width="120" height="8" rx="4" fill="url(#ill)"/>
+<text x="204" y="532" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="800" font-size="26" fill="#ffffff" opacity=".8">ガジェット天国</text>
+<g transform="translate(690,85)"><rect x="10" y="40" width="440" height="380" rx="28" fill="#00c98a" stroke="url(#ill)" stroke-width="6"/>
+<text x="230" y="215" text-anchor="middle" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="88" fill="#fff">今だ！</text>
+<text x="230" y="320" text-anchor="middle" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="70" fill="#0b1020">213ms</text>
+<path d="M340 70 L300 160 H335 L315 230 L380 130 H345 L365 70Z" fill="#ffd479"/></g></svg>
