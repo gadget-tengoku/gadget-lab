@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja"><head><script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0N6LDFJV5"></script><script src="analytics.js"></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PCでBluetoothイヤホンの音が途切れる・こもるときの確認順｜ガジェット天国</title>
+<meta name="description" content="Windows PCでBluetoothイヤホンの音が途切れる、マイクを使うと音がこもる、しばらくすると切れる場合の原因と対処を順番に解説。">
+<link rel="canonical" href="https://gadget-tengoku.com/bluetooth-earphone-pc-dropout.html">
+<meta property="og:type" content="article"><meta property="og:title" content="PCでBluetoothイヤホンの音が途切れる・こもるときの確認順"><meta property="og:description" content="Windows PCでBluetoothイヤホンの音が途切れる、マイクを使うと音がこもる、しばらくすると切れる場合の原因と対処を順番に解説。">
+<meta property="og:image" content="https://gadget-tengoku.com/ogp.png"><meta property="og:url" content="https://gadget-tengoku.com/bluetooth-earphone-pc-dropout.html">
+<meta property="og:locale" content="ja_JP"><meta property="og:site_name" content="ガジェット天国"><meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#0b1020">
+<link rel="stylesheet" href="site.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" href="/feed.xml" type="application/rss+xml" title="ガジェット天国 RSS">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3514849475707540" crossorigin="anonymous"></script>
+<style>
+.article-hero{padding:74px 0 38px}.article-hero h1{font-size:clamp(2rem,5vw,3.65rem);line-height:1.25;margin:.65rem 0 1rem;max-width:960px}.meta{color:var(--muted);font-size:.9rem}.content{max-width:850px}.content h2{font-size:1.7rem;line-height:1.45;margin:56px 0 16px}.content h3{font-size:1.2rem;margin:34px 0 10px}.content p,.content li{color:#d6dcef}.content ul,.content ol{padding-left:1.35rem}.content li{margin:.55rem 0}.lead{font-size:1.09rem}.toc,.answer-box,.check,.faq-item{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin:24px 0}.answer-box{border-color:rgba(114,230,177,.55);background:linear-gradient(135deg,rgba(114,230,177,.1),rgba(123,167,255,.06))}.answer-box b,.check b{display:block;color:var(--accent);margin-bottom:6px}.toc b{display:block;margin-bottom:8px}.toc a,.content a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}.warning{border:1px solid #67572c;background:rgba(255,212,121,.08);border-radius:14px;padding:18px 20px;color:#f6e8be;margin:24px 0}.note{border-left:4px solid var(--accent2);padding:4px 0 4px 18px;margin:24px 0;color:#d6dcef}.summary-table{width:100%;border-collapse:collapse;margin:20px 0}.summary-table th,.summary-table td{border:1px solid var(--line);padding:12px;text-align:left;vertical-align:top}.summary-table th{background:var(--panel2)}.step{display:grid;grid-template-columns:44px 1fr;gap:14px;margin:20px 0}.step-num{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#07120e;font-weight:900}.step h3{margin:3px 0 8px}.related{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.related a{display:block;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;text-decoration:none}.faq-item h3{margin:0 0 8px}.back{display:inline-block;margin-top:42px;color:var(--accent);font-weight:800}.affiliate-box{display:grid;grid-template-columns:180px 1fr;gap:20px;align-items:center;background:#fff;border:1px solid #95a5a6;border-radius:16px;padding:18px;margin:26px 0;color:#111}.affiliate-box img{width:100%;height:auto;border-radius:10px;display:block}.affiliate-box h3{color:#111;margin:0 0 10px;font-size:1.08rem;line-height:1.5}.affiliate-box p{color:#444;margin:0 0 12px;font-size:.95rem}.affiliate-btn{display:inline-block;background:#bf0000;color:#fff!important;text-decoration:none!important;font-weight:800;padding:12px 20px;border-radius:999px}.affiliate-note{font-size:.82rem;color:#666;margin-top:10px}.affiliate-label{display:inline-block;font-size:.75rem;font-weight:800;color:#111;background:#ffd479;border-radius:999px;padding:4px 9px;margin-bottom:10px}@media(max-width:760px){.article-hero{padding-top:54px}.summary-table{font-size:.88rem}.related{grid-template-columns:1fr}.step{grid-template-columns:38px 1fr}.affiliate-box{grid-template-columns:1fr}.affiliate-box img{max-width:240px;margin:auto}}
+
+.affiliate-box.noimg{grid-template-columns:1fr}
+.conclusion{background:linear-gradient(135deg,rgba(114,230,177,.1),rgba(123,167,255,.06));border:1px solid rgba(114,230,177,.55);border-radius:16px;padding:20px 24px;margin:24px 0}
+.conclusion h3{margin:0 0 8px;color:var(--accent);font-size:1.1rem}
+.content mark{background:linear-gradient(transparent 58%,rgba(114,230,177,.35) 58%);color:var(--text);padding:0 .1em}
+.callout{border-radius:14px;padding:16px 20px;margin:22px 0;border:1px solid var(--line);color:#d6dcef}
+.callout.good{border-left:4px solid var(--accent);background:rgba(114,230,177,.06)}
+.callout.warn{border:1px solid #67572c;background:rgba(255,212,121,.08);color:#f6e8be}
+.spec-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin:24px 0}
+.spec-card h3{margin-top:0}
+.bar-row{margin:14px 0}.bar-label{display:flex;justify-content:space-between;font-weight:700;font-size:.92rem;margin-bottom:6px}
+.bar-label .val{color:var(--accent)}.bar-track{height:8px;background:var(--panel2);border-radius:6px;overflow:hidden}
+.bar-fill{height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center}
+.stat .num{font-weight:900;font-size:1.8rem;color:var(--accent)}.stat .unit{font-size:.95rem}
+.stat .lbl{font-size:.8rem;color:var(--muted);margin-top:2px}
+.table-wrap{overflow-x:auto;margin:20px 0}.table-wrap table{width:100%;border-collapse:collapse;min-width:460px}
+.table-wrap th,.table-wrap td{border:1px solid var(--line);padding:12px;text-align:left;vertical-align:top}
+.table-wrap th{background:var(--panel2)}.table-wrap td{color:#d6dcef}
+details{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin:12px 0;overflow:hidden}
+summary{font-weight:800;padding:16px 20px;cursor:pointer;list-style:none;position:relative;padding-right:44px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);color:var(--accent);font-size:1.3rem;transition:transform .25s}
+details[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+details>p{padding:0 20px 16px;margin:0}
+.disclaimer{font-size:.84rem;color:var(--muted)!important;border-top:1px solid var(--line);padding-top:16px;margin-top:36px}
+.source-tag{display:inline-block;font-size:.78rem;font-weight:800;color:#07120e;background:var(--accent);border-radius:999px;padding:3px 10px;margin-right:6px}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.bar-fill{transition:none}}
+@media(max-width:760px){.stat-grid{grid-template-columns:1fr}}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "PCでBluetoothイヤホンの音が途切れる・こもるときの確認順", "description": "Windows PCでBluetoothイヤホンの音が途切れる、マイクを使うと音がこもる、しばらくすると切れる場合の原因と対処を順番に解説。", "datePublished": "2026-11-16", "dateModified": "2026-11-16", "author": {"@type": "Person", "name": "ガジェット天国 管理人", "url": "https://gadget-tengoku.com/about.html"}, "publisher": {"@type": "Organization", "name": "ガジェット天国", "url": "https://gadget-tengoku.com/"}, "mainEntityOfPage": "https://gadget-tengoku.com/bluetooth-earphone-pc-dropout.html"}</script>
+</head><body><a class="skip-link" href="#main">本文へ移動</a><header class="header"><div class="wrap header-inner"><a class="logo" href="/">Gadget<span>天国</span></a><nav aria-label="メインナビゲーション"><a href="/">ホーム</a><a href="archive.html">記事</a><a href="about.html">運営者</a><a href="review-policy.html">レビュー方針</a><a href="contact.html">お問い合わせ</a></nav></div></header><main id="main">
+<section class="article-hero"><div class="wrap content"><div class="eyebrow">AUDIO · BLUETOOTH</div><h1>PCでBluetoothイヤホンの音が途切れる・こもるときの確認順</h1>
+<div class="meta">公開：2026年11月16日　更新：2026年11月16日　／　執筆：ガジェット天国 管理人</div></div></section>
+<section class="section" style="padding-top:10px"><div class="wrap content">
+<p class="lead">Windows PCでBluetoothイヤホンの音が途切れる、マイクを使うと音がこもる、しばらくすると切れる場合の原因と対処を順番に解説。上から順に試せるように並べています。</p>
+<div class="note"><span class="source-tag">調査・手順</span>この記事は、OS・メーカーの公開情報と一般的な切り分け手順をもとにまとめたものです。特定製品の実機レビューではありません。</div>
+<section class="block reveal"><div class="conclusion"><h3>📌 先に結論</h3>
+<p>PCでBluetoothイヤホンの音が途切れる・音質が急に悪くなる原因は、主に <mark>「電波の干渉と距離」「マイク使用時のモード切替」「省電力設定」</mark> の3つです。</p>
+<p>とくに <strong>Web会議やゲームのボイスチャットを始めた瞬間に音がこもる</strong> 場合は、故障ではなくBluetoothの仕組みによるものです。</p></div></section>
+
+<section class="block reveal"><h2>1. 音がこもる・電話みたいな音になる（マイク使用時）</h2>
+<p>いちばん誤解されやすい症状です。Bluetoothイヤホンのマイクを使うと、Windowsが <strong>通話用のモード（ハンズフリー）</strong> に切り替わります。このモードは音声を双方向で送るために音質を大きく落とすので、音楽やゲーム音が急にこもって聞こえます。</p>
+<ul><li>Windowsのサウンド設定で、出力デバイスにイヤホンの <strong>「ステレオ」側</strong>（名前に Hands-Free / ハンズフリー が付かない方）を選ぶ</li>
+<li>マイクはイヤホンではなく、<strong>PC内蔵マイクや別のマイク</strong>を使う</li>
+<li>Web会議アプリ側のスピーカー・マイク設定も同じように見直す</li></ul>
+<div class="callout good">ゲームや会議でマイクも音質も妥協したくないなら、Bluetoothではなく、有線や専用ドングル（2.4GHz）接続のヘッドセットやマイクを分ける方が確実です。</div></section>
+
+<section class="block reveal"><h2>2. 途切れる・ブツブツ切れる（電波の問題）</h2>
+<p>Bluetoothは2.4GHz帯の電波を使うため、同じ帯域を使う機器や障害物の影響を受けやすいです。</p>
+<ul><li><strong>距離と障害物</strong>：PC本体とイヤホンの間に体や壁があると切れやすい。PCに近づいて改善するか試す</li>
+<li><strong>Wi-Fiの2.4GHz帯</strong>：PCのWi-Fiを5GHz帯につなぎ替えると改善することがある</li>
+<li><strong>USB 3.0機器・ケーブル</strong>：USB 3.0の機器や端子の近くは2.4GHz帯にノイズが出ることがある。USBのBluetoothアダプタを使っているなら、延長ケーブルで機器から離す</li>
+<li><strong>デスクトップPC</strong>：本体背面のBluetoothは金属ケースに遮られやすい。アンテナ付きのアダプタやUSB延長で位置を変える</li></ul></section>
+
+<section class="block reveal"><h2>3. 省電力設定で切れる</h2>
+<p>しばらく音を出さないと切れる、スリープ復帰後につながらない、という場合はWindowsの省電力機能が原因のことがあります。</p>
+<ol><li>デバイスマネージャーを開き、Bluetoothのアダプタを右クリック → プロパティ</li>
+<li>「電源の管理」タブで、<strong>「電力の節約のために、コンピューターでこのデバイスの電源をオフにできるようにする」</strong> のチェックを外す</li></ol>
+<p>同じ設定がUSBハブ（USBルートハブ）にもある場合は、そちらも見直します。</p></section>
+
+<section class="block reveal"><h2>4. それでもダメなとき</h2>
+<ul><li><strong>ペアリングをやり直す</strong>：Windowsのデバイス一覧から一度削除して、再度ペアリング</li>
+<li><strong>スマホとの同時接続を切る</strong>：マルチポイント接続中だと、スマホ側の通知などで切り替わることがある</li>
+<li><strong>Bluetoothドライバーの更新</strong>：PCメーカーまたはチップメーカーの公式サイトから</li>
+<li><strong>イヤホンのファームウェア更新</strong>：メーカーのアプリで更新できる機種が多い</li>
+<li><strong>別の機器で試す</strong>：スマホでは途切れないならPC側、スマホでも途切れるならイヤホン側の問題と切り分けられる</li></ul></section>
+
+<section class="block reveal"><h2>ゲームの音が遅れる場合</h2>
+<p>途切れではなく「音が遅れる」場合は、Bluetoothの仕組み上どうしても遅延が出やすいことが原因です。動画は映像側で補正されることがありますが、ゲームでは補正されません。対戦ゲームでは、有線や低遅延をうたう接続の機器を選ぶのが確実です。音楽用イヤホンでゲームをするときの考え方は <a href="article-valorant-earphone-tws.html">高級ワイヤレスイヤホンでVALORANTは戦えるか</a> にまとめています。</p></section>
+
+<section class="block reveal"><h2>❓ よくある質問</h2>
+<details><summary>出力デバイスにイヤホンが2つ表示される</summary><p>多くの場合、音楽用（ステレオ）と通話用（ハンズフリー）の2つです。普段の再生はステレオ側を選びます。マイクを使うと自動で通話用に切り替わることがあります。</p></details>
+<details><summary>Bluetoothアダプタを買い替えれば直る?</summary><p>アダプタの位置や古さが原因なら改善することがあります。ただ、マイク使用時に音がこもる症状は、アダプタを替えても基本的には変わりません。まずは原因を切り分けてから判断しましょう。</p></details></section>
+
+<section class="block reveal"><h2>まとめ</h2>
+<p>音がこもるなら <strong>ハンズフリーへの切り替え</strong>、途切れるなら <strong>電波と距離</strong>、しばらくすると切れるなら <strong>省電力設定</strong> をまず疑う。この3つで多くの症状は説明できます。</p>
+<p class="disclaimer">※Windowsのメニュー名はバージョンによって異なる場合があります。イヤホンの機能や接続方式は機種ごとに異なるため、メーカーの案内もご確認ください。</p></section>
+
+<h2>関連記事</h2><div class="related"><a href="article-valorant-earphone-tws.html">高級ワイヤレスイヤホンでVALORANTは戦えるか</a><a href="external-monitor-not-detected.html">ノートPCで外部モニターが映らないときの確認順</a><a href="controller-right-stick-not-working.html">コントローラーの右スティックが反応しないとき</a></div>
+<a class="back" href="archive.html">← 記事一覧へ戻る</a>
+</div></section></main><footer class="footer"><div class="wrap footer-row"><div>© 2026 ガジェット天国</div><div class="footer-links"><a href="about.html">運営者情報</a><a href="review-policy.html">レビュー方針</a><a href="ad-policy.html">広告ポリシー</a><a href="privacy.html">プライバシー</a><a href="contact.html">お問い合わせ</a><a href="feed.xml">RSS</a></div></div></footer>
+<script>
+(function(){var io='IntersectionObserver'in window?new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var t=e.target;t.classList.add('in');t.querySelectorAll('.bar-fill').forEach(function(b){b.style.width=b.dataset.w+'%'});t.querySelectorAll('.num[data-count]').forEach(function(n){var g=parseFloat(n.dataset.count),f=!Number.isInteger(g),c=0,s=g/40||1;(function k(){c=Math.min(g,c+s);n.textContent=f?c.toFixed(1):Math.floor(c);if(c<g)requestAnimationFrame(k)})()});io.unobserve(t)})},{threshold:.15}):null;
+document.querySelectorAll('.reveal').forEach(function(el){if(io)io.observe(el);else{el.classList.add('in');el.querySelectorAll('.bar-fill').forEach(function(b){b.style.width=b.dataset.w+'%'});el.querySelectorAll('.num[data-count]').forEach(function(n){n.textContent=n.dataset.count})}})})();
+</script>
+</body></html>

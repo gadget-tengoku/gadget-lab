@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja"><head><script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0N6LDFJV5"></script><script src="analytics.js"></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ノートPCで外部モニターが映らないときの確認順｜USB-C・HDMI・Windows設定｜ガジェット天国</title>
+<meta name="description" content="外部モニターが「信号なし」で映らないときに、入力切替、ケーブル、USB-Cの映像出力対応、Windowsの表示設定を順番に確認する方法。">
+<link rel="canonical" href="https://gadget-tengoku.com/external-monitor-not-detected.html">
+<meta property="og:type" content="article"><meta property="og:title" content="ノートPCで外部モニターが映らないときの確認順｜USB-C・HDMI・Windows設定"><meta property="og:description" content="外部モニターが「信号なし」で映らないときに、入力切替、ケーブル、USB-Cの映像出力対応、Windowsの表示設定を順番に確認する方法。">
+<meta property="og:image" content="https://gadget-tengoku.com/ogp.png"><meta property="og:url" content="https://gadget-tengoku.com/external-monitor-not-detected.html">
+<meta property="og:locale" content="ja_JP"><meta property="og:site_name" content="ガジェット天国"><meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#0b1020">
+<link rel="stylesheet" href="site.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" href="/feed.xml" type="application/rss+xml" title="ガジェット天国 RSS">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3514849475707540" crossorigin="anonymous"></script>
+<style>
+.article-hero{padding:74px 0 38px}.article-hero h1{font-size:clamp(2rem,5vw,3.65rem);line-height:1.25;margin:.65rem 0 1rem;max-width:960px}.meta{color:var(--muted);font-size:.9rem}.content{max-width:850px}.content h2{font-size:1.7rem;line-height:1.45;margin:56px 0 16px}.content h3{font-size:1.2rem;margin:34px 0 10px}.content p,.content li{color:#d6dcef}.content ul,.content ol{padding-left:1.35rem}.content li{margin:.55rem 0}.lead{font-size:1.09rem}.toc,.answer-box,.check,.faq-item{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin:24px 0}.answer-box{border-color:rgba(114,230,177,.55);background:linear-gradient(135deg,rgba(114,230,177,.1),rgba(123,167,255,.06))}.answer-box b,.check b{display:block;color:var(--accent);margin-bottom:6px}.toc b{display:block;margin-bottom:8px}.toc a,.content a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}.warning{border:1px solid #67572c;background:rgba(255,212,121,.08);border-radius:14px;padding:18px 20px;color:#f6e8be;margin:24px 0}.note{border-left:4px solid var(--accent2);padding:4px 0 4px 18px;margin:24px 0;color:#d6dcef}.summary-table{width:100%;border-collapse:collapse;margin:20px 0}.summary-table th,.summary-table td{border:1px solid var(--line);padding:12px;text-align:left;vertical-align:top}.summary-table th{background:var(--panel2)}.step{display:grid;grid-template-columns:44px 1fr;gap:14px;margin:20px 0}.step-num{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#07120e;font-weight:900}.step h3{margin:3px 0 8px}.related{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.related a{display:block;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;text-decoration:none}.faq-item h3{margin:0 0 8px}.back{display:inline-block;margin-top:42px;color:var(--accent);font-weight:800}.affiliate-box{display:grid;grid-template-columns:180px 1fr;gap:20px;align-items:center;background:#fff;border:1px solid #95a5a6;border-radius:16px;padding:18px;margin:26px 0;color:#111}.affiliate-box img{width:100%;height:auto;border-radius:10px;display:block}.affiliate-box h3{color:#111;margin:0 0 10px;font-size:1.08rem;line-height:1.5}.affiliate-box p{color:#444;margin:0 0 12px;font-size:.95rem}.affiliate-btn{display:inline-block;background:#bf0000;color:#fff!important;text-decoration:none!important;font-weight:800;padding:12px 20px;border-radius:999px}.affiliate-note{font-size:.82rem;color:#666;margin-top:10px}.affiliate-label{display:inline-block;font-size:.75rem;font-weight:800;color:#111;background:#ffd479;border-radius:999px;padding:4px 9px;margin-bottom:10px}@media(max-width:760px){.article-hero{padding-top:54px}.summary-table{font-size:.88rem}.related{grid-template-columns:1fr}.step{grid-template-columns:38px 1fr}.affiliate-box{grid-template-columns:1fr}.affiliate-box img{max-width:240px;margin:auto}}
+
+.affiliate-box.noimg{grid-template-columns:1fr}
+.conclusion{background:linear-gradient(135deg,rgba(114,230,177,.1),rgba(123,167,255,.06));border:1px solid rgba(114,230,177,.55);border-radius:16px;padding:20px 24px;margin:24px 0}
+.conclusion h3{margin:0 0 8px;color:var(--accent);font-size:1.1rem}
+.content mark{background:linear-gradient(transparent 58%,rgba(114,230,177,.35) 58%);color:var(--text);padding:0 .1em}
+.callout{border-radius:14px;padding:16px 20px;margin:22px 0;border:1px solid var(--line);color:#d6dcef}
+.callout.good{border-left:4px solid var(--accent);background:rgba(114,230,177,.06)}
+.callout.warn{border:1px solid #67572c;background:rgba(255,212,121,.08);color:#f6e8be}
+.spec-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin:24px 0}
+.spec-card h3{margin-top:0}
+.bar-row{margin:14px 0}.bar-label{display:flex;justify-content:space-between;font-weight:700;font-size:.92rem;margin-bottom:6px}
+.bar-label .val{color:var(--accent)}.bar-track{height:8px;background:var(--panel2);border-radius:6px;overflow:hidden}
+.bar-fill{height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center}
+.stat .num{font-weight:900;font-size:1.8rem;color:var(--accent)}.stat .unit{font-size:.95rem}
+.stat .lbl{font-size:.8rem;color:var(--muted);margin-top:2px}
+.table-wrap{overflow-x:auto;margin:20px 0}.table-wrap table{width:100%;border-collapse:collapse;min-width:460px}
+.table-wrap th,.table-wrap td{border:1px solid var(--line);padding:12px;text-align:left;vertical-align:top}
+.table-wrap th{background:var(--panel2)}.table-wrap td{color:#d6dcef}
+details{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin:12px 0;overflow:hidden}
+summary{font-weight:800;padding:16px 20px;cursor:pointer;list-style:none;position:relative;padding-right:44px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);color:var(--accent);font-size:1.3rem;transition:transform .25s}
+details[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+details>p{padding:0 20px 16px;margin:0}
+.disclaimer{font-size:.84rem;color:var(--muted)!important;border-top:1px solid var(--line);padding-top:16px;margin-top:36px}
+.source-tag{display:inline-block;font-size:.78rem;font-weight:800;color:#07120e;background:var(--accent);border-radius:999px;padding:3px 10px;margin-right:6px}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.bar-fill{transition:none}}
+@media(max-width:760px){.stat-grid{grid-template-columns:1fr}}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "ノートPCで外部モニターが映らないときの確認順｜USB-C・HDMI・Windows設定", "description": "外部モニターが「信号なし」で映らないときに、入力切替、ケーブル、USB-Cの映像出力対応、Windowsの表示設定を順番に確認する方法。", "datePublished": "2026-11-16", "dateModified": "2026-11-16", "author": {"@type": "Person", "name": "ガジェット天国 管理人", "url": "https://gadget-tengoku.com/about.html"}, "publisher": {"@type": "Organization", "name": "ガジェット天国", "url": "https://gadget-tengoku.com/"}, "mainEntityOfPage": "https://gadget-tengoku.com/external-monitor-not-detected.html"}</script>
+</head><body><a class="skip-link" href="#main">本文へ移動</a><header class="header"><div class="wrap header-inner"><a class="logo" href="/">Gadget<span>天国</span></a><nav aria-label="メインナビゲーション"><a href="/">ホーム</a><a href="archive.html">記事</a><a href="about.html">運営者</a><a href="review-policy.html">レビュー方針</a><a href="contact.html">お問い合わせ</a></nav></div></header><main id="main">
+<section class="article-hero"><div class="wrap content"><div class="eyebrow">PC WORK · MONITOR</div><h1>ノートPCで外部モニターが映らないときの確認順｜USB-C・HDMI・Windows設定</h1>
+<div class="meta">公開：2026年11月16日　更新：2026年11月16日　／　執筆：ガジェット天国 管理人</div></div></section>
+<section class="section" style="padding-top:10px"><div class="wrap content">
+<p class="lead">外部モニターが「信号なし」で映らないときに、入力切替、ケーブル、USB-Cの映像出力対応、Windowsの表示設定を順番に確認する方法。上から順に試せるように並べています。</p>
+<div class="note"><span class="source-tag">調査・手順</span>この記事は、OS・メーカーの公開情報と一般的な切り分け手順をもとにまとめたものです。特定製品の実機レビューではありません。</div>
+<section class="block reveal"><div class="conclusion"><h3>📌 先に結論</h3>
+<p>外部モニターが映らない原因は、ほとんどが <mark>「入力切替」「端子・ケーブルの対応」「Windowsの表示設定」</mark> のどれかです。故障を疑う前に、上から順に確認すれば多くは数分で解決します。</p>
+<p>特にノートPCのUSB-C接続は要注意。<strong>USB-C端子なら何でも映像が出るわけではありません</strong>。</p></div></section>
+
+<section class="block reveal"><h2>1. モニター側の入力切替と電源</h2>
+<p>一番多いのがこれです。モニターは複数の入力（HDMI1、HDMI2、DisplayPortなど）を持っていて、<strong>今つないだ端子とは別の入力を表示している</strong>と「信号なし」になります。</p>
+<ul><li>モニターのボタンやメニューで、入力をつないだ端子に切り替える</li>
+<li>モニターの電源ランプが点いているか（スタンバイの色のままになっていないか）</li>
+<li>自動入力検出がオフになっていないか</li></ul></section>
+
+<section class="block reveal"><h2>2. ケーブルを挿し直し、別のケーブルで試す</h2>
+<p>半挿しや接触不良は意外と多いです。両端をしっかり挿し直し、可能なら <strong>別のケーブル</strong> でも試します。ケーブルが原因かどうかを切り分けられるのが大きいです。</p>
+<div class="table-wrap"><table><thead><tr><th>やりたいこと</th><th>確認ポイント</th></tr></thead><tbody>
+<tr><td>4K・60Hzで映したい</td><td>HDMIなら2.0以上対応のケーブル・端子か。DisplayPortなら多くの場合問題なし</td></tr>
+<tr><td>144Hz・240Hzなど高リフレッシュレート</td><td>モニターとPCの両方がその端子でそのHzに対応しているか。DisplayPort推奨のモニターが多い</td></tr>
+<tr><td>変換アダプタを使っている</td><td>変換の向き（PC側→モニター側）と対応解像度。安価な変換で映らない・30Hzになる例がある</td></tr>
+</tbody></table></div></section>
+
+<section class="block reveal"><h2>3. ノートPCのUSB-Cは「映像出力対応」か</h2>
+<p>USB-C端子は形が同じでも、中身の機能が端子ごとに違います。<strong>充電やデータ転送専用で、映像が出ない端子</strong>もあります。</p>
+<ul><li>端子の横に <strong>DisplayPortのマーク</strong> や <strong>Thunderbolt（稲妻）マーク</strong> があれば、映像出力に対応している可能性が高い</li>
+<li>マークがなければ、PCメーカーの仕様表で「DisplayPort Alt Mode対応」「映像出力対応」と書かれているか確認</li>
+<li>USB-Cポートが複数ある場合、<strong>映像が出るのは一部の端子だけ</strong>ということもある</li></ul>
+<div class="callout warn">USB-C→HDMIの変換ケーブルを使う場合も、PC側のUSB-C端子が映像出力に対応していなければ映りません。変換ケーブルの故障を疑う前に、端子の対応を確認してください。</div></section>
+
+<section class="block reveal"><h2>4. Windowsの表示設定を確認する</h2>
+<p>ケーブルが正しくても、Windows側で外部モニターに表示しない設定になっていることがあります。</p>
+<ol><li><strong>Windowsキー + P</strong> を押し、「拡張」または「複製」を選ぶ（「PC画面のみ」になっていると外部モニターは映りません）</li>
+<li>設定 → システム → ディスプレイ を開き、「複数のディスプレイ」の中の <strong>「検出」</strong> を押す</li>
+<li>モニターが認識されたら、解像度とリフレッシュレート（ディスプレイの詳細設定）が適切か確認</li></ol></section>
+
+<section class="block reveal"><h2>5. それでも映らないとき</h2>
+<ul><li><strong>PCを再起動</strong>する（ケーブルを挿したまま起動すると認識されることがある）</li>
+<li><strong>グラフィックドライバーを更新</strong>する（PCメーカーまたはGPUメーカーの公式サイトから）</li>
+<li><strong>別のPC・別のモニター</strong>で試し、どちら側の問題かを切り分ける</li>
+<li>ドッキングステーションやUSBハブ経由なら、<strong>一度PCに直接</strong>つないで試す</li></ul>
+<p>別のPCでも映らないならモニター側、別のモニターなら映るならPCかケーブル側、という形で原因の場所が絞れます。</p></section>
+
+<section class="block"><div class="affiliate-box noimg"><div><span class="affiliate-label">PR・楽天アフィリエイト</span><h3>USB-C→HDMI/DisplayPortの変換ケーブルを探す</h3><p>PC側のUSB-C端子が映像出力（DisplayPort Alt Mode / Thunderbolt）に対応していることを確認してから選んでください。4K・高リフレッシュレートで使うなら対応解像度とHzも確認を。</p><a class="affiliate-btn" href="https://hb.afl.rakuten.co.jp/hgc/55446103.f1d7a4e7.55446104.0eaa6172/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2FUSB-C%2520HDMI%2520%25E5%25A4%2589%25E6%258F%259B%25E3%2582%25B1%25E3%2583%25BC%25E3%2583%2596%25E3%2583%25AB%25204K%252060Hz%2F&amp;m=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2FUSB-C%2520HDMI%2520%25E5%25A4%2589%25E6%258F%259B%25E3%2582%25B1%25E3%2583%25BC%25E3%2583%2596%25E3%2583%25AB%25204K%252060Hz%2F" rel="nofollow sponsored noopener" target="_blank">楽天市場で価格を見る</a><div class="affiliate-note">楽天市場の検索結果に移動します。価格・仕様・在庫は販売店ごとに異なります。</div></div></div></section><section class="block reveal"><h2>❓ よくある質問</h2>
+<details><summary>映るけど解像度が低い・画面がぼやける</summary><p>Windowsの「ディスプレイの解像度」がモニター本来の解像度（推奨と表示されているもの）になっているか確認します。変換アダプタやケーブルの対応上限で、高い解像度が選べないこともあります。</p></details>
+<details><summary>144Hzのモニターなのに60Hzになる</summary><p>ディスプレイの詳細設定でリフレッシュレートを選び直します。選択肢に出ない場合は、端子・ケーブル・変換アダプタがそのHzに対応していない可能性があります。ゲーム用途の詳しい確認は <a href="valorant-240hz-monitor-guide.html">240Hzモニターの選び方</a> も参考にしてください。</p></details>
+<details><summary>スリープから復帰すると外部モニターが映らない</summary><p>モニターの省電力機能やディープスリープ設定が影響していることがあります。モニターのメニューで省電力設定を見直す、ケーブルを挿し直す、ドライバーを更新する、を順に試してください。</p></details></section>
+
+<section class="block reveal"><h2>まとめ</h2>
+<p>外部モニターが映らないときは、<strong>入力切替 → ケーブル → USB-Cの対応 → Windowsの表示設定 → 再起動とドライバー</strong> の順で確認すれば、多くは解決します。いきなり買い替えず、どこが原因かを切り分けてからにしましょう。</p>
+<p class="disclaimer">※Windowsのメニュー名はバージョンによって異なる場合があります。PCやモニターの対応状況は機種ごとに違うため、メーカーの仕様表をご確認ください。</p></section>
+
+<h2>関連記事</h2><div class="related"><a href="valorant-240hz-monitor-guide.html">VALORANT向け240Hzモニターの選び方</a><a href="usb-c-laptop-not-charging.html">USB-C充電器でノートPCが充電されないときの確認</a><a href="keyboard-not-responding-windows.html">キーボードが反応しないときの確認順</a></div>
+<a class="back" href="archive.html">← 記事一覧へ戻る</a>
+</div></section></main><footer class="footer"><div class="wrap footer-row"><div>© 2026 ガジェット天国</div><div class="footer-links"><a href="about.html">運営者情報</a><a href="review-policy.html">レビュー方針</a><a href="ad-policy.html">広告ポリシー</a><a href="privacy.html">プライバシー</a><a href="contact.html">お問い合わせ</a><a href="feed.xml">RSS</a></div></div></footer>
+<script>
+(function(){var io='IntersectionObserver'in window?new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var t=e.target;t.classList.add('in');t.querySelectorAll('.bar-fill').forEach(function(b){b.style.width=b.dataset.w+'%'});t.querySelectorAll('.num[data-count]').forEach(function(n){var g=parseFloat(n.dataset.count),f=!Number.isInteger(g),c=0,s=g/40||1;(function k(){c=Math.min(g,c+s);n.textContent=f?c.toFixed(1):Math.floor(c);if(c<g)requestAnimationFrame(k)})()});io.unobserve(t)})},{threshold:.15}):null;
+document.querySelectorAll('.reveal').forEach(function(el){if(io)io.observe(el);else{el.classList.add('in');el.querySelectorAll('.bar-fill').forEach(function(b){b.style.width=b.dataset.w+'%'});el.querySelectorAll('.num[data-count]').forEach(function(n){n.textContent=n.dataset.count})}})})();
+</script>
+</body></html>

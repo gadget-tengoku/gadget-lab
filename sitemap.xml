@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://gadget-tengoku.com/</loc><lastmod>2026-06-27</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://gadget-tengoku.com/archive.html</loc><lastmod>2026-06-27</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://gadget-tengoku.com/</loc><lastmod>2026-11-16</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://gadget-tengoku.com/archive.html</loc><lastmod>2026-11-16</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
   <url><loc>https://gadget-tengoku.com/about.html</loc><lastmod>2026-06-27</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://gadget-tengoku.com/review-policy.html</loc><lastmod>2026-06-27</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://gadget-tengoku.com/ad-policy.html</loc><lastmod>2026-06-27</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -14,4 +14,14 @@
   <url><loc>https://gadget-tengoku.com/pico4-steamvr-double-screen.html</loc><lastmod>2026-06-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://gadget-tengoku.com/keyboard-not-responding-windows.html</loc><lastmod>2026-06-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://gadget-tengoku.com/controller-right-stick-not-working.html</loc><lastmod>2026-06-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gadget-tengoku.com/valorant-graphics-settings.html</loc><lastmod>2026-11-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gadget-tengoku.com/article-gaming-chair-akracing.html</loc><lastmod>2026-11-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gadget-tengoku.com/article-valorant-keyboard-wooting.html</loc><lastmod>2026-11-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gadget-tengoku.com/article-valorant-earphone-tws.html</loc><lastmod>2026-11-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gadget-tengoku.com/article-valorant-gaming-mouse-guide.html</loc><lastmod>2026-11-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gadget-tengoku.com/article-valorant-monitor-240hz.html</loc><lastmod>2026-11-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gadget-tengoku.com/external-monitor-not-detected.html</loc><lastmod>2026-11-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gadget-tengoku.com/bluetooth-earphone-pc-dropout.html</loc><lastmod>2026-11-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gadget-tengoku.com/usb-c-laptop-not-charging.html</loc><lastmod>2026-11-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gadget-tengoku.com/quest-pc-vr-stutter.html</loc><lastmod>2026-11-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
