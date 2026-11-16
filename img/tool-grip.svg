@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#121a36"/><stop offset="1" stop-color="#0b1020"/></linearGradient>
+<linearGradient id="ill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff7bb0"/><stop offset="1" stop-color="#e0457f"/></linearGradient>
+<radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ff7bb0" stop-opacity=".45"/><stop offset="1" stop-color="#ff7bb0" stop-opacity="0"/></radialGradient>
+<pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="2" fill="#fff" opacity=".06"/></pattern></defs>
+<rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#dots)"/>
+<circle cx="920" cy="320" r="330" fill="url(#glow)"/>
+<g transform="translate(64,96)"><rect width="206" height="58" rx="29" fill="url(#ill)"/>
+<text x="28" y="40" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="30" fill="#0b1020">30秒診断</text></g>
+<text x="64" y="270" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="92" fill="#fff">あなたの</text>
+<text x="64" y="385" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="92" fill="#ff7bb0">持ち方は？</text>
+<text x="64" y="470" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="700" font-size="30" fill="#aab4d4">かぶせ・つかみ・つまみ</text>
+<rect x="64" y="520" width="120" height="8" rx="4" fill="url(#ill)"/>
+<text x="204" y="532" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="800" font-size="26" fill="#ffffff" opacity=".8">ガジェット天国</text>
+<g transform="translate(690,85)"><g transform="translate(110,20)">
+<ellipse cx="120" cy="420" rx="110" ry="16" fill="#000" opacity=".35"/>
+<path d="M120 20 C40 20 20 110 20 210 C20 330 60 410 120 410 C180 410 220 330 220 210 C220 110 200 20 120 20Z" fill="url(#ill)" stroke="#fff" stroke-opacity=".25" stroke-width="3"/>
+<path d="M120 22 V160" stroke="#0b1020" stroke-width="5" opacity=".55"/>
+<path d="M24 165 Q120 185 216 165" stroke="#0b1020" stroke-width="5" fill="none" opacity=".45"/>
+<rect x="106" y="62" width="28" height="62" rx="14" fill="#0b1020" opacity=".8"/>
+<rect x="113" y="74" width="14" height="22" rx="7" fill="#ff7bb0"/>
+<path d="M60 60 Q75 40 100 34" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity=".45" fill="none"/>
+</g>
+<g stroke="#ff7bb0" stroke-width="7" stroke-linecap="round" opacity=".8"><path d="M40 170 h50"/><path d="M20 230 h70"/><path d="M45 290 h45"/></g></g></svg>
