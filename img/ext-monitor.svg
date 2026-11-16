@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#121a36"/><stop offset="1" stop-color="#0b1020"/></linearGradient>
+<linearGradient id="ill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7ba7ff"/><stop offset="1" stop-color="#4a6fe0"/></linearGradient>
+<radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#7ba7ff" stop-opacity=".45"/><stop offset="1" stop-color="#7ba7ff" stop-opacity="0"/></radialGradient>
+<pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="2" fill="#fff" opacity=".06"/></pattern></defs>
+<rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#dots)"/>
+<circle cx="920" cy="320" r="330" fill="url(#glow)"/>
+<g transform="translate(64,96)"><rect width="296" height="58" rx="29" fill="url(#ill)"/>
+<text x="28" y="40" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="30" fill="#0b1020">PCトラブル解決</text></g>
+<text x="64" y="270" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="92" fill="#fff">モニターが</text>
+<text x="64" y="385" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="92" fill="#7ba7ff">映らない！</text>
+<text x="64" y="470" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="700" font-size="30" fill="#aab4d4">USB-C・HDMI・Windows設定</text>
+<rect x="64" y="520" width="120" height="8" rx="4" fill="url(#ill)"/>
+<text x="204" y="532" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="800" font-size="26" fill="#ffffff" opacity=".8">ガジェット天国</text>
+<g transform="translate(690,85)"><ellipse cx="230" cy="440" rx="200" ry="14" fill="#000" opacity=".35"/>
+<rect x="150" y="40" width="300" height="200" rx="16" fill="url(#ill)"/><rect x="162" y="52" width="276" height="176" rx="8" fill="#0f1730"/>
+<text x="300" y="175" text-anchor="middle" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="110" fill="#fff">?</text>
+<rect x="285" y="240" width="30" height="40" fill="#2a3557"/><rect x="240" y="278" width="120" height="14" rx="7" fill="#2a3557"/>
+<path d="M30 300 h170 l20 110 h-210z" fill="#2a3557"/><rect x="40" y="250" width="150" height="100" rx="10" fill="#1b2440" stroke="#fff" stroke-opacity=".2"/>
+<path d="M200 360 C260 360 250 300 300 300" stroke="#7ba7ff" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="4 18"/>
+<g stroke="#ff7bb0" stroke-width="10" stroke-linecap="round"><path d="M250 320 l24 24 M274 320 l-24 24"/></g></g></svg>

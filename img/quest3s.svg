@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#121a36"/><stop offset="1" stop-color="#0b1020"/></linearGradient>
+<linearGradient id="ill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#72e6b1"/><stop offset="1" stop-color="#2fbf8a"/></linearGradient>
+<radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#72e6b1" stop-opacity=".45"/><stop offset="1" stop-color="#72e6b1" stop-opacity="0"/></radialGradient>
+<pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="2" fill="#fff" opacity=".06"/></pattern></defs>
+<rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#dots)"/>
+<circle cx="920" cy="320" r="330" fill="url(#glow)"/>
+<g transform="translate(64,96)"><rect width="296" height="58" rx="29" fill="url(#ill)"/>
+<text x="28" y="40" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="30" fill="#0b1020">Quest 3S</text></g>
+<text x="64" y="262" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="64" fill="#fff">SteamVRを</text>
+<text x="64" y="385" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="92" fill="#72e6b1">始める準備</text>
+<text x="64" y="470" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="700" font-size="30" fill="#aab4d4">有線・無線の違い</text>
+<rect x="64" y="520" width="120" height="8" rx="4" fill="url(#ill)"/>
+<text x="204" y="532" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="800" font-size="26" fill="#ffffff" opacity=".8">ガジェット天国</text>
+<g transform="translate(690,85)"><ellipse cx="230" cy="430" rx="190" ry="14" fill="#000" opacity=".35"/>
+<path d="M60 170 Q60 110 130 110 H330 Q400 110 400 170 V280 Q400 330 340 330 H275 Q250 330 240 300 Q230 280 220 300 Q210 330 185 330 H120 Q60 330 60 280Z" fill="url(#ill)" stroke="#fff" stroke-opacity=".3" stroke-width="3"/>
+<rect x="90" y="150" width="280" height="40" rx="20" fill="#0b1020" opacity=".35"/>
+<path d="M60 200 H20 M400 200 H440" stroke="#2a3557" stroke-width="22" stroke-linecap="round"/>
+<g stroke="#72e6b1" stroke-width="9" fill="none" stroke-linecap="round"><path d="M170 70 q60 -45 120 0" opacity=".9"/><path d="M130 40 q100 -70 200 0" opacity=".4"/></g>
+<g stroke="#ff7bb0" stroke-width="10" stroke-linecap="round"><path d="M320 360 l26 26 M346 360 l-26 26"/></g></g></svg>

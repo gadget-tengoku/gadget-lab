@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#121a36"/><stop offset="1" stop-color="#0b1020"/></linearGradient>
+<linearGradient id="ill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b18cff"/><stop offset="1" stop-color="#7a52e0"/></linearGradient>
+<radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#b18cff" stop-opacity=".45"/><stop offset="1" stop-color="#b18cff" stop-opacity="0"/></radialGradient>
+<pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="2" fill="#fff" opacity=".06"/></pattern></defs>
+<rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#dots)"/>
+<circle cx="920" cy="320" r="330" fill="url(#glow)"/>
+<g transform="translate(64,96)"><rect width="446" height="58" rx="29" fill="url(#ill)"/>
+<text x="28" y="40" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="30" fill="#0b1020">VALORANT 画質設定</text></g>
+<text x="64" y="262" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="64" fill="#fff">FPSも見やすさも</text>
+<text x="64" y="385" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="92" fill="#b18cff">両取りする</text>
+<text x="64" y="470" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="700" font-size="30" fill="#aab4d4">設定項目ごとの考え方</text>
+<rect x="64" y="520" width="120" height="8" rx="4" fill="url(#ill)"/>
+<text x="204" y="532" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="800" font-size="26" fill="#ffffff" opacity=".8">ガジェット天国</text>
+<g transform="translate(690,85)"><rect x="10" y="40" width="440" height="380" rx="28" fill="#0f1730" stroke="url(#ill)" stroke-width="6"/><rect x="40" y="90" width="380" height="14" rx="7" fill="#1b2440"/><rect x="40" y="90" width="76" height="14" rx="7" fill="#b18cff"/><circle cx="116" cy="97" r="24" fill="#fff" stroke="#b18cff" stroke-width="8"/><rect x="40" y="175" width="380" height="14" rx="7" fill="#1b2440"/><rect x="40" y="175" width="285" height="14" rx="7" fill="#7a52e0"/><circle cx="325" cy="182" r="24" fill="#fff" stroke="#7a52e0" stroke-width="8"/><rect x="40" y="260" width="380" height="14" rx="7" fill="#1b2440"/><rect x="40" y="260" width="171" height="14" rx="7" fill="#b18cff"/><circle cx="211" cy="267" r="24" fill="#fff" stroke="#b18cff" stroke-width="8"/><rect x="40" y="345" width="380" height="14" rx="7" fill="#1b2440"/><rect x="40" y="345" width="342" height="14" rx="7" fill="#7a52e0"/><circle cx="382" cy="352" r="24" fill="#fff" stroke="#7a52e0" stroke-width="8"/></g></svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#121a36"/><stop offset="1" stop-color="#0b1020"/></linearGradient>
+<linearGradient id="ill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff7bb0"/><stop offset="1" stop-color="#e0457f"/></linearGradient>
+<radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ff7bb0" stop-opacity=".45"/><stop offset="1" stop-color="#ff7bb0" stop-opacity="0"/></radialGradient>
+<pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="2" fill="#fff" opacity=".06"/></pattern></defs>
+<rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#dots)"/>
+<circle cx="920" cy="320" r="330" fill="url(#glow)"/>
+<g transform="translate(64,96)"><rect width="446" height="58" rx="29" fill="url(#ill)"/>
+<text x="28" y="40" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="30" fill="#0b1020">AKRacing 5年使用</text></g>
+<text x="64" y="270" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="92" fill="#fff">5年座っても</text>
+<text x="64" y="385" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="92" fill="#ff7bb0">ヘタらない</text>
+<text x="64" y="470" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="700" font-size="30" fill="#aab4d4">長期使用の正直レビュー</text>
+<rect x="64" y="520" width="120" height="8" rx="4" fill="url(#ill)"/>
+<text x="204" y="532" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="800" font-size="26" fill="#ffffff" opacity=".8">ガジェット天国</text>
+<g transform="translate(690,85)"><ellipse cx="230" cy="440" rx="160" ry="14" fill="#000" opacity=".35"/>
+<path d="M150 30 Q230 0 310 30 L320 250 Q230 270 140 250Z" fill="url(#ill)" stroke="#fff" stroke-opacity=".25" stroke-width="3"/>
+<path d="M185 60 Q230 45 275 60 L280 120 Q230 130 180 120Z" fill="#0b1020" opacity=".55"/>
+<path d="M195 150 L265 150 L270 235 Q230 245 190 235Z" fill="#0b1020" opacity=".35"/>
+<rect x="120" y="250" width="220" height="54" rx="20" fill="url(#ill)" stroke="#fff" stroke-opacity=".25" stroke-width="3"/>
+<rect x="90" y="190" width="26" height="90" rx="10" fill="#2a3557"/><rect x="344" y="190" width="26" height="90" rx="10" fill="#2a3557"/>
+<rect x="218" y="304" width="24" height="80" fill="#2a3557"/>
+<path d="M230 384 L110 420 M230 384 L350 420 M230 384 L170 430 M230 384 L290 430" stroke="#2a3557" stroke-width="14" stroke-linecap="round"/>
+<g font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" fill="#ff7bb0"><text x="20" y="110" font-size="64">5</text><text x="20" y="150" font-size="30">YEARS</text></g></g></svg>
