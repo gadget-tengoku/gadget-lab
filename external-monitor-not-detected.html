@@ -58,6 +58,41 @@ details>p{padding:0 20px 16px;margin:0}
 .writer p{margin:0;font-size:.92rem;color:var(--muted)}
 .content h2{position:relative;padding-left:16px}
 .content h2::before{content:"";position:absolute;left:0;top:.2em;bottom:.2em;width:6px;border-radius:3px;background:linear-gradient(var(--accent),var(--accent2))}
+
+.pbar{position:fixed;top:0;left:0;height:4px;width:0;z-index:999;background:linear-gradient(90deg,#72e6b1,#7ba7ff,#ff7bb0);box-shadow:0 0 12px #72e6b1}
+.grad{background:linear-gradient(90deg,#72e6b1,#7ba7ff,#ff7bb0,#72e6b1);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gradmove 6s linear infinite}
+@keyframes gradmove{to{background-position:300% 0}}
+.hero-img{animation:floaty 6s ease-in-out infinite}
+@keyframes floaty{50%{transform:translateY(-6px)}}
+.pcard{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:center;background:linear-gradient(135deg,rgba(114,230,177,.10),rgba(123,167,255,.08) 50%,rgba(255,123,176,.08));border:1px solid rgba(114,230,177,.45);border-radius:22px;padding:18px;margin:26px 0;position:relative;box-shadow:0 0 0 1px rgba(255,255,255,.03),0 18px 40px rgba(0,0,0,.35)}
+.pc-img{position:relative;display:block;background:#fff;border-radius:16px;overflow:hidden;aspect-ratio:1}
+.pc-img img{width:100%;height:100%;object-fit:contain;padding:10px;transition:transform .4s}
+.pc-img:hover img{transform:scale(1.07) rotate(-2deg)}
+.ribbon{position:absolute;top:10px;left:10px;z-index:1;font-size:.72rem;font-weight:900;color:#0b1020;background:linear-gradient(90deg,#ffd479,#ff7bb0);border-radius:999px;padding:4px 10px;box-shadow:0 4px 12px rgba(255,123,176,.45)}
+.pc-cat{font-size:.72rem;font-weight:900;letter-spacing:.12em;color:var(--accent);display:flex;gap:8px;align-items:center}
+.pc-cat .pr{font-size:.65rem;letter-spacing:0;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:0 5px}
+.pcard h3{margin:4px 0 8px;font-size:1.15rem;line-height:1.4}
+.pc-quote{font-weight:900;font-size:1.15rem;background:rgba(11,16,32,.6);border-left:4px solid #ff7bb0;border-radius:10px;padding:10px 14px;margin-bottom:10px}
+.pc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}.pc-tags span{font-size:.75rem;font-weight:800;color:#c9d3ef;background:var(--panel2);border-radius:999px;padding:3px 10px}
+.shine-btn{position:relative;overflow:hidden;display:inline-flex;gap:8px;align-items:center;font-weight:900;color:#0b1020!important;text-decoration:none!important;background:linear-gradient(90deg,#ff7bb0,#ffb36b);border-radius:14px;padding:13px 22px;box-shadow:0 8px 24px rgba(255,123,176,.45);transition:transform .15s}
+.shine-btn:hover{transform:translateY(-2px) scale(1.02)}
+.shine-btn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent);animation:shine 2.6s infinite}
+@keyframes shine{60%,100%{left:130%}}
+.pc-sub{display:inline-block;margin-left:14px;font-weight:800;font-size:.9rem}
+.pc-note{font-size:.75rem;color:var(--muted);margin-top:10px}
+.sticky-cta{position:fixed;left:10px;right:10px;bottom:10px;z-index:998;display:flex;gap:10px;align-items:center;background:rgba(18,26,54,.96);backdrop-filter:blur(8px);border:1px solid rgba(255,123,176,.55);border-radius:16px;padding:8px 10px;box-shadow:0 12px 30px rgba(0,0,0,.5);transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.sticky-cta.show{transform:none}
+.sticky-cta img{width:48px;height:48px;object-fit:contain;background:#fff;border-radius:10px;padding:3px}
+.sc-t{flex:1;min-width:0}.sc-t small{display:block;font-size:.66rem;color:var(--muted)}.sc-t b{display:block;font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sticky-cta a{font-weight:900;font-size:.85rem;color:#0b1020;text-decoration:none;background:linear-gradient(90deg,#ff7bb0,#ffb36b);border-radius:10px;padding:10px 12px;white-space:nowrap}
+.sticky-cta button{background:none;border:0;color:var(--muted);font-size:1.2rem;cursor:pointer;padding:0 4px}
+@media(min-width:900px){.sticky-cta{left:auto;width:420px;right:20px;bottom:20px}}
+.setup-banner{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:30px 0;padding:22px 24px;border-radius:20px;text-decoration:none!important;color:var(--text)!important;background:linear-gradient(120deg,#1d2a55,#3a1d4f);border:1px solid rgba(255,123,176,.5);box-shadow:0 14px 34px rgba(0,0,0,.4)}
+.setup-banner small{color:#ffd479;font-weight:900;letter-spacing:.14em;font-size:.72rem}.setup-banner b{display:block;font-size:1.15rem;margin:4px 0}
+.setup-banner span{font-size:.85rem;color:#c9d3ef}.setup-banner em{font-style:normal;font-weight:900;white-space:nowrap;color:#0b1020;background:#ffd479;border-radius:12px;padding:10px 14px}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}.reveal.in{opacity:1;transform:none}
+@media(max-width:640px){.pcard{grid-template-columns:1fr}.pc-img{max-width:260px;margin:0 auto;width:100%}.pc-sub{display:block;margin:12px 0 0}.setup-banner{flex-direction:column;align-items:flex-start}}
+@media(prefers-reduced-motion:reduce){.grad,.hero-img,.shine-btn::after{animation:none}}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "ノートPCで外部モニターが映らないときの確認順｜USB-C・HDMI・Windows設定", "description": "外部モニターが「信号なし」で映らないときに、入力切替、ケーブル、USB-Cの映像出力対応、Windowsの表示設定を順番に確認する方法。", "datePublished": "2026-11-16", "dateModified": "2026-11-16", "author": {"@type": "Person", "name": "ガジェット天国 管理人", "url": "https://gadget-tengoku.com/about.html"}, "publisher": {"@type": "Organization", "name": "ガジェット天国", "url": "https://gadget-tengoku.com/"}, "mainEntityOfPage": "https://gadget-tengoku.com/external-monitor-not-detected.html"}</script>
 </head><body><a class="skip-link" href="#main">本文へ移動</a><header class="header"><div class="wrap header-inner"><a class="logo" href="/">Gadget<span>天国</span></a><nav aria-label="メインナビゲーション"><a href="/">ホーム</a><a href="archive.html">記事</a><a href="about.html">運営者</a><a href="review-policy.html">レビュー方針</a><a href="contact.html">お問い合わせ</a></nav></div></header><main id="main">
@@ -113,11 +148,14 @@ details>p{padding:0 20px 16px;margin:0}
 <p>外部モニターが映らないときは、<strong>入力切替 → ケーブル → USB-Cの対応 → Windowsの表示設定 → 再起動とドライバー</strong> の順で確認すれば、多くは解決します。いきなり買い替えず、どこが原因かを切り分けてからにしましょう。</p>
 <p class="disclaimer">※Windowsのメニュー名はバージョンによって異なる場合があります。PCやモニターの対応状況は機種ごとに違うため、メーカーの仕様表をご確認ください。</p></section>
 
-<h2>関連記事</h2><div class="related"><a href="valorant-240hz-monitor-guide.html">VALORANT向け240Hzモニターの選び方</a><a href="usb-c-laptop-not-charging.html">USB-C充電器でノートPCが充電されないときの確認</a><a href="keyboard-not-responding-windows.html">キーボードが反応しないときの確認順</a></div>
+<a class="setup-banner reveal" href="setup.html"><div><small>MY SETUP</small><b>管理人の愛用ガジェット、全部見せます</b><span>マウス・キーボード・イヤホン・モニター・チェア</span></div><em>見てみる →</em></a><h2>関連記事</h2><div class="related"><a href="valorant-240hz-monitor-guide.html">VALORANT向け240Hzモニターの選び方</a><a href="usb-c-laptop-not-charging.html">USB-C充電器でノートPCが充電されないときの確認</a><a href="keyboard-not-responding-windows.html">キーボードが反応しないときの確認順</a></div>
 <a class="back" href="archive.html">← 記事一覧へ戻る</a>
 </div></section></main><footer class="footer"><div class="wrap footer-row"><div>© 2026 ガジェット天国</div><div class="footer-links"><a href="about.html">運営者情報</a><a href="review-policy.html">レビュー方針</a><a href="ad-policy.html">広告ポリシー</a><a href="privacy.html">プライバシー</a><a href="contact.html">お問い合わせ</a><a href="feed.xml">RSS</a></div></div></footer>
 <script>
 (function(){var io='IntersectionObserver'in window?new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var t=e.target;t.classList.add('in');t.querySelectorAll('.bar-fill').forEach(function(b){b.style.width=b.dataset.w+'%'});t.querySelectorAll('.num[data-count]').forEach(function(n){var g=parseFloat(n.dataset.count),f=!Number.isInteger(g),c=0,s=g/40||1;(function k(){c=Math.min(g,c+s);n.textContent=f?c.toFixed(1):Math.floor(c);if(c<g)requestAnimationFrame(k)})()});io.unobserve(t)})},{threshold:.15}):null;
 document.querySelectorAll('.reveal').forEach(function(el){if(io)io.observe(el);else{el.classList.add('in');el.querySelectorAll('.bar-fill').forEach(function(b){b.style.width=b.dataset.w+'%'});el.querySelectorAll('.num[data-count]').forEach(function(n){n.textContent=n.dataset.count})}})})();
 </script>
-</body></html>
+<script>(function(){var b=document.createElement('div');b.className='pbar';document.body.appendChild(b);var s=document.getElementById('stickyCta');
+function u(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight,p=m>0?h.scrollTop/m:0;b.style.width=(p*100)+'%';if(s)s.classList.toggle('show',p>.18&&p<.97)}
+addEventListener('scroll',u,{passive:true});u();
+var els=document.querySelectorAll('.reveal:not(.in)');if('IntersectionObserver'in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});els.forEach(function(e){io.observe(e)})}else els.forEach(function(e){e.classList.add('in')})})();</script></body></html>
