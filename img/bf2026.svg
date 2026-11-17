@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#121a36"/><stop offset="1" stop-color="#0b1020"/></linearGradient>
+<linearGradient id="ill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd23f"/><stop offset="1" stop-color="#ff8a3d"/></linearGradient>
+<radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffd23f" stop-opacity=".45"/><stop offset="1" stop-color="#ffd23f" stop-opacity="0"/></radialGradient>
+<pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="2" fill="#fff" opacity=".06"/></pattern></defs>
+<rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#dots)"/>
+<circle cx="920" cy="320" r="330" fill="url(#glow)"/>
+<g transform="translate(64,96)"><rect width="386" height="58" rx="29" fill="url(#ill)"/>
+<text x="28" y="40" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="30" fill="#0b1020">楽天ブラックフライデー</text></g>
+<text x="64" y="270" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="92" fill="#fff">ゲーマー向け</text>
+<text x="64" y="385" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="92" fill="#ffd23f">完全攻略</text>
+<text x="64" y="470" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="700" font-size="30" fill="#aab4d4">11/19(木)20:00〜11/25(水)01:59</text>
+<rect x="64" y="520" width="120" height="8" rx="4" fill="url(#ill)"/>
+<text x="204" y="532" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="800" font-size="26" fill="#ffffff" opacity=".8">ガジェット天国</text>
+<g transform="translate(690,85)"><rect x="10" y="40" width="440" height="380" rx="28" fill="#000" stroke="url(#ill)" stroke-width="8"/>
+<text x="230" y="190" text-anchor="middle" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="92" fill="url(#ill)">BLACK</text>
+<text x="230" y="290" text-anchor="middle" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="92" fill="url(#ill)">FRIDAY</text>
+<text x="230" y="370" text-anchor="middle" font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','Noto Sans CJK JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="40" fill="#ff7bb0">11/19 20:00〜</text>
+<text x="60" y="100" font-size="44">🪙</text><text x="360" y="110" font-size="40">✨</text></g></svg>
