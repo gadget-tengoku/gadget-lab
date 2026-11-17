@@ -76,3 +76,8 @@ var q0=new URLSearchParams(location.search).get('q');if(q0){inp.value=q0;run()}}
 
 (function(){var d=document;if(!/^\/(index\.html)?$/.test(location.pathname))return;var h=d.querySelector('.hero, .x-hero');if(!h||d.querySelector('.gg-home-find'))return;
 var f=d.createElement('form');f.className='gg-find gg-home-find wrap';f.action='archive.html';f.method='get';f.innerHTML='<input type="search" name="q" placeholder="記事をさがす（例：マウス、加湿器、VALORANT）" aria-label="記事を検索">';h.after(f)})();
+
+
+(function(){var d=document,q=d.querySelector('.quick');if(!q)return;var a=d.createElement('a');a.className='gg-sticky';a.href='#';a.textContent='おすすめ商品を早見表で見る';
+a.onclick=function(e){e.preventDefault();q.scrollIntoView({behavior:'smooth',block:'start'})};d.body.appendChild(a);
+addEventListener('scroll',function(){var r=q.getBoundingClientRect();a.classList.toggle('on',r.bottom<0)},{passive:true})})();
