@@ -73,3 +73,6 @@ function run(){var q=inp.value.trim().toLowerCase(),n=0;cards.forEach(function(a
 inp.addEventListener('input',run);ch.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;ch.querySelectorAll('button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');re=b.dataset.r;run()});
 var q0=new URLSearchParams(location.search).get('q');if(q0){inp.value=q0;run()}}
 })();
+
+(function(){var d=document;if(!/^\/(index\.html)?$/.test(location.pathname))return;var h=d.querySelector('.hero, .x-hero');if(!h||d.querySelector('.gg-home-find'))return;
+var f=d.createElement('form');f.className='gg-find gg-home-find wrap';f.action='archive.html';f.method='get';f.innerHTML='<input type="search" name="q" placeholder="記事をさがす（例：マウス、加湿器、VALORANT）" aria-label="記事を検索">';h.after(f)})();
