@@ -34,3 +34,11 @@ if(matchMedia('(pointer:fine)').matches&&!reduce){document.querySelectorAll('.bt
 /* 初回だけ隠しコマンドのヒント */
 try{if(!localStorage.getItem('ggHint')&&matchMedia('(pointer:fine)').matches){setTimeout(function(){toast('💡 ヒント：このサイトには<b>隠しコマンド</b>があるらしい…')},9000);localStorage.setItem('ggHint','1')}}catch(e){}
 })();
+(function(){var S=new Date('2026-11-19T20:00:00+09:00').getTime(),E=new Date('2026-11-25T01:59:59+09:00').getTime(),now=Date.now();if(now>E)return;if(/blackfriday\.html/.test(location.pathname))return;
+try{if(sessionStorage.getItem('bfBarClosed'))return}catch(e){}
+var b=document.createElement('a');b.className='bf-bar';b.href='blackfriday.html';b.innerHTML='<span class="bf-k">BLACK FRIDAY</span><span class="bf-t"></span><span class="bf-go">攻略ページ →</span><button type="button" aria-label="閉じる">×</button>';
+document.body.insertBefore(b,document.body.firstChild);document.documentElement.classList.add('has-bf');
+b.querySelector('button').addEventListener('click',function(e){e.preventDefault();e.stopPropagation();b.remove();document.documentElement.classList.remove('has-bf');try{sessionStorage.setItem('bfBarClosed','1')}catch(x){}});
+var t=b.querySelector('.bf-t');function p(n){return n<10?'0'+n:n}
+function u(){var n=Date.now(),live=n>=S,r=(live?E:S)-n;if(r<=0&&live){b.remove();return}var d=Math.floor(r/864e5),h=Math.floor(r%864e5/36e5),m=Math.floor(r%36e5/6e4),s=Math.floor(r%6e4/1e3);
+t.innerHTML=(live?'🔥 楽天ブラックフライデー開催中！終了まで ':'楽天ブラックフライデーまで ')+'<b>'+(d?d+'日 ':'')+p(h)+':'+p(m)+':'+p(s)+'</b>'}u();setInterval(u,1000)})();

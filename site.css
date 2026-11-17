@@ -56,5 +56,20 @@ nav a{position:relative;transition:color .2s}nav a::after{content:"";position:ab
 .gg-toast.in{transform:translate(-50%,0)}.gg-toast b{color:#ffd23f}
 .gg-cf{position:fixed;top:0;z-index:9998;pointer-events:none;border-radius:2px}
 .gg-hs{position:fixed;z-index:10000;pointer-events:none;font-weight:900;font-size:1.6rem;font-style:italic;letter-spacing:.04em;color:#fff;text-shadow:0 0 8px #ff3d9a,0 0 22px #ff3d9a,2px 2px 0 #7b5cff;white-space:nowrap}
-.gg-rainbow main,.gg-rainbow .header,.gg-rainbow .footer{animation:hue 1.2s linear infinite}@keyframes hue{to{filter:hue-rotate(360deg)}}
+.gg-rainbow main,.gg-rainbow .header,.gg-rainbow .footer{animation:hue 1.2s linear infinite}
+.bf-bar{position:sticky;top:0;z-index:1001;display:flex;align-items:center;justify-content:center;gap:12px;padding:8px 40px 8px 12px;text-decoration:none!important;color:#fff!important;font-weight:800;font-size:.88rem;background:linear-gradient(90deg,#000,#2a1a00,#000);border-bottom:2px solid #ffd23f;box-shadow:0 0 24px rgba(255,210,63,.45)}
+.bf-bar .bf-k{font-weight:900;letter-spacing:.12em;color:#000;background:linear-gradient(90deg,#ffd23f,#fff3b0,#ffd23f);background-size:200% 100%;animation:flow 2.5s linear infinite;border-radius:6px;padding:2px 8px}
+.bf-bar .bf-t b{color:#ffd23f;font-variant-numeric:tabular-nums;text-shadow:0 0 10px rgba(255,210,63,.8)}
+.bf-bar .bf-go{color:#ffd23f}
+.bf-bar button{position:absolute;right:8px;background:none;border:0;color:#c9b98a;font-size:1.1rem;cursor:pointer}
+@media(max-width:640px){.bf-bar{position:relative;font-size:.74rem;gap:6px;flex-wrap:wrap}.bf-bar .bf-go{display:none}.has-bf .header{top:0!important}}
+.has-bf .header{top:38px}
+
+.bf-banner{display:block;text-align:center;padding:44px 20px;border-radius:30px;text-decoration:none;color:#fff;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 0%,rgba(255,210,63,.4),transparent 60%),linear-gradient(160deg,#000,#1a0f00 60%,#1a0010);border:2px solid #ffd23f;box-shadow:0 0 60px rgba(255,210,63,.4)}
+.bf-banner:hover{box-shadow:0 0 90px rgba(255,210,63,.7)}
+.bfb-k{display:inline-block;font-weight:900;letter-spacing:.2em;color:#000;background:#ffd23f;border-radius:999px;padding:4px 14px}
+.bf-banner b{display:block;font-size:clamp(1.6rem,5vw,2.8rem);line-height:1.2;margin:14px 0 8px;background:linear-gradient(90deg,#ffd23f,#fff3b0,#ffd23f);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 3s linear infinite}
+.bfb-s{display:block;color:#ffe9a6;font-weight:700;margin-bottom:20px}
+.bf-banner em{font-style:normal;font-weight:900;color:#000;background:linear-gradient(90deg,#ffd23f,#ff8a3d);border-radius:999px;padding:14px 28px;box-shadow:0 0 30px rgba(255,210,63,.7)}
+@keyframes hue{to{filter:hue-rotate(360deg)}}
 
